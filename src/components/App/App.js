@@ -5,22 +5,19 @@ import {
   Redirect,
   Switch,
 } from 'react-router-dom';
-
 import { connect } from 'react-redux';
-
-import Nav from '../Nav/Nav';
+import NewNav from '../Nav/Nav'
 import Footer from '../Footer/Footer';
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
-
+import AddSong from '../AddSong/AddSong'
 import './App.css';
+import UserHome from '../UserHome/UserHome';
 
 class App extends Component {
   componentDidMount() {
@@ -31,7 +28,8 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Nav />
+          {/* <Nav /> */}
+          <NewNav/>
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />
@@ -49,10 +47,23 @@ class App extends Component {
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
             <ProtectedRoute
+              // logged in shows InfoPage else shows LoginPage
+              exact
+              path="/userInfo"
+              component={UserPage}
+            />
+            <ProtectedRoute
               // logged in shows UserPage else shows LoginPage
               exact
               path="/user"
-              component={UserPage}
+              component={UserHome}
+            />
+
+            <ProtectedRoute
+              // logged in shows UserPage else shows LoginPage
+              exact
+              path="/addSong"
+              component={AddSong}
             />
 
             <ProtectedRoute
@@ -61,6 +72,8 @@ class App extends Component {
               path="/info"
               component={InfoPage}
             />
+
+
 
             {/* When a value is supplied for the authRedirect prop the user will
             be redirected to the path supplied when logged in, otherwise they will
