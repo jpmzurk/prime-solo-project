@@ -16,7 +16,7 @@ export default function More () {
       setAnchorElly(null)
     };
 
-    const [value, setValue] = React.useState(30);
+    const [value, setValue] = useState(30);
   
     const handleChange = (event, newValue) => {
       setValue(newValue);

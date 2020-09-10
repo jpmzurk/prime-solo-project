@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import SongCards from '../SongCards/SongCards'
+import SongOutlineCards from '../SongOutlineCard/SongOutlineCards'
 
 const UserHome = () => {
     return (
         <>
-            <SongCards/>
+            <SongOutlineCards/>
+           
         </>
     );
 }
