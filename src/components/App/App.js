@@ -18,6 +18,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import AddSong from '../AddSong/AddSong'
 import './App.css';
 import UserHome from '../UserHome/UserHome';
+import WorkingSong from '../WorkingSong/WorkingSong';
 
 class App extends Component {
   componentDidMount() {
@@ -72,7 +73,12 @@ class App extends Component {
               path="/info"
               component={InfoPage}
             />
-
+            <ProtectedRoute
+              // logged in shows InfoPage else shows LoginPage
+              exact
+              path="/workingSong"
+              component={WorkingSong}
+            />
 
 
             {/* When a value is supplied for the authRedirect prop the user will

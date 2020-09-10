@@ -12,6 +12,7 @@ const OutlineCardMenu = () => {
     const handleClose = () => {
         setAnchorEl(null)
     };
+    
     return (
         <>
             <IconButton aria-controls="simple-menu" aria-haspopup="true" onClick={handleMenuClick}>
@@ -24,10 +25,13 @@ const OutlineCardMenu = () => {
                 keepMounted
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
-            >
-                <MenuItem onClick={handleClose} >Rename Title</MenuItem>
+            >   
+                <MenuItem onClick={() => {
+                    handleClose();
+                    
+                }}>Open Card</MenuItem>
+                <MenuItem onClick={handleClose}>Rename Title</MenuItem>
                 <MenuItem onClick={handleClose}>Choose Color</MenuItem>
-                <MenuItem onClick={handleClose}>Open Card</MenuItem>
                 <MenuItem onClick={handleClose}>Delete Card</MenuItem>
             </Menu>
         </>

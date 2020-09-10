@@ -8,10 +8,10 @@ const AudioUpload = ({dispatch}) => {
         console.log(info);
         // console.log('File uploaded with filename', info.filename)
         console.log('Access it on s3 at', info.fileUrl)
-        dispatch({type: 'POST_IMAGE', payload: info.fileUrl})
+        dispatch({type: 'POST_AUDIO', payload: info.fileUrl})
 
     }
-    console.log('POSTING IMAGE');
+    console.log('POSTING AUDIO');
     const uploadOptions = {
         server: 'http://localhost:5000',
         // signingUrlQueryParams: { uploadType: 'avatar' },

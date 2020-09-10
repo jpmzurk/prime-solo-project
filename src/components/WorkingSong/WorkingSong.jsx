@@ -1,13 +1,13 @@
 import React from "react";
 import { makeStyles} from "@material-ui/core/styles";
-import { useState } from 'react'
+// import { useState } from 'react'
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
 import DetailsPlayer from '../DetailsPlayer/DetailsPlayer';
 import DetailsCardMenu from '../DetailsCardMenu/DetailsCardMenu'
-import AudioUpload from '../AudioUpload/AudioUpload';
+// import AudioUpload from '../AudioUpload/AudioUpload';
 
 const useStyles = makeStyles(() => ({
     card: {
@@ -38,9 +38,9 @@ const WorkingSong = () => {
                         (Working Song)
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p" style={{ marginLeft: '1em' }}>
-                        Well they blew up the chicken man in Philly Last night <br />
-                        Now they blew up his house too <br />
-                        Down on the boardwalk they're gettin' ready for a fight gonna see what them racket boys can do ...
+                        Well they blew up the chicken man in Philly Last night 
+                        Now they blew up his house too 
+                        Down on the boardwalk they're gettin' ready for a fight gonna see what them racket boys can do
                     </Typography>
                 </CardContent>
                 <DetailsPlayer />

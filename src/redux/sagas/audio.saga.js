@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { takeLatest } from 'redux-saga/effects';
 
-function* postImage(action) {
+function* postAudio(action) {
     try {
         const config = {
             headers: { 'Content-Type': 'application/json' },
@@ -12,16 +12,16 @@ function* postImage(action) {
             imageUrl: action.payload
         }
 
-        const response = yield axios.post('/api/image', data, config);
+        const response = yield axios.post('/api/aws', data, config);
         console.log(response);
         
         //make get here? 
     } catch (error) {
-        console.log('Image post request failed', error)
+        console.log('Audio post request failed', error)
     }
 }
-function* imageSaga() {
-    yield takeLatest('POST_IMAGE', postImage);
+function* audioSaga() {
+    yield takeLatest('POST_AUDIO', postAudio);
 }
 
-export default imageSaga;
+export default audioSaga;

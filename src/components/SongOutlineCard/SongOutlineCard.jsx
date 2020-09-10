@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles} from "@material-ui/core/styles";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Card from "@material-ui/core/Card";
 import AudioPlayer from '../AudioPlayer/AudioPlayer'
 import Typography from "@material-ui/core/Typography";
-import OutlineCardMenu from '../SongOutlineMenu/SongOutlineMenu'
-import WorkingSong from '../WorkingSong/WorkingSong';
+import SongOutlineMenu from '../SongOutlineMenu/SongOutlineMenu'
+import { connect } from 'react-redux';
+import mapStoreToProps from '../../redux/mapStoreToProps';
+// { useState }
 
 const useStyles = makeStyles(() => ({
     card: {
@@ -14,24 +16,16 @@ const useStyles = makeStyles(() => ({
         backgroundColor: "#EBEBEB",
         width: 300,
         maxHeight: 300
-    },
-    root: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'space-around',
-        overflow: 'hidden',
-    },
- 
+    }
 }));
 
 const SongCards = (props) => {
     const classes = useStyles();
-    
+   
     return (
         <> 
-        <div className={classes.root}>
             <Card className={classes.card}>
-                <OutlineCardMenu/>
+                <SongOutlineMenu />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h5" style={{ marginLeft: '2.5em' }}>
                         Atlantic City
@@ -46,13 +40,11 @@ const SongCards = (props) => {
                 <CardActions>
                 </CardActions>
             </Card>
-        <WorkingSong/>
-        </div>
         </>
     );
 }
 
-export default SongCards;
+export default connect(mapStoreToProps)(SongCards);
 
 
 

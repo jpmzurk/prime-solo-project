@@ -9,8 +9,9 @@ const passport = require('./strategies/user.strategy');
 
 // Route includes
 const userRouter = require('./routes/user.router');
-const imageRouter =require('./routes/image.router')
+const awsRouter =require('./routes/aws.router')
 const UploaderS3Router = require('react-dropzone-s3-uploader/s3router')
+const songRouter = require('./routes/song.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -25,7 +26,8 @@ app.use(passport.session());
 
 /* Routes */
 app.use('/api/user', userRouter);
-app.use('/api/image', imageRouter)
+app.use('/api/aws', awsRouter)
+app.use('/api/song', songRouter);
 
 app.use('/s3', UploaderS3Router({
   bucket: 'primesonglybucket',                           // required
