@@ -12,7 +12,7 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-const UserHome = ({ dispatch, songs }) => {
+const UserHome = ({ dispatch, songs, history }) => {
     const classes = useStyles();
     const getSongs = () => {
         dispatch({ type: 'FETCH_SONGS' })
@@ -21,7 +21,7 @@ const UserHome = ({ dispatch, songs }) => {
     useEffect(getSongs, []);
 
     const directWorkingCard = () => {
-        // history.push('/details')
+        history.push('/workingsong')
         console.log('clicked to working card');
     }
     return (

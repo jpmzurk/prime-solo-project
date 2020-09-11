@@ -16,7 +16,7 @@ CREATE TABLE "songs" (
 	"title" TEXT NOT NULL,
 	"notes" TEXT DEFAULT 'no notes added',
 	"lyrics" TEXT DEFAULT 'no lyrics added',
-	"org_da" date NOT NULL,
+	"org_date" date NOT NULL,
 	"org_title" varchar(150) NOT NULL,
 	"org_notes" TEXT DEFAULT 'no notes provided', 
 	"org_lyrics" TEXT DEFAULT 'no lyrics provided',

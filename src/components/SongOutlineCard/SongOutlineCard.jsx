@@ -30,6 +30,10 @@ const useStyles = makeStyles(() => ({
         maxHeight: '5.4em',
         lineHeight: '1.8em'
     },
+    media: {
+        width: 300,
+        height: 300,
+    },
 
 }));
 
@@ -37,11 +41,14 @@ const SongCards = ({ song, directWorkingCard }) => {
     const classes = useStyles();
     console.log(song);
     console.log(song.array_agg.length);
+
+    
     return (
         <>
             <Card className={classes.card}>
-                <SongOutlineMenu directWorkingCard={directWorkingCard} />
+                <SongOutlineMenu directWorkingCard={directWorkingCard} song={song}/>
                 <CardContent >
+              
                     <Typography gutterBottom variant="h5" component="h5"  >
                         {song.title}
                     </Typography>

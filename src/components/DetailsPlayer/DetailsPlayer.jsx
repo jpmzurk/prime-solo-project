@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import AudioPlayer from "react-modular-audio-player";
 import playIcon from './icons/play.png'
 import pauseIcon from './icons/pause.png'
@@ -8,17 +8,6 @@ import mute from './icons/volume-off.png'
 import loop from './icons/all-inclusive.png'
 import skipNext from './icons/skip-next.png'
 // import More from './MoreMenu/more'
-
-let audioFiles = [
-    {
-        src: "https://freesound.org/data/previews/532/532991_4397472-lq.mp3",
-        title: "atlantic city demo",
-    },
-    {
-        src: "https://freesound.org/data/previews/532/532774_6738752-lq.mp3",
-        title: "atlantic first idea",
-    },
-];
 
 //for rearrange prop
 let rearrangedPlayer = [
@@ -67,15 +56,64 @@ let rearrangedPlayer = [
     },
 ];
 
-const Player = () => {
+const Player = ({ selectedSong }) => {
+  
+    const [recordings, setRecordings ] = useState([
+        selectedSong ?
+        {
+            src: selectedSong.array_agg,
+            title: 'no title provided',
+        } 
+        :
+        {
+            src: '',
+            title: '',
+        } 
+
+    ])
+
+     
+    const titleFix = () => {
+        let songTitle = ''
+        if (selectedSong.array_agg.length > 0 ) {
+        songTitle = String(selectedSong.array_agg[0]);
+        songTitle = songTitle.split("/").pop()
+        console.log(songTitle);
+        setRecordings([{title: songTitle}])
+        console.log(recordings);
+        }
+        
+   }
+  
+    const onLoad = () => {
+        let recordingsList = [];
+        if (selectedSong.array_agg.length > 1 ){
+            console.log('if statement is true');
+            selectedSong.array_agg.map(recording => {
+                return recordingsList.push({src: recording, title: 
+                    
+                    (recording.split("/").pop())})
+            })
+            console.log(recordingsList);
+            setRecordings(recordingsList)
+        }
+    }
+    useEffect(() => {
+        titleFix();
+        onLoad();
+    }, []);
+
+    // useEffect(onLoad, []);
+    console.log(recordings);
+
     return (
         <>
+        { recordings &&
             <AudioPlayer
-                audioFiles={audioFiles}
+                audioFiles={recordings}
                 rearrange={rearrangedPlayer}
                 iconSize="1.5rem"
                 playIcon={playIcon}
-                // playHoverIcon={bigPlay}
                 pauseIcon={pauseIcon}
                 rewindIcon={skipBack}
                 forwardIcon={skipNext}
@@ -84,79 +122,11 @@ const Player = () => {
                 loopIcon={loop}
                 fontFamily="sans-serif"
                 fontSize="1rem"
-            // playerWidth="auto"
+            playerWidth="auto"
             />
+        }
         </>
     );
 }
 
 export default Player;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import React, { Component } from 'react'
-// import AudioPlayer from '../src/index'
-
-// const playlist = [
-//   { name: '枝芽', src: 'https://hanzluo.s3-us-west-1.amazonaws.com/music/zhiya.mp3' },
-//   { name: '自由女神', src: 'https://hanzluo.s3-us-west-1.amazonaws.com/music/ziyounvshen.mp3' },
-//   { name: '无雨无晴', src: 'https://hanzluo.s3-us-west-1.amazonaws.com/music/wuyuwuqing.mp3' },
-//   { name: '碎片', src: 'https://hanzluo.s3-us-west-1.amazonaws.com/music/suipian.mp3' },
-//   { name: '永恒的港湾', src: 'https://hanzluo.s3-us-west-1.amazonaws.com/music/yonghengdegangwan.mp3' },
-// ]
-
-
-// class PlayList extends Component {
-//   state = {
-//     currentMusicIndex: 0,
-//   }
-
-//   handleClickPrevious = () => {
-//     this.setState((prevState) => ({
-//       currentMusicIndex: prevState.currentMusicIndex === 0 ? playlist.length - 1 : prevState.currentMusicIndex - 1,
-//     }))
-//   }
-
-//   handleClickNext = () => {
-//     this.setState((prevState) => ({
-//       currentMusicIndex: prevState.currentMusicIndex < playlist.length - 1 ? prevState.currentMusicIndex + 1 : 0,
-//     }))
-//   }
-
-//   render() {
-//     const { currentMusicIndex } = this.state
-//     return (
-//       <div>
-//         <p>currentMusicIndex: {currentMusicIndex}</p>
-//         <AudioPlayer
-//           autoPlayAfterSrcChange={true}
-//           showSkipControls={true}
-//           showJumpControls={false}
-//           src={playlist[currentMusicIndex].src}
-//           onClickPrevious={this.handleClickPrevious}
-//           onClickNext={this.handleClickNext}
-//         />
-//       </div>
-//     )
-//   }
-// }
-
-// export default PlayList

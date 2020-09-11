@@ -12,15 +12,17 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   console.log('req.user:', req.user);
 
   const queryText = 
-        `SELECT song_id, title, lyrics, preview_audio, ARRAY_AGG (url_path) FROM songs
+        `SELECT song_id, title, date, lyrics, preview_audio, notes, org_date, org_title, org_title, org_lyrics,
+        ARRAY_AGG (url_path) 
+        FROM songs
         JOIN "recordings" ON "recordings".song_id = "songs".id
         WHERE user_id = $1
-        GROUP BY song_id, title, lyrics, preview_audio
+        GROUP BY song_id, title, date, lyrics, preview_audio, notes, org_date, org_title, org_title, org_lyrics
         `;
   pool.query(queryText, [req.user.id])
     .then((result) => { 
       console.log(result.rows);
-      res.send(result.rows); 
+      res.send((result.rows)); 
     })
     .catch((err) => {
       console.log('Error completing SELECT songs query', err);
@@ -28,27 +30,26 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     });
 });
 
-//could use a get/:id route to all records with a matching song_id = 3 or whatever
 
-router.get('/:id', (req, res) => {
-    const id = req.params.id
-    console.log('in get songs with id', id);
+// router.get('/:id', (req, res) => {
+//     const id = req.params.id
+//     console.log('in get songs with id', id);
   
-    const queryText = `
-      SELECT * FROM songs 
-    //JOIN recordings ON recordings.song_id = songs.id
-      WHERE songs.id = $1`
-    ;
-    pool.query(queryText, [id])
-      .then((result) => { 
-        console.log(result.rows);
-        res.send(result.rows); 
-      })
-      .catch((err) => {
-        console.log('Error completing get song by ID query', err);
-        res.sendStatus(500);
-      });
-  });
+//     const queryText = `
+//       SELECT * FROM songs 
+//     //JOIN recordings ON recordings.song_id = songs.id
+//       WHERE songs.id = $1`
+//     ;
+//     pool.query(queryText, [id])
+//       .then((result) => { 
+//         console.log(result.rows);
+//         res.send(result.rows); 
+//       })
+//       .catch((err) => {
+//         console.log('Error completing get song by ID query', err);
+//         res.sendStatus(500);
+//       });
+//   });
 
 /**
  * POST route template

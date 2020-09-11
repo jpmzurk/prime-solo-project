@@ -5,7 +5,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { connect } from 'react-redux';
 
-const OutlineCardMenu = () => {
+const OutlineCardMenu = ({ directWorkingCard, song, dispatch}) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const handleMenuClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -13,10 +13,17 @@ const OutlineCardMenu = () => {
     const handleClose = () => {
         setAnchorEl(null)
     };
-    
-    const directToWorkingCard = () => {
-        console.log('going to workingCard id: ', );
+
+    const handleCardSelect = () => {
+        console.log('in handleCardSelect');
+        handleClose();
+        dispatch({ type: 'SET_SELECTED_SONG', payload: song })
+        directWorkingCard()
     }
+
+    // const directToWorkingCard = () => {
+    //     console.log('going to workingCard id: ', );
+    // }
     return (
         <>
             <IconButton aria-controls="simple-menu" aria-haspopup="true" onClick={handleMenuClick}>
@@ -29,11 +36,8 @@ const OutlineCardMenu = () => {
                 keepMounted
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
-            >   
-                <MenuItem onClick={() => {
-                    handleClose();
-                    directToWorkingCard()
-                }}>Open Card</MenuItem>
+            >
+                <MenuItem onClick={handleCardSelect}>Open Card</MenuItem>
                 <MenuItem onClick={handleClose}>Rename Title</MenuItem>
                 <MenuItem onClick={handleClose}>Choose Color</MenuItem>
                 <MenuItem onClick={handleClose}>Delete Card</MenuItem>
@@ -47,5 +51,5 @@ const mapStoreToProps = (reduxState) => {
     return {
         songs: reduxState.songs,
     };
-  };
+};
 export default connect(mapStoreToProps)(OutlineCardMenu);

@@ -1,57 +1,71 @@
 import React from "react";
 import { makeStyles} from "@material-ui/core/styles";
 // import { useState } from 'react'
+import { connect } from 'react-redux';
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
 import DetailsPlayer from '../DetailsPlayer/DetailsPlayer';
-import DetailsCardMenu from '../DetailsCardMenu/DetailsCardMenu'
+import DetailsCardMenu from '../DetailsCardMenu/DetailsCardMenu';
+import CardMedia from '@material-ui/core/CardMedia';
+
 // import AudioUpload from '../AudioUpload/AudioUpload';
 
 const useStyles = makeStyles(() => ({
     card: {
         marginTop: '2em',
         backgroundColor: "#EBEBEB",
-        width: 300,
+        width: 500,
+        height: 500,
     },
     root: {
         display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'space-around',
-        overflow: 'hidden',
+        alignContent: 'center',
+        justifyContent: 'center',
     },
 }));
 
-const WorkingSong = () => {
-    const classes = useStyles();
-
+const WorkingSong = ({ selectedSong }) => {
+    const {card, root} = useStyles();
+    console.log(selectedSong.song_id);
+    // console.log(selectedSong.image);
+    console.log(selectedSong.array_agg);
     return (
-        <>
-          <Card className={classes.card}>
+        <div className={root}>
+          <Card className={card}>
               <DetailsCardMenu/>
                 <CardContent>
+                {/* { selectedSong.image === 'images/blackhole.gif' ? 
+                <CardMedia image={`images/blackhole.gif`} /> : null
+                    } */}
                     <Typography gutterBottom variant="h5" component="h5" style={{ marginLeft: '25%' }}>
-                        Atlantic City
+                        {selectedSong.title}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p" style={{ marginLeft: '30%', marginBottom: '.75em', marginTop: '-.75em' }}>
                         (Working Song)
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p" style={{ marginLeft: '1em' }}>
-                        Well they blew up the chicken man in Philly Last night 
-                        Now they blew up his house too 
-                        Down on the boardwalk they're gettin' ready for a fight gonna see what them racket boys can do
+                    {selectedSong.lyrics}
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" component="p" style={{ marginLeft: '1em' }}>
+                    {selectedSong.notes}
                     </Typography>
                 </CardContent>
-                <DetailsPlayer />
+                <DetailsPlayer selectedSong={selectedSong}/>
                 <CardActions>
                 {/* <div style={{paddingLeft : '3em' }}> 
                 <AudioUpload />
                 </div> */}
                 </CardActions>
             </Card>
-        </>
+        </div>
     );
 }
 
-export default WorkingSong;
+const mapStoreToProps = (reduxState) => {
+    return {
+        selectedSong: reduxState.selectedSong,
+    };
+  };
+export default connect(mapStoreToProps)(WorkingSong);
