@@ -3,6 +3,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { connect } from 'react-redux';
 
 const OutlineCardMenu = () => {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -13,6 +14,9 @@ const OutlineCardMenu = () => {
         setAnchorEl(null)
     };
     
+    const directToWorkingCard = () => {
+        console.log('going to workingCard id: ', );
+    }
     return (
         <>
             <IconButton aria-controls="simple-menu" aria-haspopup="true" onClick={handleMenuClick}>
@@ -28,7 +32,7 @@ const OutlineCardMenu = () => {
             >   
                 <MenuItem onClick={() => {
                     handleClose();
-                    
+                    directToWorkingCard()
                 }}>Open Card</MenuItem>
                 <MenuItem onClick={handleClose}>Rename Title</MenuItem>
                 <MenuItem onClick={handleClose}>Choose Color</MenuItem>
@@ -38,4 +42,10 @@ const OutlineCardMenu = () => {
     );
 }
 
-export default OutlineCardMenu;
+
+const mapStoreToProps = (reduxState) => {
+    return {
+        songs: reduxState.songs,
+    };
+  };
+export default connect(mapStoreToProps)(OutlineCardMenu);

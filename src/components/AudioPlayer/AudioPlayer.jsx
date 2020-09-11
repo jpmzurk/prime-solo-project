@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import AudioPlayer from "react-modular-audio-player";
 import playIcon from './icons/play.png'
 import pauseIcon from './icons/pause.png'
@@ -7,18 +7,6 @@ import volume from './icons/volume-high.png'
 import mute from './icons/volume-off.png'
 import loop from './icons/all-inclusive.png'
 import skipNext from './icons/skip-next.png'
-
-let audioFiles = [
-    {
-        src: "https://freesound.org/data/previews/532/532774_6738752-lq.mp3",
-        title: "atlantic ",
-        // artist: "unknown"
-    },
-    {
-        src: "https://freesound.org/data/previews/532/532991_4397472-lq.mp3",
-        title: "atlantic city demo",
-    },
-];
 
 //for rearrange prop
 let rearrangedPlayer = [
@@ -40,11 +28,25 @@ let rearrangedPlayer = [
     },
 ];
 
-const Player = () => {
+const Player = ({ song }) => {
+    const [preview, setPreview] = useState('')
+
+    const previewSong = () => {
+        song.array_agg.length > 1 ?  setPreview(song.preview_audio) :  setPreview(song.array_agg[0]) 
+    }
+    useEffect(previewSong, []);
+
     return (
         <>
             <AudioPlayer
-                audioFiles={audioFiles}
+                audioFiles={
+                    [
+                        {
+                            src: preview,
+                            title: song.title
+                        }
+                    ]
+                }
                 rearrange={rearrangedPlayer}
                 iconSize="1.5rem"
                 playIcon={playIcon}

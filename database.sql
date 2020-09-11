@@ -16,10 +16,11 @@ CREATE TABLE "songs" (
 	"title" TEXT NOT NULL,
 	"notes" TEXT DEFAULT 'no notes added',
 	"lyrics" TEXT DEFAULT 'no lyrics added',
-	"org_date" date NOT NULL,
+	"org_da" date NOT NULL,
 	"org_title" varchar(150) NOT NULL,
 	"org_notes" TEXT DEFAULT 'no notes provided', 
-	"org_lyrics" TEXT DEFAULT 'no lyrics provided'
+	"org_lyrics" TEXT DEFAULT 'no lyrics provided',
+	"preview_audio" text, 
 );
 
 CREATE TABLE "recordings" (
@@ -27,6 +28,18 @@ CREATE TABLE "recordings" (
 	"song_id" int NOT NULL REFERENCES "songs",
 	"url_path" text NOT NULL
 )
+
+INSERT INTO "recordings" ("user_id", "song_id", "url_path")
+VALUES 
+(1, 1, 'audioFiles/LooseConnection.mp3'),
+(1, 2, 'audioFiles/ToSurvive.mp3'),
+(1, 3, 'audioFiles/AFriendOfYours.mp3'),
+(1, 4, 'audioFiles/HowManyTimes.mp3'),
+(1, 5, 'audioFiles/AtlanticCity.mp3'),
+(1, 3, 'audioFiles/AFriendOfYours4-3.mp3'), 
+(2, 5, 'audioFiles/AtlanticCity.mp3')
+
+
 
 INSERT INTO "songs" ("user_id", "date", "title", "notes", "lyrics", "org_date", "org_title", "org_notes", "org_lyrics")
 VALUES 
@@ -51,14 +64,14 @@ what would you imply
 but you dont then you leave'
 )
 
-INSERT INTO "songs" ("user_id", "title", "lyrics", "org_date", "org_title")
+INSERT INTO "songs" ("user_id", "title", "lyrics", "org_date", "org_title", "preview_audio" )
 VALUES 
 (1, 'A Friend of Yours', 
 'heard you two finally emptied that house
 were all capable of dragging it out
 oh my god your almond eyes
 way to go on that great surprise
-what you needed was a friend of yours', '10/2/2017', 'holy crowd')
+what you needed was a friend of yours', '10/2/2017', 'holy crowd', 'audioFiles/AFriendOfYours4-3.mp3')
 
 INSERT INTO "songs" ("user_id", "title", "lyrics", "org_date", "org_title")
 VALUES 
@@ -87,6 +100,12 @@ And you whos always new
 and its you im talking to'
 , '2/27/2019', 'you im talking to')
 
+INSERT INTO "songs" ("user_id", "title", "lyrics", "org_date", "org_notes", "org_title")
+VALUES 
+(2, 'Atlantic City', 
+'Well they blew up the chicken man in Philly Last night 
+Now they blew up his house too 
+Down on the boardwalk theyre gettin ready for a fight gonna see what them racket boys can do', '9/30/1982', 'this song should probably be done with the whole band really rockin out', 'Fistful of Dollars')
 
 INSERT INTO "recordings" ("song_id", "url_path")
 VALUES 

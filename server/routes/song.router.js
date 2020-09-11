@@ -2,17 +2,20 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 const {rejectUnauthenticated } = require('../modules/authentication-middleware');
+
 /**
  * GET route template
  */
+
 router.get('/', rejectUnauthenticated, (req, res) => {
   // GET route code here
   console.log('req.user:', req.user);
 
   const queryText = 
-        `SELECT * FROM songs 
+        `SELECT song_id, title, lyrics, preview_audio, ARRAY_AGG (url_path) FROM songs
         JOIN "recordings" ON "recordings".song_id = "songs".id
         WHERE user_id = $1
+        GROUP BY song_id, title, lyrics, preview_audio
         `;
   pool.query(queryText, [req.user.id])
     .then((result) => { 
@@ -25,15 +28,16 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     });
 });
 
+//could use a get/:id route to all records with a matching song_id = 3 or whatever
+
 router.get('/:id', (req, res) => {
     const id = req.params.id
     console.log('in get songs with id', id);
   
     const queryText = `
-      SELECT genres.name
-      FROM movies 
-    //   JOIN movies_genres ON movies_genres.movie_id = movies.id
-      WHERE movies.id = $1`
+      SELECT * FROM songs 
+    //JOIN recordings ON recordings.song_id = songs.id
+      WHERE songs.id = $1`
     ;
     pool.query(queryText, [id])
       .then((result) => { 

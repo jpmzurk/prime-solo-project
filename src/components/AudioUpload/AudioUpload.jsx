@@ -24,9 +24,9 @@ const AudioUpload = ({dispatch}) => {
             <DropzoneS3Uploader
                 onFinish={handleFinishedUpload}
                 s3Url={s3Url}
-                maxSize={1024 * 1024 * 5}
+                maxSize={1024 * 1024 * 11}
                 upload={uploadOptions}
-                // accept="audio/*"
+                accept="audio/*"
             />
         </>
     )

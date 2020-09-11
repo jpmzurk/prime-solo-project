@@ -17,7 +17,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import AddSong from '../AddSong/AddSong'
 import './App.css';
-import UserHome from '../UserHome/UserHome';
+import UserHome from '../SongCardsAll/SongCardsAll';
 import WorkingSong from '../WorkingSong/WorkingSong';
 
 class App extends Component {
