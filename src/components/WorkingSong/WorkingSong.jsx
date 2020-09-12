@@ -26,19 +26,19 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-const WorkingSong = ({ selectedSong }) => {
+const WorkingSong = ({ selectedSong, history }) => {
     const {card, root} = useStyles();
-    console.log(selectedSong.song_id);
-    // console.log(selectedSong.image);
-    console.log(selectedSong.array_agg);
+    console.log(selectedSong.song_id, selectedSong.array_agg);
+
+    const directUserHome = () => {
+        console.log('clicked to home');
+        history.push('/user')
+    }
     return (
         <div className={root}>
           <Card className={card}>
-              <DetailsCardMenu/>
+              <DetailsCardMenu directUserHome={directUserHome}/>
                 <CardContent>
-                {/* { selectedSong.image === 'images/blackhole.gif' ? 
-                <CardMedia image={`images/blackhole.gif`} /> : null
-                    } */}
                     <Typography gutterBottom variant="h5" component="h5" style={{ marginLeft: '25%' }}>
                         {selectedSong.title}
                     </Typography>

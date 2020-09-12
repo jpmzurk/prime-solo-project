@@ -5,7 +5,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { connect } from 'react-redux';
 
-const OutlineCardMenu = ({ directWorkingCard, song, dispatch}) => {
+const OutlineCardMenu = ({ directWorkingCard, song, dispatch, history}) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const handleMenuClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -20,10 +20,7 @@ const OutlineCardMenu = ({ directWorkingCard, song, dispatch}) => {
         dispatch({ type: 'SET_SELECTED_SONG', payload: song })
         directWorkingCard()
     }
-
-    // const directToWorkingCard = () => {
-    //     console.log('going to workingCard id: ', );
-    // }
+    
     return (
         <>
             <IconButton aria-controls="simple-menu" aria-haspopup="true" onClick={handleMenuClick}>

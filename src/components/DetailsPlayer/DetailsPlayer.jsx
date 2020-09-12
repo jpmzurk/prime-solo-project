@@ -72,14 +72,14 @@ const Player = ({ selectedSong }) => {
 
     ])
 
-     
     const titleFix = () => {
         let songTitle = ''
         if (selectedSong.array_agg.length > 0 ) {
         songTitle = String(selectedSong.array_agg[0]);
-        songTitle = songTitle.split("/").pop()
+        songTitle = songTitle.split("/").pop();
+        songTitle = songTitle.split("_").pop();
         console.log(songTitle);
-        setRecordings([{title: songTitle}])
+        setRecordings([{src: selectedSong.array_agg, title: songTitle}])
         console.log(recordings);
         }
         

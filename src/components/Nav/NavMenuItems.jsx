@@ -10,7 +10,7 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 // import SearchIcon from '@material-ui/icons/Search';
 
-const NavItems = ({ store, dispatch }) => {
+const NavItems = ({ store, dispatch, handleDrawerClose }) => {
 
   let loginLinkData = {
     path: '/login',
@@ -23,6 +23,7 @@ const NavItems = ({ store, dispatch }) => {
   }
 
   const logOut = () => {
+    handleDrawerClose();
     dispatch({ type: 'LOGOUT' })
   }
 
@@ -42,7 +43,7 @@ const NavItems = ({ store, dispatch }) => {
     {
       text: "Add New Song",
       icon: <AddCircleIcon />,
-      path: '/newSong'
+      path: '/addSong'
     },
     {
       text: "User Info",
@@ -55,7 +56,7 @@ const NavItems = ({ store, dispatch }) => {
     <>
       <List>
         {persistentNav.map(({ text, icon, path }) => (
-          <ListItem key={text} component={Link} to={path}>
+          <ListItem key={text} component={Link} to={path} onClick={handleDrawerClose}>
             <ListItemIcon>
               {icon}
             </ListItemIcon>
@@ -65,7 +66,7 @@ const NavItems = ({ store, dispatch }) => {
         {store.user.id && (
           <>
             {userNavItems.map(({ text, icon, path }) => (
-              <ListItem key={text} component={Link} to={path}>
+              <ListItem key={text} component={Link} to={path} onClick={handleDrawerClose}>
                 <ListItemIcon>
                   {icon}
                 </ListItemIcon>

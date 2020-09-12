@@ -4,7 +4,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
-const DetailsCardMenu = () => {
+const DetailsCardMenu = ({ directUserHome }) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -12,6 +12,11 @@ const DetailsCardMenu = () => {
     const handleClose = () => {
         setAnchorEl(null)
     };
+
+    const goBack = () => {
+        directUserHome();
+        handleClose();
+    }
     return (
         <>
             <IconButton aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
@@ -32,7 +37,7 @@ const DetailsCardMenu = () => {
                     <MenuItem onClick={handleClose}>Delete Current Audio</MenuItem>
                     <MenuItem onClick={handleClose}>Change Color</MenuItem>
                     <MenuItem onClick={handleClose}>Delete Card</MenuItem>
-                    <MenuItem onClick={handleClose}>Go Back</MenuItem>
+                    <MenuItem onClick={goBack}>Go Back</MenuItem>
                 </Menu>  
         </>
     );

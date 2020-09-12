@@ -16,8 +16,8 @@ function* getSong(action) {
         console.log('Song GET request failed', error)
     }
 }
-function* songSaga() {
+function* getSongSaga() {
     yield takeLatest('FETCH_SONGS', getSong);
 }
 
-export default songSaga;
+export default getSongSaga;

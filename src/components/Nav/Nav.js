@@ -17,7 +17,7 @@ import NavList from './NavMenuItems'
 import useStyles from './NavStyles'
 
 
-const NavDrawer = ({}) => {
+const NavDrawer = ({history}) => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
@@ -73,7 +73,7 @@ const NavDrawer = ({}) => {
           </IconButton>
         </div>
         <Divider />
-        <NavList />
+        <NavList handleDrawerClose={handleDrawerClose}/>
         <Divider />
       </Drawer>
       <main
