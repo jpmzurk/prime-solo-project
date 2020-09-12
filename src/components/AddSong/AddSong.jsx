@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { connect } from 'react-redux';
 import { TextField, Button, Typography } from '@material-ui/core';
-import { FormControl, FormHelperText, InputLabel } from '@material-ui/core';
-import { MenuItem, Select, Paper } from '@material-ui/core';
+import { FormControl, FormHelperText } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
 // import AudioUpload from '../AudioUpload/AudioUpload'
 import ReactS3Uploader from '../AudioUpload/ReactS3Uploader'
 

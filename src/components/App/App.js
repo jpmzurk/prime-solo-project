@@ -19,6 +19,7 @@ import AddSong from '../AddSong/AddSong'
 import './App.css';
 import UserHome from '../SongCardsAll/SongCardsAll';
 import WorkingSong from '../WorkingSong/WorkingSong';
+import OriginalSong from '../OriginalIdeaCard/OriginalIdeaCard'
 
 class App extends Component {
   componentDidMount() {
@@ -78,6 +79,12 @@ class App extends Component {
               exact
               path="/workingsong"
               component={WorkingSong}
+            />
+             <ProtectedRoute
+              // logged in shows InfoPage else shows LoginPage
+              exact
+              path="/originalsong"
+              component={OriginalSong}
             />
 
 

@@ -3,8 +3,9 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const {rejectUnauthenticated } = require('../modules/authentication-middleware');
 
+//get songs from SongCardsAll
 router.get('/', rejectUnauthenticated, (req, res) => {
-  // GET route code here
+
   console.log('req.user:', req.user);
 
   const queryText = 
@@ -26,12 +27,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     });
 });
 
-
-/**
- * POST route template
- */
+//Post new song from AddSong
 router.post('/', rejectUnauthenticated, (req, res) => {
-  // POST route code here
   console.log(req.body)
   console.log(req.user.id);
   const song = req.body;
@@ -66,6 +63,27 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 });
 
 module.exports = router;
+
+
+
+router.put('/title:id', rejectUnauthenticated, (req, res) => {
+  const id = req.params.id;
+  const newTitle = req.body
+
+  console.log('in put songs title', id);
+  let sqlText = `UPDATE songs 
+                 SET title = $2 
+                 WHERE id = $1;`
+
+  pool.query(sqlText, [id, newTitle])
+      .then(result => {
+          console.log(result);
+          res.sendStatus(201);
+      }).catch(error => {
+          console.log('error in put', error);
+          res.sendStatus(500);
+      });
+});
 
 
 // router.get('/:id', (req, res) => {

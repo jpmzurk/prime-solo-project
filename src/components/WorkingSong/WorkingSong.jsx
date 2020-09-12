@@ -6,10 +6,8 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
-import DetailsPlayer from '../DetailsPlayer/DetailsPlayer';
-import DetailsCardMenu from '../DetailsCardMenu/DetailsCardMenu';
-import CardMedia from '@material-ui/core/CardMedia';
-
+import DetailsPlayer from '../WorkingSongPlayer/WorkingSongPlayer';
+import WorkingCardMenu from '../WorkingCardMenu/WorkingCardMenu';
 // import AudioUpload from '../AudioUpload/AudioUpload';
 
 const useStyles = makeStyles(() => ({
@@ -34,10 +32,15 @@ const WorkingSong = ({ selectedSong, history }) => {
         console.log('clicked to home');
         history.push('/user')
     }
+
+    const directOriginalSong = () => {
+        console.log('clicked to home');
+        history.push('/originalsong')
+    }
     return (
         <div className={root}>
           <Card className={card}>
-              <DetailsCardMenu directUserHome={directUserHome}/>
+              <WorkingCardMenu directUserHome={directUserHome} directOriginalSong={directOriginalSong}/>
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h5" style={{ marginLeft: '25%' }}>
                         {selectedSong.title}
@@ -54,9 +57,6 @@ const WorkingSong = ({ selectedSong, history }) => {
                 </CardContent>
                 <DetailsPlayer selectedSong={selectedSong}/>
                 <CardActions>
-                {/* <div style={{paddingLeft : '3em' }}> 
-                <AudioUpload />
-                </div> */}
                 </CardActions>
             </Card>
         </div>

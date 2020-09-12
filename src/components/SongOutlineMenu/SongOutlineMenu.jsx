@@ -4,6 +4,8 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { connect } from 'react-redux';
+import TitleChangeDialog from '../MenuDialogComponents/NameChangeDialog/NameChangeDialog'
+import DeleteCardDialog from '../MenuDialogComponents/DeleteCardDialog/DeleteCardDialog'
 
 const OutlineCardMenu = ({ directWorkingCard, song, dispatch, history}) => {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -35,9 +37,9 @@ const OutlineCardMenu = ({ directWorkingCard, song, dispatch, history}) => {
                 onClose={handleClose}
             >
                 <MenuItem onClick={handleCardSelect}>Open Card</MenuItem>
-                <MenuItem onClick={handleClose}>Rename Title</MenuItem>
+                <TitleChangeDialog/>
                 <MenuItem onClick={handleClose}>Choose Color</MenuItem>
-                <MenuItem onClick={handleClose}>Delete Card</MenuItem>
+                <DeleteCardDialog />
             </Menu>
         </>
     );

@@ -3,8 +3,11 @@ import IconButton from "@material-ui/core/IconButton";
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+// import NameChangeDialog from '../MenuDialogComponents/NameChangeDialog/NameChangeDialog';
+import DeleteAudioDialog from '../MenuDialogComponents/DeleteAudioDialog/DeleteAudioDialog';
+import UploaderMenuDialog from '../MenuDialogComponents/AddAudioFileDialog/AddAudioFileDialog';
 
-const DetailsCardMenu = ({ directUserHome }) => {
+const OriginalCardMenu = ({ directUserHome, directToWorking }) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -13,10 +16,16 @@ const DetailsCardMenu = ({ directUserHome }) => {
         setAnchorEl(null)
     };
 
-    const goBack = () => {
+    const goHome = () => {
         directUserHome();
         handleClose();
     }
+
+    const goToWorking = () => {
+        directToWorking();
+        handleClose();
+    }
+    
     return (
         <>
             <IconButton aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
@@ -30,17 +39,16 @@ const DetailsCardMenu = ({ directUserHome }) => {
                     open={Boolean(anchorEl)}
                     onClose={handleClose}
                 >
-                    <MenuItem onClick={handleClose}>Add New Audio File</MenuItem>
-                    <MenuItem onClick={handleClose}>Go to Original Idea</MenuItem>
-                    <MenuItem onClick={handleClose}>Rename Title</MenuItem>
-                    <MenuItem onClick={handleClose}>Make this the original Audio</MenuItem>
-                    <MenuItem onClick={handleClose}>Delete Current Audio</MenuItem>
+                    <UploaderMenuDialog/>
+                    {/* <NameChangeDialog /> */}
+                    <MenuItem onClick={handleClose}>Make This The original Audio</MenuItem>
+                    <DeleteAudioDialog />
                     <MenuItem onClick={handleClose}>Change Color</MenuItem>
-                    <MenuItem onClick={handleClose}>Delete Card</MenuItem>
-                    <MenuItem onClick={goBack}>Go Back</MenuItem>
+                    <MenuItem onClick={goToWorking}>Go to Working Song</MenuItem>
+                    <MenuItem onClick={goHome}>Go Home</MenuItem>
                 </Menu>  
         </>
     );
 }
 
-export default DetailsCardMenu;
+export default OriginalCardMenu;
