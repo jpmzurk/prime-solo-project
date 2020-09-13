@@ -54,6 +54,7 @@ const AddSong = ({ dispatch, history }) => {
             reset();
             setUrl('');
             setComplete(false)
+            history.push('/user')
         }
     };
 
@@ -81,7 +82,9 @@ const AddSong = ({ dispatch, history }) => {
                         <ReactS3Uploader uploadComplete={uploadComplete}/>
                         <FormControl className={inputs}>
                             <section className={inputs}>
+                                { complete &&
                                 <Button type="submit" > Save </Button>
+                                }
                                 <Button onClick={toUserHome}> CANCEL </Button>
                             </section>
                         </FormControl>

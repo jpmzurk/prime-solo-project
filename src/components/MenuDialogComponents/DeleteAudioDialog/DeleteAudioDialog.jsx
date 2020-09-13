@@ -1,5 +1,5 @@
-import React from 'react';
-import Button from '@material-ui/core/Button';
+import React, { useState }from 'react';
+// import { makeStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -7,9 +7,10 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { connect } from 'react-redux';
 import MenuItem from '@material-ui/core/MenuItem';
+import AudioRadioBtns from './AudioRadioBtns'
 
 function DeleteAudioDialog({selectedSong}) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
     if (selectedSong.song_id === null){
@@ -23,27 +24,23 @@ function DeleteAudioDialog({selectedSong}) {
   };
 
   const handleDelete = () => {
+    console.log('song save successfully clicked');
     setOpen(false);
     
   }
   // console.log(selectedSong.song_id);
   return (
     <div>
-      <MenuItem onClick={handleClickOpen}> Delete Current Audio </MenuItem>
+      <MenuItem onClick={handleClickOpen}> Delete An Audio File</MenuItem>
       <Dialog open={open} onClose={handleClose} aria-labelledby="Rename song title input">
         <DialogTitle id="dialogTitle">Delete Audio File?</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Are you sure you want to delete this audio from the song?
+            Select an audio file to delete:
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>
-            No
-          </Button>
-          <Button onClick={handleDelete}>
-            Yes
-          </Button>
+          <AudioRadioBtns handleDelete={handleDelete} handleClose={handleClose}/>
         </DialogActions>
       </Dialog>
     </div>

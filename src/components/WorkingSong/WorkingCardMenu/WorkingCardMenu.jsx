@@ -44,13 +44,16 @@ const WorkingCardMenu = ({ directUserHome, directOriginalSong, selectedSong }) =
                     open={Boolean(anchorEl)}
                     onClose={handleClose}
                 >   
-                    <MenuItem onClick={goBack}>Go Back To All Songs</MenuItem>
+                    
                     <UploaderMenuDialog/>
                     {/* <NameChangeDialog /> */}
-                    {/* <MenuItem onClick={handleClose}>Make This The original Audio</MenuItem> */}
-                    <DeleteAudioDialog />
-                    <MenuItem onClick={handleClose}>Change Color</MenuItem>
+                    <MenuItem onClick={goBack}>Go Back To All Songs</MenuItem>
                     <MenuItem onClick={goToOriginal}>Go to Original Idea</MenuItem>
+                    <MenuItem onClick={handleClose}>Change Color</MenuItem>
+                    <DeleteAudioDialog />
+                    
+                   
+                    
                     
                 </Menu>  
         </>

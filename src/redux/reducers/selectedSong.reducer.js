@@ -9,6 +9,7 @@ const initialSongState = {
         org_title: '',
         org_notes: '',
         org_lyrics: '',
+        original_audio: '',
         preview_audio: '',
         image: 'images/blackhole.gif',
 

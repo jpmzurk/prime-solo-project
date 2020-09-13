@@ -31,7 +31,6 @@ function DeleteCardDialog({ selectedSong , handleMenuClose, dispatch }) {
     handleMenuClose();
   }
 
-  console.log(selectedSong.song_id);
   return (
     <div>
       <MenuItem onClick={handleClickOpen}> Delete Card </MenuItem>

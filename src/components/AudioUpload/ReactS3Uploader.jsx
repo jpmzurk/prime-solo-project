@@ -18,7 +18,7 @@ class AudioUpload extends Component {
     //send complete function to AddSong and di
     onFinish = (info) => {
       console.log(info.publicUrl)
-      // this.props.dispatch({ type: 'SET_SONG_URL', payload: info.signedUrl})
+      // this.props.dispatch({ type: 'SET_SONG_URL', payload: info.publicUrl})
       this.props.uploadComplete(info.publicUrl)
     }
 
@@ -26,7 +26,7 @@ class AudioUpload extends Component {
         return (
           <div>
               <ReactS3uploader
-                autoUpload={false}
+                // autoUpload={false}
                 ref={uploader => { this.uploader = uploader; }}
                 // inputRef={cmp => this.uploadInput = cmp}
                 signingUrl="/s3/sign"
@@ -41,7 +41,7 @@ class AudioUpload extends Component {
                 s3path={''}
                 accept="audio/*"                
             />
-            <input type="button" value="Upload" onClick={this.handleUpload} />
+            {/* <input type="button" value="Upload" onClick={this.handleUpload} /> */}
           </div>
         );
       }

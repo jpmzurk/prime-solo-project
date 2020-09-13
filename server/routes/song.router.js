@@ -9,12 +9,12 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   console.log('req.user:', req.user);
 
   const queryText =
-    `SELECT song_id, title, date, lyrics, preview_audio, notes, org_date, org_title, org_title, org_lyrics,
+    `SELECT song_id, title, date, lyrics, preview_audio, notes, org_date, org_title, org_title, org_lyrics, org_audio,
         ARRAY_AGG (url_path) 
         FROM songs
         JOIN "recordings" ON "recordings".song_id = "songs".id
         WHERE user_id = $1
-        GROUP BY song_id, title, date, lyrics, preview_audio, notes, org_date, org_title, org_title, org_lyrics
+        GROUP BY song_id, title, date, lyrics, preview_audio, notes, org_date, org_title, org_title, org_lyrics, org_audio
         `;
   pool.query(queryText, [req.user.id])
     .then((result) => {
@@ -34,11 +34,11 @@ router.post('/', rejectUnauthenticated, (req, res) => {
   const song = req.body;
 
   const queryText = `INSERT INTO "songs" (
-                        user_id, title, notes, lyrics, preview_audio, org_title, org_notes, org_lyrics
+                        user_id, title, notes, lyrics, preview_audio, org_title, org_notes, org_lyrics, org_audio
                      )
-                     VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+                     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
                      RETURNING "id"`;
-  pool.query(queryText, [req.user.id, song.title, song.notes, song.lyrics, song.url_path, song.title, song.notes, song.lyrics])
+  pool.query(queryText, [req.user.id, song.title, song.notes, song.lyrics, song.url_path, song.title, song.notes, song.lyrics, song.url_path])
 
     .then(result => {
       console.log('new song id:', result.rows[0].id);
@@ -63,7 +63,6 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 });
 
 module.exports = router;
-
 
 
 router.put('/', rejectUnauthenticated, (req, res) => {

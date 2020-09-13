@@ -12,21 +12,22 @@ CREATE TABLE "user" (
 CREATE TABLE "songs" (
 	"id" serial PRIMARY KEY,
 	"user_id" iNT NOT NULL REFERENCES "user",
-	"date" date DEFAULT CURRENT_DATE,
+	"date" DATE DEFAULT CURRENT_DATE,
 	"title" TEXT NOT NULL,
 	"notes" TEXT DEFAULT 'no notes added',
 	"lyrics" TEXT DEFAULT 'no lyrics added',
-	"org_date" date NOT NULL,
-	"org_title" varchar(150) NOT NULL,
+	"org_date" DATE DEFAULT CURRENT_DATE,
+	"org_title" VARCHAR (150),
 	"org_notes" TEXT DEFAULT 'no notes provided', 
 	"org_lyrics" TEXT DEFAULT 'no lyrics provided',
-	"preview_audio" text, 
+	"org_audio" TEXT, 
+	"preview_audio" TEXT
 );
 
 CREATE TABLE "recordings" (
 	"id" serial PRIMARY KEY,
-	"song_id" int NOT NULL REFERENCES "songs",
-	"url_path" text NOT NULL
+	"song_id" INT NOT NULL REFERENCES "songs",
+	"url_path" TEXT NOT NULL
 )
 
 INSERT INTO "recordings" ("user_id", "song_id", "url_path")
@@ -35,7 +36,6 @@ VALUES
 (1, 2, 'audioFiles/ToSurvive.mp3'),
 (1, 3, 'audioFiles/AFriendOfYours.mp3'),
 (1, 4, 'audioFiles/HowManyTimes.mp3'),
-(1, 5, 'audioFiles/AtlanticCity.mp3'),
 (1, 3, 'audioFiles/AFriendOfYours4-3.mp3'), 
 (2, 5, 'audioFiles/AtlanticCity.mp3')
 

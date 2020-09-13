@@ -66,7 +66,7 @@ const Player = ({ selectedSong }) => {
 
     ])
 
-    const onLoad = () => {
+    useEffect(() => {
         let recordingsList = [];
         if (selectedSong.array_agg.length > 0 ){
             selectedSong.array_agg.map(recording => {
@@ -74,20 +74,15 @@ const Player = ({ selectedSong }) => {
                 songTitle = songTitle.split("/").pop();
                 console.log(songTitle, recording);
                 recordingsList.push({src: recording, title: songTitle })
-                return 
+                return null;
             })
             setRecordings(recordingsList)
         }
-    }
-   
-    useEffect(() => {
-        onLoad();
-    
-    }, []);
+    }, [selectedSong.array_agg]);
 
 
     console.log(recordings);
-    
+
     return (
         <>
         { recordings &&
