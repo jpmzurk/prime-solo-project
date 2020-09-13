@@ -1,5 +1,5 @@
 const initialSongState = {
-        song_id: 0,
+        song_id: null,
         array_agg: '',
         date: '', 
         title: 'No song selected yet!',

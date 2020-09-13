@@ -59,12 +59,6 @@ let rearrangedPlayer = [
 const Player = ({ selectedSong }) => {
   
     const [recordings, setRecordings ] = useState([
-        selectedSong ?
-        {
-            src: selectedSong.array_agg,
-            title: 'no title provided',
-        } 
-        :
         {
             src: '',
             title: '',
@@ -72,40 +66,28 @@ const Player = ({ selectedSong }) => {
 
     ])
 
-    const titleFix = () => {
-        let songTitle = ''
-        if (selectedSong.array_agg.length > 0 ) {
-        songTitle = String(selectedSong.array_agg[0]);
-        songTitle = songTitle.split("/").pop();
-        songTitle = songTitle.split("_").pop();
-        console.log(songTitle);
-        setRecordings([{src: selectedSong.array_agg, title: songTitle}])
-        console.log(recordings);
-        }
-        
-   }
-  
     const onLoad = () => {
         let recordingsList = [];
-        if (selectedSong.array_agg.length > 1 ){
-            console.log('if statement is true');
+        if (selectedSong.array_agg.length > 0 ){
             selectedSong.array_agg.map(recording => {
-                return recordingsList.push({src: recording, title: 
-                    
-                    (recording.split("/").pop())})
+                let songTitle = recording.split("_").pop();
+                songTitle = songTitle.split("/").pop();
+                console.log(songTitle, recording);
+                recordingsList.push({src: recording, title: songTitle })
+                return 
             })
-            console.log(recordingsList);
             setRecordings(recordingsList)
         }
     }
+   
     useEffect(() => {
-        titleFix();
         onLoad();
+    
     }, []);
 
-    // useEffect(onLoad, []);
-    console.log(recordings);
 
+    console.log(recordings);
+    
     return (
         <>
         { recordings &&

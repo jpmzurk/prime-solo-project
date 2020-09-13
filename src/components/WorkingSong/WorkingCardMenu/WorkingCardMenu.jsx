@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { connect } from 'react-redux';
 import IconButton from "@material-ui/core/IconButton";
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -7,7 +8,7 @@ import DeleteAudioDialog from '../../MenuDialogComponents/DeleteAudioDialog/Dele
 import UploaderMenuDialog from '../../MenuDialogComponents/AddAudioFileDialog/AddAudioFileDialog';
 // import NameChangeDialog from '../MenuDialogComponents/NameChangeDialog/NameChangeDialog';
 
-const WorkingCardMenu = ({ directUserHome, directOriginalSong }) => {
+const WorkingCardMenu = ({ directUserHome, directOriginalSong, selectedSong }) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -22,8 +23,12 @@ const WorkingCardMenu = ({ directUserHome, directOriginalSong }) => {
     }
 
     const goToOriginal = () => {
+        if (selectedSong.song_id === null){
+           return
+        } else {
         directOriginalSong();
         handleClose();
+        }
     }
     
     return (
@@ -52,4 +57,9 @@ const WorkingCardMenu = ({ directUserHome, directOriginalSong }) => {
     );
 }
 
-export default WorkingCardMenu;
+const mapStoreToProps = (reduxState) => {
+    return {
+        selectedSong: reduxState.selectedSong,
+    };
+  };
+export default connect(mapStoreToProps)(WorkingCardMenu);

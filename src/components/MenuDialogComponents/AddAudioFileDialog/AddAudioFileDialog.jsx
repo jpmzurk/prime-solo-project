@@ -14,12 +14,16 @@ function NameChangeDialog({selectedSong, dispatch }) {
   const [publicUrl, setPublicUrl] = useState('')
 
   const handleClickOpen = () => {
+    if (selectedSong.song_id === null){
+      setOpen(false)
+    } else
     setOpen(true);
   };
 
   const handleSave = () => {
-    
-    dispatch({ type: 'ADD_RECORDING', payload: publicUrl})
+    let newAudio = {song_id : selectedSong.song_id, url_path: publicUrl }
+    console.log(newAudio);
+    dispatch({ type: 'ADD_RECORDING', payload: newAudio})
     setOpen(false);
   };
 
@@ -29,6 +33,7 @@ function NameChangeDialog({selectedSong, dispatch }) {
 
   const settingPublicUrl = (url) => {
     setPublicUrl(url)
+    console.log(selectedSong);
   }
 
   console.log(selectedSong.song_id);

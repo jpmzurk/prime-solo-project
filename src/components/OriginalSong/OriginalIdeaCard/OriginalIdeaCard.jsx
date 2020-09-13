@@ -40,8 +40,8 @@ const WorkingSong = ({ selectedSong, history }) => {
         history.push('/workingsong')
     }
     return (
-        <div className={root}>
-          <Card className={card}>
+        <div className={root} onDoubleClick={directUserHome}>
+          <Card className={card} onDoubleClick={e => e.stopPropagation()}>
               <OriginalCardMenu directUserHome={directUserHome} directToWorking={directToWorking}/>
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h5" style={{ marginLeft: '25%' }}>

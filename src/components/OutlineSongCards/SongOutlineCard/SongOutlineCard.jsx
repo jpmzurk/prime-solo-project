@@ -7,8 +7,6 @@ import AudioPlayer from '../AudioPlayer/AudioPlayer'
 import Typography from "@material-ui/core/Typography";
 import SongOutlineMenu from '../SongOutlineMenu/SongOutlineMenu'
 import { connect } from 'react-redux';
-import mapStoreToProps from '../../../redux/mapStoreToProps';
-// { useState }
 
 const useStyles = makeStyles(() => ({
     card: {
@@ -37,12 +35,17 @@ const useStyles = makeStyles(() => ({
 
 }));
 
-const SongCards = ({ song, directWorkingCard }) => {
+const SongCards = ({ song, directWorkingCard, dispatch }) => {
     const classes = useStyles();
-    
+
+    const handleDoubleClick = () => {
+        dispatch({ type: 'SET_SELECTED_SONG', payload: song })
+        directWorkingCard()
+    }
+
     return (
         <>
-            <Card className={classes.card}>
+            <Card className={classes.card} onDoubleClick={handleDoubleClick}>
                 <SongOutlineMenu directWorkingCard={directWorkingCard} song={song}/>
                 <CardContent >
               
@@ -61,7 +64,8 @@ const SongCards = ({ song, directWorkingCard }) => {
     );
 }
 
-export default connect(mapStoreToProps)(SongCards);
+
+export default connect()(SongCards);
 
 
 

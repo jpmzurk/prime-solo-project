@@ -100,7 +100,6 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
       pool.query(sqlText, [id])
         .then(result => {
           console.log(result);
-          console.log(result);
           res.sendStatus(201);
         }).catch(error => {
           console.log('error in put', error);

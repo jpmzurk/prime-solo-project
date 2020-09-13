@@ -12,6 +12,9 @@ function DeleteAudioDialog({selectedSong}) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
+    if (selectedSong.song_id === null){
+      setOpen(false)
+    } else
     setOpen(true);
   };
 
@@ -23,7 +26,7 @@ function DeleteAudioDialog({selectedSong}) {
     setOpen(false);
     
   }
-  console.log(selectedSong.song_id);
+  // console.log(selectedSong.song_id);
   return (
     <div>
       <MenuItem onClick={handleClickOpen}> Delete Current Audio </MenuItem>
