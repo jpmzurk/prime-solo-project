@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -9,21 +9,42 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { connect } from 'react-redux';
 import MenuItem from '@material-ui/core/MenuItem';
 
-function NameChangeDialog({selectedSong}) {
-  const [open, setOpen] = React.useState(false);
+function NameChangeDialog({selectedSong, handleClose, dispatch}) {
+  const [open, setOpen] = useState(false);
+  const [newTitle, setNewTitle] = useState('');
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const handleCloseDialog = () => {
     setOpen(false);
   };
-  console.log(selectedSong.song_id);
+
+  const handleCancel = () => {
+    setOpen(false);
+    handleClose();
+  };
+
+  const handleSave = () => {
+    let song = {id : selectedSong.song_id}
+    song = {...song, title: newTitle}
+    setOpen(false);
+    handleClose();
+    dispatch({ type: 'EDIT_TITLE', payload: song})
+    // setTimeout(() => {
+    //   dispatch({ type: 'FETCH_SONGS'})
+    // }, 800)
+    //pop up that the title has been successfully changed ?
+  };
+  const handleChange = (e) => {
+    setNewTitle(e.target.value)
+  }
+
   return (
     <div>
       <MenuItem onClick={handleClickOpen}> Rename Song Title </MenuItem>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="Rename song title input">
+      <Dialog open={open} onClose={() => handleCloseDialog()} aria-labelledby="Rename song title input">
         <DialogTitle id="dialogTitle">Song Title</DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -37,13 +58,14 @@ function NameChangeDialog({selectedSong}) {
             type="text"
             defaultValue={selectedSong.title}
             fullWidth
+            onChange={handleChange}
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>
+          <Button onClick={() => handleCancel()}>
             Cancel
           </Button>
-          <Button onClick={handleClose}>
+          <Button onClick={() => handleSave()}>
             Save
           </Button>
         </DialogActions>

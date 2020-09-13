@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { put, takeLatest } from 'redux-saga/effects';
+import { takeLatest } from 'redux-saga/effects';
 
 function* postSong(action) {
     try {
@@ -10,8 +10,8 @@ function* postSong(action) {
 
         const response = yield axios.post('/api/song', action.payload, config);
         console.log(response);
-        yield put({ type: 'ADD_NEW_SONG', payload: response.data})
-        //make get here? 
+        // yield put({ type: 'ADD_NEW_SONG', payload: response.data})
+
     } catch (error) {
         console.log('Song POST request failed', error)
     }

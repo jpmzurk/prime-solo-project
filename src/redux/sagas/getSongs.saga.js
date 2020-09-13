@@ -11,7 +11,7 @@ function* getSong(action) {
         const response = yield axios.get('/api/song', config);
         console.log(response);
         yield put({ type: 'SET_SONGS', payload: response.data})
-        //make get here? 
+
     } catch (error) {
         console.log('Song GET request failed', error)
     }

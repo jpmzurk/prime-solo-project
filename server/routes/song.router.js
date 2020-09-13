@@ -66,16 +66,16 @@ module.exports = router;
 
 
 
-router.put('/title:id', rejectUnauthenticated, (req, res) => {
-  const id = req.params.id;
-  const newTitle = req.body
+router.put('/', rejectUnauthenticated, (req, res) => {
+  // const id = req.params.id;
+  // const newTitle = req.body.title
 
-  console.log('in put songs title', id);
+  console.log('in put songs title', req.body.id);
   let sqlText = `UPDATE songs 
                  SET title = $2 
                  WHERE id = $1;`
 
-  pool.query(sqlText, [id, newTitle])
+  pool.query(sqlText, [req.body.id, req.body.title])
       .then(result => {
           console.log(result);
           res.sendStatus(201);

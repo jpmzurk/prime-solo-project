@@ -4,10 +4,10 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 // import NameChangeDialog from '../MenuDialogComponents/NameChangeDialog/NameChangeDialog';
-import DeleteAudioDialog from '../MenuDialogComponents/DeleteAudioDialog/DeleteAudioDialog';
-import UploaderMenuDialog from '../MenuDialogComponents/AddAudioFileDialog/AddAudioFileDialog';
+import DeleteAudioDialog from '../../MenuDialogComponents/DeleteAudioDialog/DeleteAudioDialog';
+import UploaderMenuDialog from '../../MenuDialogComponents/AddAudioFileDialog/AddAudioFileDialog';
 
-const WorkingCardMenu = ({ directUserHome, directOriginalSong }) => {
+const OriginalCardMenu = ({ directUserHome, directToWorking }) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -16,13 +16,13 @@ const WorkingCardMenu = ({ directUserHome, directOriginalSong }) => {
         setAnchorEl(null)
     };
 
-    const goBack = () => {
+    const goHome = () => {
         directUserHome();
         handleClose();
     }
 
-    const goToOriginal = () => {
-        directOriginalSong();
+    const goToWorking = () => {
+        directToWorking();
         handleClose();
     }
     
@@ -44,11 +44,11 @@ const WorkingCardMenu = ({ directUserHome, directOriginalSong }) => {
                     <MenuItem onClick={handleClose}>Make This The original Audio</MenuItem>
                     <DeleteAudioDialog />
                     <MenuItem onClick={handleClose}>Change Color</MenuItem>
-                    <MenuItem onClick={goToOriginal}>Go to Original Idea</MenuItem>
-                    <MenuItem onClick={goBack}>Go Back</MenuItem>
+                    <MenuItem onClick={goToWorking}>Go to Working Song</MenuItem>
+                    <MenuItem onClick={goHome}>Go Home</MenuItem>
                 </Menu>  
         </>
     );
 }
 
-export default WorkingCardMenu;
+export default OriginalCardMenu;

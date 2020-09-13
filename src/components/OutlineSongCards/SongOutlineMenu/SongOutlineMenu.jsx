@@ -4,13 +4,15 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { connect } from 'react-redux';
-import TitleChangeDialog from '../MenuDialogComponents/NameChangeDialog/NameChangeDialog'
-import DeleteCardDialog from '../MenuDialogComponents/DeleteCardDialog/DeleteCardDialog'
+import NameChangeDialog from '../../MenuDialogComponents/NameChangeDialog/NameChangeDialog'
+import DeleteCardDialog from '../../MenuDialogComponents/DeleteCardDialog/DeleteCardDialog'
 
-const OutlineCardMenu = ({ directWorkingCard, song, dispatch, history}) => {
+const OutlineCardMenu = ({ directWorkingCard, song, dispatch}) => {
     const [anchorEl, setAnchorEl] = useState(null);
+
     const handleMenuClick = (event) => {
         setAnchorEl(event.currentTarget);
+        dispatch({ type: 'SET_SELECTED_SONG', payload: song })
     };
     const handleClose = () => {
         setAnchorEl(null)
@@ -19,7 +21,6 @@ const OutlineCardMenu = ({ directWorkingCard, song, dispatch, history}) => {
     const handleCardSelect = () => {
         console.log('in handleCardSelect');
         handleClose();
-        dispatch({ type: 'SET_SELECTED_SONG', payload: song })
         directWorkingCard()
     }
     
@@ -37,9 +38,9 @@ const OutlineCardMenu = ({ directWorkingCard, song, dispatch, history}) => {
                 onClose={handleClose}
             >
                 <MenuItem onClick={handleCardSelect}>Open Card</MenuItem>
-                <TitleChangeDialog/>
+                <NameChangeDialog handleClose={handleClose}/>
                 <MenuItem onClick={handleClose}>Choose Color</MenuItem>
-                <DeleteCardDialog />
+                <DeleteCardDialog handleMenuClose={handleClose}/>
             </Menu>
         </>
     );

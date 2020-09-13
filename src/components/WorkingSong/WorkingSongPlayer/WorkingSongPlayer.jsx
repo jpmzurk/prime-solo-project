@@ -59,12 +59,12 @@ let rearrangedPlayer = [
 const Player = ({ selectedSong }) => {
   
     const [recordings, setRecordings ] = useState([
-        selectedSong ?
-        {
-            src: selectedSong.array_agg,
-            title: 'no title provided',
-        } 
-        :
+        // selectedSong ?
+        // {
+        //     src: selectedSong.array_agg,
+        //     title: 'no title provided',
+        // } 
+        // :
         {
             src: '',
             title: '',
@@ -103,7 +103,6 @@ const Player = ({ selectedSong }) => {
         onLoad();
     }, []);
 
-    // useEffect(onLoad, []);
     console.log(recordings);
 
     return (

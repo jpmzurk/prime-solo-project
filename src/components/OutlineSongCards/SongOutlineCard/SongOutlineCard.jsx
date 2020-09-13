@@ -7,7 +7,7 @@ import AudioPlayer from '../AudioPlayer/AudioPlayer'
 import Typography from "@material-ui/core/Typography";
 import SongOutlineMenu from '../SongOutlineMenu/SongOutlineMenu'
 import { connect } from 'react-redux';
-import mapStoreToProps from '../../redux/mapStoreToProps';
+import mapStoreToProps from '../../../redux/mapStoreToProps';
 // { useState }
 
 const useStyles = makeStyles(() => ({
@@ -39,9 +39,6 @@ const useStyles = makeStyles(() => ({
 
 const SongCards = ({ song, directWorkingCard }) => {
     const classes = useStyles();
-    console.log(song);
-    console.log(song.array_agg.length);
-
     
     return (
         <>

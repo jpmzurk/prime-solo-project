@@ -1,6 +1,6 @@
 const initialSongState = {
         song_id: 0,
-        array_agg: [],
+        array_agg: '',
         date: '', 
         title: 'No song selected yet!',
         lyrics: 'There are no lyrics for an empty song. Sad. Go back and select a song.',
