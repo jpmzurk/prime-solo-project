@@ -25,17 +25,16 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     })
   })
 
-
-
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
-  const id = req.params.id;
-  // const newUrl = req.body
+  const url_path = decodeURIComponent(req.params.id)
+  console.log('req.body : ', url_path);
+  
 
-  console.log('in put recordings url', id);
+  console.log('in delete recordings url', url_path);
   let sqlText = `DELETE FROM recordings 
-                 WHERE song_id = $1;`
+                 WHERE url_path = $1;`
 
-  pool.query(sqlText, [id])
+  pool.query(sqlText, [url_path])
       .then(result => {
           console.log(result);
           res.sendStatus(201);

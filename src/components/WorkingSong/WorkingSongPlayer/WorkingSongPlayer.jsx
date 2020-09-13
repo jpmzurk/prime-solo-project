@@ -57,7 +57,7 @@ let rearrangedPlayer = [
     },
 ];
 
-const Player = ({ selectedSong }) => {
+const Player = ({ selectedSong, dispatch, audio }) => {
   
     const [recordings, setRecordings ] = useState([
         {
@@ -72,18 +72,17 @@ const Player = ({ selectedSong }) => {
             selectedSong.array_agg.map(recording => {
                 let songTitle = recording.split("_").pop();
                 songTitle = songTitle.split("/").pop();
-                console.log(songTitle, recording);
-                recordingsList.push({src: recording, title: songTitle })
+                let song = {src: recording, title: songTitle }
+                console.log(song);
+                recordingsList.push(song)
                 return null;
             })
-            setRecordings(recordingsList)
-        }
-    
-    }, [selectedSong.array_agg]);
+            dispatch({type: 'SET_AUDIO_FILES', payload: recordingsList})
+            setRecordings(recordingsList)  
+        }   
+    }, [selectedSong.array_agg, dispatch, ]);
 
-
-    console.log(recordings);
-
+    console.log('audio reducer array', audio);
     return (
         <>
         { recordings &&
@@ -110,6 +109,7 @@ const Player = ({ selectedSong }) => {
 const mapStoreToProps = (reduxState) => {
     return {
         selectedSong: reduxState.selectedSong,
+        audio: reduxState.audio,
     };
   };
 export default connect(mapStoreToProps)(Player);

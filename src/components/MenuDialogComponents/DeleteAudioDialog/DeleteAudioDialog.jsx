@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import MenuItem from '@material-ui/core/MenuItem';
 import AudioRadioBtns from './AudioRadioBtns'
 
-function DeleteAudioDialog({selectedSong}) {
+function DeleteAudioDialog({selectedSong, handMenuClose}) {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -24,11 +24,11 @@ function DeleteAudioDialog({selectedSong}) {
   };
 
   const handleDelete = () => {
-    console.log('song save successfully clicked');
+    console.log('song delete successfully clicked');
     setOpen(false);
-    
+    handMenuClose()
   }
-  // console.log(selectedSong.song_id);
+
   return (
     <div>
       <MenuItem onClick={handleClickOpen}> Delete An Audio File</MenuItem>
@@ -40,7 +40,7 @@ function DeleteAudioDialog({selectedSong}) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <AudioRadioBtns handleDelete={handleDelete} handleClose={handleClose}/>
+          <AudioRadioBtns handleDelete={handleDelete}/>
         </DialogActions>
       </Dialog>
     </div>

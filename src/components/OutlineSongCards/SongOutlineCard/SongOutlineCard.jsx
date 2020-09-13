@@ -32,7 +32,6 @@ const useStyles = makeStyles(() => ({
         width: 300,
         height: 300,
     },
-
 }));
 
 const SongCards = ({ song, directWorkingCard, dispatch }) => {

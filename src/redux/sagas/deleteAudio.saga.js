@@ -1,14 +1,16 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
-function* songDelete(action) {
+function* audioDelete(action) {
     try {
         const config = {
             headers: { 'Content-Type': 'application/json' },
             withCredentials: true,
         };
+        let url = encodeURIComponent(action.payload);
+        console.log('in audio Delete. payload: ', url);
         
-        const response = yield axios.delete(`/api/song/${action.payload}`, config);
+        const response = yield axios.delete(`/api/recording/${url}`, config);
         console.log(response);
     
         yield put({ type: 'FETCH_SONGS'})
@@ -17,8 +19,8 @@ function* songDelete(action) {
     }
 }
 
-function* deleteSong() {
-    yield takeLatest('DELETE_SONG', songDelete);
+function* deleteAudio() {
+    yield takeLatest('DELETE_AUDIO', audioDelete);
 }
 
-export default deleteSong;
+export default deleteAudio;

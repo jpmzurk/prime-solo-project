@@ -30,6 +30,11 @@ const WorkingCardMenu = ({ directUserHome, directOriginalSong, selectedSong }) =
         handleClose();
         }
     }
+
+    const handleUpload = () => {
+        setAnchorEl(null)
+        
+    }
     
     return (
         <>
@@ -44,17 +49,12 @@ const WorkingCardMenu = ({ directUserHome, directOriginalSong, selectedSong }) =
                     open={Boolean(anchorEl)}
                     onClose={handleClose}
                 >   
-                    
-                    <UploaderMenuDialog/>
+                    <UploaderMenuDialog handleUpload={handleUpload}/>
                     {/* <NameChangeDialog /> */}
                     <MenuItem onClick={goBack}>Go Back To All Songs</MenuItem>
                     <MenuItem onClick={goToOriginal}>Go to Original Idea</MenuItem>
                     <MenuItem onClick={handleClose}>Change Color</MenuItem>
-                    <DeleteAudioDialog />
-                    
-                   
-                    
-                    
+                    <DeleteAudioDialog handMenuClose={handleClose} />
                 </Menu>  
         </>
     );

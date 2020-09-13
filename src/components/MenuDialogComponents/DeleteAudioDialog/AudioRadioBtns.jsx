@@ -18,12 +18,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function RecordingRadios({handleClose, handleDelete}) {
+function RecordingRadios({ handleDelete, audioFiles, dispatch}) {
   const classes = useStyles();
   const [value, setValue] = useState('');
   const [error, setError] = useState(false);
   const [helperText, setHelperText] = useState('');
   const [readyDelete, setReadyDelete] = useState(false);
+
 
   const handleRadioChange = (event) => {
     setValue(event.target.value);
@@ -33,38 +34,42 @@ function RecordingRadios({handleClose, handleDelete}) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    if (value.length > 0 ) {
-      setHelperText('Are you sure you want to delete ', 'audioTitleHere ?');
-      setError(true);
-      setReadyDelete(true)
-    } else if ((value.length > 0) && (readyDelete === true)) {
+    
+     if ((value.length > 0) && (readyDelete === true)) {
       setHelperText('');
       setError(false);
-      setReadyDelete(false)
+      setReadyDelete(false);
+      console.log(value);
+      dispatch({type: 'DELETE_AUDIO', payload: value})
+    //   dispatch({type: 'FETCH_SONG'}) 
       handleDelete();
+    }  else if (value.length > 0 ) {
+        setHelperText('Are you sure you want to delete this audio', `?`);
+        setError(true);
+        setReadyDelete(true)
     } else {
       setHelperText('Please select an option.');
       setError(true);
     }
-
-    
   };
+//   {url_path: value}
+//   console.log(audioFiles);
 
   return (
     <form onSubmit={handleSubmit}>
       <FormControl component="fieldset" error={error} className={classes.formControl}>
-        <FormLabel component="legend">Recording To Delete</FormLabel>
+        {/* <FormLabel component="legend">Recording To Delete</FormLabel> */}
         <RadioGroup aria-label="songs to delete" name="recordings" value={value} onChange={handleRadioChange}>
-
-          <FormControlLabel value="No goodbyes" control={<Radio />} label="The best!" />
-          <FormControlLabel value="no goodbyes demo" control={<Radio />} label="The worst." />
+            {
+                audioFiles.map((audio, i )=> {
+                    return <FormControlLabel value={audio.src} control={<Radio />} label={audio.title} key={i}/>
+                })
+            }
+          {/* <FormControlLabel value="No goodbyes" control={<Radio />} label="The best!" />
+          <FormControlLabel value="no goodbyes demo" control={<Radio />} label="The worst." /> */}
         </RadioGroup>
         <FormHelperText>{helperText}</FormHelperText>
-        {/* <Button type="submit" variant="outlined" color="primary" className={classes.button}>
-          Check Answer
-        </Button> */}
-        <Button className={classes.button} onClick={handleClose}>
+        <Button className={classes.button} onClick={handleDelete} >
             Cancel
           </Button>
           <Button type="submit" className={classes.button}>
@@ -77,7 +82,8 @@ function RecordingRadios({handleClose, handleDelete}) {
 
 const mapStoreToProps = (reduxState) => {
     return {
-        selectedSong: reduxState.selectedSong,
+        // selectedSong: reduxState.selectedSong,
+        audioFiles: reduxState.audio,
     };
   };
 export default connect(mapStoreToProps)(RecordingRadios);

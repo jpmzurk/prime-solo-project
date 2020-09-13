@@ -1,7 +1,10 @@
-const songs = (state = [], action) => {
+
+const audio = (state = [], action) => {
     switch (action.type) {
-        case 'SET_SONGS':
+        case 'SET_AUDIO_FILES':
             return action.payload;
+        // case 'CLEAR_AUDIO_FILES':
+        //     return state = [];
         default:
             return state;
     }
@@ -9,4 +12,4 @@ const songs = (state = [], action) => {
   
   // user will be on the redux state at:
   // state.user
-  export default songs;
+  export default audio;

@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import MenuItem from '@material-ui/core/MenuItem';
 import Uploader from './UploaderForDialog'
 
-function NameChangeDialog({selectedSong, dispatch }) {
+function NameChangeDialog({selectedSong, dispatch, handMenuClose }) {
   const [open, setOpen] = useState(false);
   const [publicUrl, setPublicUrl] = useState('')
 
@@ -24,6 +24,8 @@ function NameChangeDialog({selectedSong, dispatch }) {
     let newAudio = {song_id : selectedSong.song_id, url_path: publicUrl }
     console.log(newAudio);
     dispatch({ type: 'ADD_RECORDING', payload: newAudio})
+    dispatch({type : 'GET_SONG', payload: selectedSong.song_id})
+    handMenuClose();
     setOpen(false);
   };
 
@@ -36,8 +38,6 @@ function NameChangeDialog({selectedSong, dispatch }) {
     console.log(selectedSong);
   }
 
-  console.log(selectedSong.song_id);
-  console.log(publicUrl);
   return (
     <div>
       <MenuItem onClick={handleClickOpen}> Add New Audio File </MenuItem>
