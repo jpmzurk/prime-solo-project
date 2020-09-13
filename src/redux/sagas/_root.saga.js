@@ -2,9 +2,10 @@ import { all } from 'redux-saga/effects';
 import loginSaga from './login.saga';
 import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
-import postSongSaga from './postSong.saga'
-import getSongSaga from './getSongs.saga'
-import titleChange from './titleChange.saga'
+import postSongSaga from './postSong.saga';
+import getSongSaga from './getSongs.saga';
+import titleChange from './titleChange.saga';
+import deleteSong from './deleteSong.saga'
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
 // This is imported in index.js as rootSaga
@@ -20,5 +21,6 @@ export default function* rootSaga() {
     postSongSaga(),
     getSongSaga(),
     titleChange(),
+    deleteSong(),
   ]);
 }

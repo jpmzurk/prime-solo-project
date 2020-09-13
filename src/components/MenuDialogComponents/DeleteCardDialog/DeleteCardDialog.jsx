@@ -8,7 +8,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { connect } from 'react-redux';
 import MenuItem from '@material-ui/core/MenuItem';
 
-function DeleteCardDialog({ selectedSong , handleMenuClose }) {
+function DeleteCardDialog({ selectedSong , handleMenuClose, dispatch }) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -20,9 +20,12 @@ function DeleteCardDialog({ selectedSong , handleMenuClose }) {
   };
 
   const handleDelete = () => {
+    const id = selectedSong.song_id;
     setOpen(false);
     handleMenuClose();
+    dispatch({type: 'DELETE_SONG', payload: id})
   }
+
   const handleCancel = () => {
     setOpen(false);
     handleMenuClose();
