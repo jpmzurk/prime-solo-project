@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { makeStyles} from "@material-ui/core/styles";
 import { connect } from 'react-redux';
 import SongOutlineCard from '../SongOutlineCard/SongOutlineCard'
@@ -16,16 +16,21 @@ const UserHome = ({ dispatch, songs, history }) => {
     const classes = useStyles();
     const getSongs = () => {
         dispatch({ type: 'FETCH_SONGS' })
-        
     }
-
-    useEffect(getSongs, []);
+    // useEffect(
+    //     getSongs, []);
+    
+    useEffect(() => {
+        getSongs()
+        
+    }, []);
 
     const directWorkingCard = () => {
         history.push('/workingsong')
         console.log('clicked to working card');
     }
     return (
+
         <div className={classes.root}>
             {songs.map((song, i) => {
             return <SongOutlineCard key={i} song={song} directWorkingCard={directWorkingCard}/>

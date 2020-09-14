@@ -4,17 +4,7 @@ import ReactS3uploader from 'react-s3-uploader'
 
 
 class UploaderForDialog extends Component {
-    constructor(props) {
-      super();
-      this.uploader = null;
-      this.handleUpload = this.handleUpload.bind(this);
-    }
-
-    //use the ref that was created! 
-    handleUpload = () => {
-      this.uploader.uploadFile();
-    }
-
+  
     //send complete function to AddSong and di
     onFinish = (info) => {
       console.log(info.publicUrl)
@@ -27,14 +17,14 @@ class UploaderForDialog extends Component {
           <div>
               <ReactS3uploader
                 // autoUpload={false}
-                ref={uploader => { this.uploader = uploader; }}
+                // ref={uploader => { this.uploader = uploader; }}
                 signingUrl="/s3/sign"
                 signingUrlMethod="GET"
                 onDrop={this.handleDrop}
                 onProgress={this.onProgress}
                 onError={this.onError}
                 onFinish={this.onFinish}
-                s3path={''}
+                // s3path={''}
                 accept="audio/*"                
             />
             {/* <input type="button" value="Upload" onClick={this.handleUpload} /> */}

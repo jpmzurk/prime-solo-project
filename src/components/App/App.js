@@ -61,6 +61,7 @@ class App extends Component {
               component={UserHome}
             />
 
+
             <ProtectedRoute
               // logged in shows UserPage else shows LoginPage
               exact

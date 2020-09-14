@@ -57,11 +57,11 @@ let rearrangedPlayer = [
     },
 ];
 
-const Player = ({ recordings, dispatch, selectedSong }) => {
-    console.log('in working song player', recordings);
+const Player = ({ recordings }) => {
     const [playlist, setPlaylist] = useState([
-        { src: '' }
+        { src: '' , title: ''}
     ]);
+    
     const mounted = useRef();
     useEffect(() => {
         if (!mounted.current) {
@@ -70,21 +70,20 @@ const Player = ({ recordings, dispatch, selectedSong }) => {
             mounted.current = true;
         } else {
             // do componentDidUpdate-ish
-            setPlaylist(recordings)
-            
+            recordings ? setPlaylist(recordings) : setPlaylist([{ src: '',title: ''}])
         }
-    });
+    }, [recordings]);
   
 
     const setRecordings = () => {
-        dispatch({ type: 'FETCH_RECORDINGS', payload: selectedSong.song_id })
+        // dispatch({ type: 'FETCH_RECORDINGS', payload: song.id })
+        console.log('working song player remounted');
     }
 
-
-    console.log(playlist);
     return (
         <>
             { recordings &&
+                <div >
                 <AudioPlayer
                     audioFiles={playlist}
                     rearrange={rearrangedPlayer}
@@ -100,6 +99,7 @@ const Player = ({ recordings, dispatch, selectedSong }) => {
                     fontSize="1rem"
                     playerWidth="auto"
                 />
+                 </div>
             }
         </>
     );
@@ -107,7 +107,7 @@ const Player = ({ recordings, dispatch, selectedSong }) => {
 
 const mapStoreToProps = (reduxState) => {
     return {
-        selectedSong: reduxState.selectedSong,
+        song: reduxState.song,
         recordings: reduxState.recordings,
     };
 };

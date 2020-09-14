@@ -8,7 +8,8 @@ import titleChange from './titleChange.saga';
 import deleteSong from './deleteSong.saga';
 import postRecording from './postRecording.saga'
 import deleteAudio from './deleteAudio.saga'
-import setSelected from './setSelected.saga'
+import setSelectedAudio from './setSelectedAudio.saga'
+import setSelectedSong  from './setSelectedSong.saga'
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
 // This is imported in index.js as rootSaga
@@ -27,6 +28,7 @@ export default function* rootSaga() {
     deleteSong(),
     postRecording(),
     deleteAudio(),
-    setSelected(),
+    setSelectedAudio(),
+    setSelectedSong()
   ]);
 }

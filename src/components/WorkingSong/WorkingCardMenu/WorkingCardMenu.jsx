@@ -8,7 +8,7 @@ import DeleteAudioDialog from '../../MenuDialogComponents/DeleteAudioDialog/Dele
 import UploaderMenuDialog from '../../MenuDialogComponents/AddAudioFileDialog/AddAudioFileDialog';
 // import NameChangeDialog from '../MenuDialogComponents/NameChangeDialog/NameChangeDialog';
 
-const WorkingCardMenu = ({ directUserHome, directOriginalSong, selectedSong }) => {
+const WorkingCardMenu = ({ directUserHome, directOriginalSong, song, dispatch }) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -23,14 +23,22 @@ const WorkingCardMenu = ({ directUserHome, directOriginalSong, selectedSong }) =
     }
 
     const goToOriginal = () => {
-        if (selectedSong.song_id === null){
+        if (song.id === null){
            return
         } else {
         directOriginalSong();
         handleClose();
         }
     }
-    
+    const handleMenuClose = (newAudio) => {
+        setAnchorEl(null);
+        dispatch({ type: 'ADD_RECORDING', payload: newAudio})   
+    };
+
+    const handleTopMenuClose = () => {
+        setAnchorEl(null)
+    };
+
     return (
         <>
             <IconButton aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
@@ -44,12 +52,12 @@ const WorkingCardMenu = ({ directUserHome, directOriginalSong, selectedSong }) =
                     open={Boolean(anchorEl)}
                     onClose={handleClose}
                 >   
-                    <UploaderMenuDialog handleMenuClose={handleClose}/>
+                    <UploaderMenuDialog handleMenuClose={handleMenuClose}/>
                     {/* <NameChangeDialog /> */}
                     <MenuItem onClick={goBack}>Go Back To All Songs</MenuItem>
                     <MenuItem onClick={goToOriginal}>Go to Original Idea</MenuItem>
                     <MenuItem onClick={handleClose}>Change Color</MenuItem>
-                    <DeleteAudioDialog handMenuClose={handleClose} />
+                    <DeleteAudioDialog handleTopMenuClose={handleTopMenuClose} />
                 </Menu>  
         </>
     );
@@ -57,7 +65,7 @@ const WorkingCardMenu = ({ directUserHome, directOriginalSong, selectedSong }) =
 
 const mapStoreToProps = (reduxState) => {
     return {
-        selectedSong: reduxState.selectedSong,
+        song: reduxState.song,
     };
   };
 export default connect(mapStoreToProps)(WorkingCardMenu);

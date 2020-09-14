@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles} from "@material-ui/core/styles";
 import { connect } from 'react-redux';
 import CardActions from "@material-ui/core/CardActions";
@@ -14,7 +14,7 @@ const useStyles = makeStyles(() => ({
         marginTop: '2em',
         backgroundColor: "#EBEBEB",
         width: 500,
-        height: 500,
+        // height: 500,
     },
     root: {
         display: 'flex',
@@ -25,7 +25,7 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-const WorkingSong = ({ selectedSong, history, dispatch }) => {
+const WorkingSong = ({ song, history, dispatch }) => {
     const {card, root} = useStyles();
 
     const directUserHome = () => {
@@ -38,37 +38,53 @@ const WorkingSong = ({ selectedSong, history, dispatch }) => {
         history.push('/originalsong')
     }
 
+    console.log(song);
+
+    useEffect(() => {
+       updateStore()
+    }, [song]);
+
+    const updateStore = () => {
+        console.log('in update store');
+    dispatch({ type: 'FETCH_RECORDINGS', payload: song.id })
+    }
+   
     return (
         <div className={root} onDoubleClick={directUserHome}>
-          <Card className={card} onDoubleClick={e => e.stopPropagation()}>
+         { song &&
+         <div onDoubleClick={e => e.stopPropagation()}>
+         <Card className={card} >
               <WorkingCardMenu directUserHome={directUserHome} directOriginalSong={directOriginalSong}/>
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h5" style={{ marginLeft: '25%' }}>
-                        {selectedSong.song_title}
+                        {song.song_title}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p" style={{ marginLeft: '30%', marginBottom: '.75em', marginTop: '-.75em' }}>
                         (Working Song)
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p" style={{ marginLeft: '1em' }}>
                     Lyrics: <br/>
-                    {selectedSong.lyrics}
+                    {song.lyrics}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p" style={{ marginLeft: '1em' }}>
                         Notes: <br/>
-                    {selectedSong.notes}
+                    {song.notes}
                     </Typography>
                 </CardContent>
-                <WorkingSongPlayer/>
+                <WorkingSongPlayer />
                 <CardActions>
                 </CardActions>
             </Card>
+            </div>}
+            
         </div>
     );
 }
 
 const mapStoreToProps = (reduxState) => {
     return {
-        selectedSong: reduxState.selectedSong,
+        song: reduxState.song,
+        recordings: reduxState.recordings,
     };
   };
 export default connect(mapStoreToProps)(WorkingSong);

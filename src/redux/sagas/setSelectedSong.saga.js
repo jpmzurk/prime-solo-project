@@ -2,7 +2,7 @@ import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
 
-function* setSong(action) {
+function* getSong(action) {
     try {
         const config = {
             headers: { 'Content-Type': 'application/json' },
@@ -10,9 +10,9 @@ function* setSong(action) {
         };
         const id = action.payload
 
-        const response = yield axios.get(`/api/recording/${id}`, config);
+        const response = yield axios.get(`/api/song/${id}`, config);
         
-        yield put({ type: 'SET_SELECTED_RECORDING', payload: response.data})
+        yield put({ type: 'SETTING_SELECTED_SONG', payload: response.data})
 
     } catch (error) {
         console.log('Song GET request failed', error)
@@ -20,8 +20,7 @@ function* setSong(action) {
 }
 
 function* setSongSaga() {
-    yield takeLatest('FETCH_RECORDINGS', setSong);
-    // yield takeLatest('FETCH_SONG', getSong);
+    yield takeLatest('SETTING_SONG', getSong);
 }
 
 export default setSongSaga;

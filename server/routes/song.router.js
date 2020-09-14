@@ -15,6 +15,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         JOIN "recordings" ON "recordings".song_id = "songs".id
         WHERE user_id = $1
         GROUP BY song_id, song_title, date, lyrics, preview_audio, notes, org_date, org_title, org_lyrics, org_audio
+        ORDER BY song_id DESC
         `;
   pool.query(queryText, [req.user.id])
     .then((result) => {
@@ -27,10 +28,31 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     });
 });
 
+//getting the selected song
+router.get('/:id', rejectUnauthenticated, (req, res) => {
+
+  console.log('in recording get by id: ', req.params.id);
+  const id = req.params.id;
+
+  const queryText = `
+                    SELECT * FROM songs
+                    WHERE id = $1
+                    `
+
+  pool.query(queryText, [id])
+  .then (result => {
+    console.log(result.rows);
+    res.send(result.rows)
+  })
+  .catch(err =>{ 
+    console.log('Error complete select song', err);
+  })
+})
+
 //Post new song from AddSong
 router.post('/', rejectUnauthenticated, (req, res) => {
-  console.log(req.body)
-  console.log(req.user.id);
+  console.log('in song post. the song and user id are',req.body, req.user.id);
+ 
   const song = req.body;
 
   const queryText = `INSERT INTO "songs" (
@@ -38,28 +60,35 @@ router.post('/', rejectUnauthenticated, (req, res) => {
                      )
                      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
                      RETURNING "id"`;
-  pool.query(queryText, [req.user.id, song.title, song.notes, song.lyrics, song.src, song.title, song.notes, song.lyrics, song.src])
+  pool.query(queryText, [req.user.id, song.song_title, song.notes, song.lyrics, song.src, song.song_title, song.notes, song.lyrics, song.src])
 
     .then(result => {
       console.log('new song id:', result.rows[0].id);
 
       const newSongId = result.rows[0].id
 
-      // Depending on how you make your junction table, this insert COULD change.
-      const recordingQueryText = `
+      const recordingQueryText = ` 
       INSERT INTO "recordings" ("song_id", "src", "title")
       VALUES  ($1, $2, $3);
       `
-      // SECOND QUERY MAKES GENRE FOR THAT NEW MOVIE
+
       pool.query(recordingQueryText, [newSongId, song.src, song.title]).then(result => {
-        //Now that both are done, send back success!
-        res.sendStatus(201);
-      }).catch(err => {
-        // catch for second query
-        console.log(err);
-        res.sendStatus(500)
-      })
-    }).catch((err) => console.log('Error completing SELECT songs query', err), res.sendStatus(500));
+        //Now that both are done, send b  ack success!
+            // console.log(result);
+            
+            //         const queryText = 
+            //         `
+            //         SELECT * FROM songs
+            //         WHERE id = $1
+            //         `
+            //         pool.query(queryText, [req.user.id]).then(result => {res.send(result.rows)
+
+            //         }).catch((err) => console.log('Error completing get songs query in Post songs', err), res.sendStatus(500))
+
+      // catch for second query
+      }).catch(err => { console.log('Error completing POST song in recordings table', err), res.sendStatus(500)})
+
+    }).catch((err) => console.log('Error completing POST songs query', err), res.sendStatus(500));
 });
 
 module.exports = router;

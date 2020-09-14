@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 import AudioPlayer from "react-modular-audio-player";
 import playIcon from './icons/play.png'
 import pauseIcon from './icons/pause.png'
@@ -56,38 +57,13 @@ let rearrangedPlayer = [
     },
 ];
 
-const Player = ({ selectedSong }) => {
-  
-    const [recordings, setRecordings ] = useState([
-        {
-            src: '',
-            title: '',
-        } 
-
-    ])
-
-    useEffect(() => {
-        let recordingsList = [];
-        if (selectedSong.array_agg.length > 0 ){
-            selectedSong.array_agg.map(recording => {
-                let songTitle = recording.split("_").pop();
-                songTitle = songTitle.split("/").pop();
-                console.log(songTitle, recording);
-                recordingsList.push({src: recording, title: songTitle })
-                return null;
-            })
-            setRecordings(recordingsList)
-        }
-    }, [selectedSong.array_agg]);
-
-
-    console.log(recordings);
+const Player = ({ song }) => {
 
     return (
         <>
-        { recordings &&
+        { song  &&
             <AudioPlayer
-                audioFiles={recordings}
+                audioFiles={[{src : song.preview_audio}]}
                 rearrange={rearrangedPlayer}
                 iconSize="1.5rem"
                 playIcon={playIcon}
@@ -106,4 +82,9 @@ const Player = ({ selectedSong }) => {
     );
 }
 
-export default Player;
+const mapStoreToProps = (reduxState) => {
+    return {
+        song: reduxState.song,
+    };
+};
+export default connect(mapStoreToProps)(Player);

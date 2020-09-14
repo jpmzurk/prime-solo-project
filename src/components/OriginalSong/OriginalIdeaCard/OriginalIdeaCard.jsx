@@ -26,7 +26,7 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-const WorkingSong = ({ selectedSong, history }) => {
+const WorkingSong = ({ song, history }) => {
     const {card, root} = useStyles();
     
     const directUserHome = () => {
@@ -44,23 +44,20 @@ const WorkingSong = ({ selectedSong, history }) => {
               <OriginalCardMenu directUserHome={directUserHome} directToWorking={directToWorking}/>
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h5" style={{ marginLeft: '25%' }}>
-                        {selectedSong.org_title}
+                        {song.org_title}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p" style={{ marginLeft: '30%', marginBottom: '.75em', marginTop: '-.75em' }}>
                         (Original Song)
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p" style={{ marginLeft: '1em' }}>
-                    {selectedSong.org_lyrics}
+                        {song.org_lyrics}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p" style={{ marginLeft: '1em' }}>
-                    {selectedSong.org_notes}
+                        {song.org_notes}
                     </Typography>
                 </CardContent>
-                <OriginalCardPlayer selectedSong={selectedSong}/>
+                <OriginalCardPlayer/>
                 <CardActions>
-                {/* <div style={{paddingLeft : '3em' }}> 
-                <AudioUpload />
-                </div> */}
                 </CardActions>
             </Card>
         </div>
@@ -69,7 +66,7 @@ const WorkingSong = ({ selectedSong, history }) => {
 
 const mapStoreToProps = (reduxState) => {
     return {
-        selectedSong: reduxState.selectedSong,
+        song: reduxState.song,
     };
   };
 export default connect(mapStoreToProps)(WorkingSong);

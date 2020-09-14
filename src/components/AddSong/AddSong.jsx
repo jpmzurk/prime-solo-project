@@ -34,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+
 const AddSong = ({ dispatch, history }) => {
     const { root, inputs, paper, textField } = useStyles();
     const { handleSubmit, reset, register } = useForm();
@@ -43,14 +44,15 @@ const AddSong = ({ dispatch, history }) => {
     const [url, setUrl] = useState('no file dropped');
 
     const onSubmit = (data) => {
-        if ((data.title === '') || (data.lyrics === '')) {
+        if ((data.song_title === '') || (data.lyrics === '')) {
             setErrorState(true);
             setHelperText('You must enter a title and a few lyrics');
         } else {
             setErrorState(false);
+            //clean up url to be title for audio player
              let songTitle = url.split("_").pop();
              songTitle = songTitle.split("/").pop();
-              songTitle = songTitle.split(".mp3").shift();
+             songTitle = songTitle.split(".mp3").shift();
             data = {...data, src: url, title: songTitle}
             console.log(data);
             dispatch({ type: 'POST_NEW_SONG', payload: data })
@@ -66,8 +68,6 @@ const AddSong = ({ dispatch, history }) => {
         setUrl(`${publicUrl}`)
     }
 
-    console.log(complete);
-    console.log(url);
     const toUserHome = () => {
         history.push('/user')
     }
@@ -78,17 +78,17 @@ const AddSong = ({ dispatch, history }) => {
                 <FormControl >
                     <form className={root} onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off" >
                         <Typography variant="h4" component="h5" style={{ marginTop: '1em' }}>Add A Song</Typography>
-                        <TextField label="title" name="title" inputRef={register} multiline className={inputs} error={errorState} />
+                        <TextField label="title" name="song_title" inputRef={register} multiline className={inputs} error={errorState} />
                         <TextField label="notes" name="notes" inputRef={register} multiline className={textField} />
                         <TextField label="lyrics" name="lyrics" inputRef={register} multiline className={textField} error={errorState} />
                         <FormHelperText error={errorState} > {helperText} </FormHelperText>
                         <ReactS3Uploader uploadComplete={uploadComplete}/>
                         <FormControl className={inputs}>
                             <section className={inputs}>
+                            <Button onClick={toUserHome}> CANCEL </Button>
                                 { complete &&
                                 <Button type="submit" > Save </Button>
-                                }
-                                <Button onClick={toUserHome}> CANCEL </Button>
+                                }   
                             </section>
                         </FormControl>
                     </form>

@@ -12,7 +12,8 @@ const OutlineCardMenu = ({ directWorkingCard, song, dispatch}) => {
 
     const handleMenuClick = (event) => {
         setAnchorEl(event.currentTarget);
-        dispatch({ type: 'SET_SELECTED_SONG', payload: song })
+        dispatch({ type: 'SETTING_SONG', payload: song.song_id })
+        dispatch({ type: 'FETCH_RECORDINGS', payload: song.song_id })
     };
     const handleClose = () => {
         setAnchorEl(null)
@@ -23,6 +24,10 @@ const OutlineCardMenu = ({ directWorkingCard, song, dispatch}) => {
         handleClose();
         directWorkingCard()
     }
+
+    const handleMenuClose = () => {
+        setAnchorEl(null)
+    };
     
     return (
         <>
@@ -40,16 +45,16 @@ const OutlineCardMenu = ({ directWorkingCard, song, dispatch}) => {
                 <MenuItem onClick={handleCardSelect}>Open Card</MenuItem>
                 <NameChangeDialog handleClose={handleClose}/>
                 <MenuItem onClick={handleClose}>Choose Color</MenuItem>
-                <DeleteCardDialog handleMenuClose={handleClose}/>
+                <DeleteCardDialog handleMenuClose={handleMenuClose}/>
             </Menu>
         </>
     );
 }
 
 
-const mapStoreToProps = (reduxState) => {
-    return {
-        songs: reduxState.songs,
-    };
-};
-export default connect(mapStoreToProps)(OutlineCardMenu);
+// const mapStoreToProps = (reduxState) => {
+//     return {
+//         song: reduxState.song,
+//     };
+// };
+export default connect()(OutlineCardMenu);

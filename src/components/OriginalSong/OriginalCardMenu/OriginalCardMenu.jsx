@@ -3,7 +3,6 @@ import IconButton from "@material-ui/core/IconButton";
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-// import NameChangeDialog from '../MenuDialogComponents/NameChangeDialog/NameChangeDialog';
 import DeleteAudioDialog from '../../MenuDialogComponents/DeleteAudioDialog/DeleteAudioDialog';
 import UploaderMenuDialog from '../../MenuDialogComponents/AddAudioFileDialog/AddAudioFileDialog';
 
@@ -41,7 +40,7 @@ const OriginalCardMenu = ({ directUserHome, directToWorking }) => {
                 >
                     <UploaderMenuDialog/>
                      <MenuItem onClick={handleClose}>Change the original Audio</MenuItem>
-                    <DeleteAudioDialog />
+                    <DeleteAudioDialog handleMenuClose={handleClose}/>
                     <MenuItem onClick={handleClose}>Change Color</MenuItem>
                     <MenuItem onClick={goToWorking}>Go to Working Song</MenuItem>
                     <MenuItem onClick={goHome}>Go Home</MenuItem>

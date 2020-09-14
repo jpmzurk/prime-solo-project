@@ -24,10 +24,6 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 })
 
 
-//  JOIN recordings ON recordings.song_id = songs.id
-
-
-
 router.post('/', rejectUnauthenticated, (req, res) => {
 
   console.log(req.body)

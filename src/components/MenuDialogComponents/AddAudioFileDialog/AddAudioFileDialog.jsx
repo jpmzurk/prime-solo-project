@@ -9,12 +9,12 @@ import { connect } from 'react-redux';
 import MenuItem from '@material-ui/core/MenuItem';
 import Uploader from './UploaderForDialog'
 
-function AddAudioDialog({selectedSong, dispatch, handleMenuClose }) {
+function AddAudioDialog({song, dispatch, handleMenuClose }) {
   const [open, setOpen] = useState(false);
   const [publicUrl, setPublicUrl] = useState('')
 
   const handleClickOpen = () => {
-    if (selectedSong.song_id === null){
+    if (song.id === null){
       setOpen(false)
     } else
     setOpen(true);
@@ -22,12 +22,9 @@ function AddAudioDialog({selectedSong, dispatch, handleMenuClose }) {
 
   const handleSave = () => {
     let newTitle = publicUrl.split("_").pop();
-    let newAudio = {song_id : selectedSong.song_id, src: publicUrl, title: newTitle}
+    let newAudio = {song_id : song.id, src: publicUrl, title: newTitle}
     console.log(newAudio);
-    dispatch({ type: 'ADD_RECORDING', payload: newAudio})
-    dispatch({ type: 'FETCH_RECORDINGS', payload: selectedSong.song_id })
-   
-    handleMenuClose();
+    handleMenuClose(newAudio);
     setOpen(false);
   };
 
@@ -39,7 +36,6 @@ function AddAudioDialog({selectedSong, dispatch, handleMenuClose }) {
 
   const settingPublicUrl = (url) => {
     setPublicUrl(url)
-    console.log(selectedSong);
   }
 
   return (
@@ -69,7 +65,7 @@ function AddAudioDialog({selectedSong, dispatch, handleMenuClose }) {
 
 const mapStoreToProps = (reduxState) => {
     return {
-        selectedSong: reduxState.selectedSong,
+        song: reduxState.song,
     };
   };
 export default connect(mapStoreToProps)(AddAudioDialog);

@@ -36,9 +36,9 @@ const useStyles = makeStyles(() => ({
 
 const SongCards = ({ song, directWorkingCard, dispatch }) => {
     const classes = useStyles();
-
+    
     const handleDoubleClick = () => {
-        dispatch({ type: 'SET_SELECTED_SONG', payload: song })
+        dispatch({ type: 'SETTING_SONG', payload: song.song_id })
         directWorkingCard()
     }
 
