@@ -18,7 +18,6 @@ class AudioUpload extends Component {
     //send complete function to AddSong and di
     onFinish = (info) => {
       console.log(info.publicUrl)
-      // this.props.dispatch({ type: 'SET_SONG_URL', payload: info.publicUrl})
       this.props.uploadComplete(info.publicUrl)
     }
 

@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import MenuItem from '@material-ui/core/MenuItem';
 import Uploader from './UploaderForDialog'
 
-function NameChangeDialog({selectedSong, dispatch, handMenuClose }) {
+function AddAudioDialog({selectedSong, dispatch, handleMenuClose }) {
   const [open, setOpen] = useState(false);
   const [publicUrl, setPublicUrl] = useState('')
 
@@ -21,16 +21,20 @@ function NameChangeDialog({selectedSong, dispatch, handMenuClose }) {
   };
 
   const handleSave = () => {
-    let newAudio = {song_id : selectedSong.song_id, url_path: publicUrl }
+    let newTitle = publicUrl.split("_").pop();
+    let newAudio = {song_id : selectedSong.song_id, src: publicUrl, title: newTitle}
     console.log(newAudio);
     dispatch({ type: 'ADD_RECORDING', payload: newAudio})
-    dispatch({type : 'GET_SONG', payload: selectedSong.song_id})
-    handMenuClose();
+    dispatch({ type: 'FETCH_RECORDINGS', payload: selectedSong.song_id })
+   
+    handleMenuClose();
     setOpen(false);
   };
 
   const handleCancel = () => {
     setOpen(false);
+    handleMenuClose();
+    setPublicUrl('');
   };
 
   const settingPublicUrl = (url) => {
@@ -42,20 +46,21 @@ function NameChangeDialog({selectedSong, dispatch, handMenuClose }) {
     <div>
       <MenuItem onClick={handleClickOpen}> Add New Audio File </MenuItem>
       <Dialog open={open} onClose={handleCancel} aria-labelledby="Rename song title input">
-        <DialogTitle id="dialogTitle">New Audio File</DialogTitle>
+        <DialogTitle id="newAudio">New Audio File</DialogTitle>
         <DialogContent>
           <DialogContentText>
             Select a file to upload. 
           </DialogContentText>
-        <Uploader setPublicUrl={settingPublicUrl}/>
+        <Uploader settingPublicUrl={settingPublicUrl}/>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCancel}>
             Cancel
           </Button>
-          <Button onClick={handleSave} >
+
+          { publicUrl.length > 0 &&  <Button onClick={handleSave} >
             Save
-          </Button>
+          </Button>}
         </DialogActions>
       </Dialog>
     </div>
@@ -67,4 +72,4 @@ const mapStoreToProps = (reduxState) => {
         selectedSong: reduxState.selectedSong,
     };
   };
-export default connect(mapStoreToProps)(NameChangeDialog);
+export default connect(mapStoreToProps)(AddAudioDialog);

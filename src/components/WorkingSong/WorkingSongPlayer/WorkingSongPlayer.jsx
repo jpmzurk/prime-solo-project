@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import AudioPlayer from "react-modular-audio-player";
 import playIcon from './icons/play.png'
@@ -57,51 +57,50 @@ let rearrangedPlayer = [
     },
 ];
 
-const Player = ({ selectedSong, dispatch, audio }) => {
-  
-    const [recordings, setRecordings ] = useState([
-        {
-            src: '',
-            title: '',
-        } 
-    ])
-   
+const Player = ({ recordings, dispatch, selectedSong }) => {
+    console.log('in working song player', recordings);
+    const [playlist, setPlaylist] = useState([
+        { src: '' }
+    ]);
+    const mounted = useRef();
     useEffect(() => {
-        let recordingsList = [];
-        if (selectedSong.array_agg.length > 0 ){
-            selectedSong.array_agg.map(recording => {
-                let songTitle = recording.split("_").pop();
-                songTitle = songTitle.split("/").pop();
-                let song = {src: recording, title: songTitle }
-                console.log(song);
-                recordingsList.push(song)
-                return null;
-            })
-            dispatch({type: 'SET_AUDIO_FILES', payload: recordingsList})
-            setRecordings(recordingsList)  
-        }   
-    }, [selectedSong.array_agg, dispatch, ]);
+        if (!mounted.current) {
+            // componentDidMount-ish
+            setRecordings()
+            mounted.current = true;
+        } else {
+            // do componentDidUpdate-ish
+            setPlaylist(recordings)
+            
+        }
+    });
+  
 
-    console.log('audio reducer array', audio);
+    const setRecordings = () => {
+        dispatch({ type: 'FETCH_RECORDINGS', payload: selectedSong.song_id })
+    }
+
+
+    console.log(playlist);
     return (
         <>
-        { recordings &&
-            <AudioPlayer
-                audioFiles={recordings}
-                rearrange={rearrangedPlayer}
-                iconSize="1.5rem"
-                playIcon={playIcon}
-                pauseIcon={pauseIcon}
-                rewindIcon={skipBack}
-                forwardIcon={skipNext}
-                volumeIcon={volume}
-                muteIcon={mute}
-                loopIcon={loop}
-                fontFamily="sans-serif"
-                fontSize="1rem"
-            playerWidth="auto"
-            />
-        }
+            { recordings &&
+                <AudioPlayer
+                    audioFiles={playlist}
+                    rearrange={rearrangedPlayer}
+                    iconSize="1.5rem"
+                    playIcon={playIcon}
+                    pauseIcon={pauseIcon}
+                    rewindIcon={skipBack}
+                    forwardIcon={skipNext}
+                    volumeIcon={volume}
+                    muteIcon={mute}
+                    loopIcon={loop}
+                    fontFamily="sans-serif"
+                    fontSize="1rem"
+                    playerWidth="auto"
+                />
+            }
         </>
     );
 }
@@ -109,7 +108,7 @@ const Player = ({ selectedSong, dispatch, audio }) => {
 const mapStoreToProps = (reduxState) => {
     return {
         selectedSong: reduxState.selectedSong,
-        audio: reduxState.audio,
+        recordings: reduxState.recordings,
     };
-  };
+};
 export default connect(mapStoreToProps)(Player);

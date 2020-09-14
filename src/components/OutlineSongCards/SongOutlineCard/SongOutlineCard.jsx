@@ -49,7 +49,7 @@ const SongCards = ({ song, directWorkingCard, dispatch }) => {
                 <CardContent >
               
                     <Typography gutterBottom variant="h5" component="h5"  >
-                        {song.title}
+                        {song.song_title}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p" className={classes.text} >
                         {song.lyrics}

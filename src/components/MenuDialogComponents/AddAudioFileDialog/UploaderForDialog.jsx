@@ -18,8 +18,7 @@ class UploaderForDialog extends Component {
     //send complete function to AddSong and di
     onFinish = (info) => {
       console.log(info.publicUrl)
-      // this.props.dispatch({ type: 'EDIT_SONG_URL', payload: info.publicUrl})
-      this.props.setPublicUrl(info.publicUrl)
+      this.props.settingPublicUrl(info.publicUrl)
       // add confirmation popup on success!
     }
 

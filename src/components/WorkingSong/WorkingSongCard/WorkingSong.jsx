@@ -25,9 +25,8 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-const WorkingSong = ({ selectedSong, history }) => {
+const WorkingSong = ({ selectedSong, history, dispatch }) => {
     const {card, root} = useStyles();
-    console.log(selectedSong.song_id, selectedSong.array_agg);
 
     const directUserHome = () => {
         console.log('clicked to home');
@@ -39,14 +38,13 @@ const WorkingSong = ({ selectedSong, history }) => {
         history.push('/originalsong')
     }
 
-
     return (
         <div className={root} onDoubleClick={directUserHome}>
           <Card className={card} onDoubleClick={e => e.stopPropagation()}>
               <WorkingCardMenu directUserHome={directUserHome} directOriginalSong={directOriginalSong}/>
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h5" style={{ marginLeft: '25%' }}>
-                        {selectedSong.title}
+                        {selectedSong.song_title}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p" style={{ marginLeft: '30%', marginBottom: '.75em', marginTop: '-.75em' }}>
                         (Working Song)

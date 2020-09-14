@@ -16,6 +16,7 @@ const UserHome = ({ dispatch, songs, history }) => {
     const classes = useStyles();
     const getSongs = () => {
         dispatch({ type: 'FETCH_SONGS' })
+        
     }
 
     useEffect(getSongs, []);

@@ -27,15 +27,10 @@ function NameChangeDialog({selectedSong, handleClose, dispatch}) {
   };
 
   const handleSave = () => {
-    let song = {id : selectedSong.song_id}
-    song = {...song, title: newTitle}
+    let song = {id : selectedSong.song_id, song_title: newTitle}
     setOpen(false);
     handleClose();
     dispatch({ type: 'EDIT_TITLE', payload: song})
-    // setTimeout(() => {
-    //   dispatch({ type: 'FETCH_SONGS'})
-    // }, 800)
-    //pop up that the title has been successfully changed ?
   };
   const handleChange = (e) => {
     setNewTitle(e.target.value)
@@ -56,7 +51,7 @@ function NameChangeDialog({selectedSong, handleClose, dispatch}) {
             id="songTitle"
             label="Song Title"
             type="text"
-            defaultValue={selectedSong.title}
+            defaultValue={selectedSong.song_title}
             fullWidth
             onChange={handleChange}
           />

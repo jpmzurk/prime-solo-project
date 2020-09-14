@@ -3,16 +3,41 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const {rejectUnauthenticated } = require('../modules/authentication-middleware');
 
+router.get('/:id', rejectUnauthenticated, (req, res) => {
+
+  console.log('in recording get by id: ', req.params.id);
+  const id = req.params.id;
+
+  const queryText = `
+                    SELECT * FROM recordings
+                    WHERE song_id = $1
+                    `
+
+  pool.query(queryText, [id])
+  .then (result => {
+    console.log(result.rows);
+    res.send(result.rows)
+  })
+  .catch(err =>{ 
+    console.log('Error complete select song', err);
+  })
+})
+
+
+//  JOIN recordings ON recordings.song_id = songs.id
+
+
+
 router.post('/', rejectUnauthenticated, (req, res) => {
-  // POST route code here
+
   console.log(req.body)
   const recording = req.body;
 
   const queryText = `INSERT INTO "recordings" (
-                        song_id, url_path
+                        song_id, src, title
                      )
-                     VALUES ($1, $2)`;
-  pool.query(queryText, [recording.song_id, recording.url_path])
+                     VALUES ($1, $2, $3)`;
+  pool.query(queryText, [recording.song_id, recording.src, recording.title])
 
     .then(result => {
       res.sendStatus(201);
@@ -25,16 +50,15 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     })
   })
 
-router.delete('/:id', rejectUnauthenticated, (req, res) => {
-  const url_path = decodeURIComponent(req.params.id)
-  console.log('req.body : ', url_path);
-  
+router.delete('/:src', rejectUnauthenticated, (req, res) => {
+  const src = decodeURIComponent(req.params.src)
 
-  console.log('in delete recordings url', url_path);
+  console.log('in delete recordings src', src);
   let sqlText = `DELETE FROM recordings 
-                 WHERE url_path = $1;`
+                 WHERE src = $1
+                 RETURNING "id";`
 
-  pool.query(sqlText, [url_path])
+  pool.query(sqlText, [src])
       .then(result => {
           console.log(result);
           res.sendStatus(201);

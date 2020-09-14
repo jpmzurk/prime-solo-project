@@ -34,9 +34,10 @@ const Player = ({ song }) => {
     const [preview, setPreview] = useState('')
 
     const previewSong = () => {
+        setPreview(song.preview_audio)
         // if statement to check if there are indeed multiple audio files and then to use the preview_audio file. 
         // if not, the only audio file provided 
-        song.array_agg.length > 1 ?  setPreview(song.preview_audio) :  setPreview(song.array_agg[0]) 
+        // song.array_agg.length > 1 ?  setPreview(song.preview_audio) :  setPreview(song.array_agg[0]) 
     }
     // prevent constant reRenders of function above
     useEffect(previewSong, []);

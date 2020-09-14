@@ -2,7 +2,7 @@ const initialSongState = {
         song_id: null,
         array_agg: '',
         date: '', 
-        title: 'No song selected yet!',
+        song_title: 'No song selected yet!',
         lyrics: 'There are no lyrics for an empty song. Sad. Go back and select a song.',
         notes: '',
         org_date: '',
@@ -11,6 +11,8 @@ const initialSongState = {
         org_lyrics: '',
         original_audio: '',
         preview_audio: '',
+        src: '',
+        title: '',
         image: 'images/blackhole.gif',
 
 }
@@ -19,7 +21,7 @@ const initialSongState = {
 const selectedSong = (state = initialSongState, action) => {
     switch (action.type) {
         case 'SET_SELECTED_SONG':
-            return action.payload;        
+            return action.payload;    
         default:
             return state;
     }

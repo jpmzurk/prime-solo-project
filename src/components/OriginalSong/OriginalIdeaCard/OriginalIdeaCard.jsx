@@ -28,8 +28,7 @@ const useStyles = makeStyles(() => ({
 
 const WorkingSong = ({ selectedSong, history }) => {
     const {card, root} = useStyles();
-    console.log(selectedSong.song_id, selectedSong.array_agg);
-
+    
     const directUserHome = () => {
         console.log('clicked to home');
         history.push('/user')

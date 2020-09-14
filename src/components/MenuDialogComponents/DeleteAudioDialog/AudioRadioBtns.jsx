@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function RecordingRadios({ handleDelete, audioFiles, dispatch}) {
+function RecordingRadios({ handleDelete, recordings, selectedSong, dispatch}) {
   const classes = useStyles();
   const [value, setValue] = useState('');
   const [error, setError] = useState(false);
@@ -41,19 +41,20 @@ function RecordingRadios({ handleDelete, audioFiles, dispatch}) {
       setReadyDelete(false);
       console.log(value);
       dispatch({type: 'DELETE_AUDIO', payload: value})
-    //   dispatch({type: 'FETCH_SONG'}) 
+      dispatch({ type: 'FETCH_RECORDINGS', payload: selectedSong.song_id })
       handleDelete();
+
     }  else if (value.length > 0 ) {
         setHelperText('Are you sure you want to delete this audio', `?`);
         setError(true);
         setReadyDelete(true)
+        
     } else {
       setHelperText('Please select an option.');
       setError(true);
     }
   };
-//   {url_path: value}
-//   console.log(audioFiles);
+
 
   return (
     <form onSubmit={handleSubmit}>
@@ -61,7 +62,7 @@ function RecordingRadios({ handleDelete, audioFiles, dispatch}) {
         {/* <FormLabel component="legend">Recording To Delete</FormLabel> */}
         <RadioGroup aria-label="songs to delete" name="recordings" value={value} onChange={handleRadioChange}>
             {
-                audioFiles.map((audio, i )=> {
+                recordings.map((audio, i )=> {
                     return <FormControlLabel value={audio.src} control={<Radio />} label={audio.title} key={i}/>
                 })
             }
@@ -82,8 +83,8 @@ function RecordingRadios({ handleDelete, audioFiles, dispatch}) {
 
 const mapStoreToProps = (reduxState) => {
     return {
-        // selectedSong: reduxState.selectedSong,
-        audioFiles: reduxState.audio,
+        selectedSong: reduxState.selectedSong,
+        recordings: reduxState.recordings,
     };
   };
 export default connect(mapStoreToProps)(RecordingRadios);
