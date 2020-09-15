@@ -38,7 +38,8 @@ function RecordingRadios({ handleDelete, recordings, song, dispatch}) {
       setHelperText('');
       setError(false);
       setReadyDelete(false);
-      dispatch({type: 'DELETE_AUDIO', payload: {src: value, id: song.id }})
+      console.log('song id to be deleteed and values to be got', song.id);
+      dispatch({type: 'DELETE_AUDIO', payload: {id: Number(value), song_id: song.id }})
       handleDelete();
 
     }  else if (value.length > 0 ) {
@@ -57,7 +58,7 @@ function RecordingRadios({ handleDelete, recordings, song, dispatch}) {
       <FormControl component="fieldset" error={error} className={classes.formControl}>
         <RadioGroup aria-label="songs to delete" name="recordings" value={value} onChange={handleRadioChange}>
             {    recordings.map((audio, i )=> {
-                    return <FormControlLabel value={audio.src} control={<Radio />} label={audio.title} key={i}/>
+                    return <FormControlLabel value={`${audio.id}`} control={<Radio />} label={audio.title} key={i}/>
                 })
             }
         </RadioGroup>

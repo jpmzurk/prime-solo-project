@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles} from "@material-ui/core/styles";
 import { connect } from 'react-redux';
 import SongOutlineCard from '../SongOutlineCard/SongOutlineCard'
@@ -17,8 +17,6 @@ const UserHome = ({ dispatch, songs, history }) => {
     const getSongs = () => {
         dispatch({ type: 'FETCH_SONGS' })
     }
-    // useEffect(
-    //     getSongs, []);
     
     useEffect(() => {
         getSongs()

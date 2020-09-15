@@ -30,12 +30,12 @@ const WorkingCardMenu = ({ directUserHome, directOriginalSong, song, dispatch })
         handleClose();
         }
     }
-    const handleMenuClose = (newAudio) => {
+    const handleMenuClose = () => {
         setAnchorEl(null);
-        dispatch({ type: 'ADD_RECORDING', payload: newAudio})   
     };
 
     const handleTopMenuClose = () => {
+        dispatch({ type: 'SETTING_SONG', payload: song.song_id });
         setAnchorEl(null)
     };
 

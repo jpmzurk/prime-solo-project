@@ -1,5 +1,9 @@
+let initialState = [{
+    src: '', title: ''
+}]
 
-const song_selected_recording = (state = [], action) => {
+
+const song_selected_recording = (state = initialState, action) => {
     switch (action.type) {
         case 'SET_SELECTED_RECORDING':
             return action.payload;

@@ -13,7 +13,7 @@ function DeleteAudioDialog({song, handleTopMenuClose}) {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
-    if (song.song_id === null){
+    if (song.id === null){
       setOpen(false)
     } else
     setOpen(true);

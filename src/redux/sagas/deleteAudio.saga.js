@@ -7,14 +7,14 @@ function* audioDelete(action) {
             headers: { 'Content-Type': 'application/json' },
             withCredentials: true,
         };
-        let src = encodeURIComponent(action.payload.src);
-        console.log('in audio Delete payload: ', src);
+        let id = (action.payload.id);
+        console.log('in audio Delete payload: ', id );
         console.log(action.payload.id);
         
-        const response = yield axios.delete(`/api/recording/${src}`, config);
+        const response = yield axios.delete(`/api/recording/${id}`, config);
         console.log(response);
         
-        yield put({ type: 'FETCH_RECORDINGS', payload: action.payload.id})
+        yield put({ type: 'FETCH_RECORDINGS', payload: action.payload.song_id})
     } catch (error) {
         console.log('Song DELETE request failed', error)
     }

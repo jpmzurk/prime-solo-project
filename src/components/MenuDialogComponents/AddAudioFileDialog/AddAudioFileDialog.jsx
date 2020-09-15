@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import MenuItem from '@material-ui/core/MenuItem';
 import Uploader from './UploaderForDialog'
 
-function AddAudioDialog({song, dispatch, handleMenuClose }) {
+function AddAudioDialog({song, handleMenuClose, dispatch }) {
   const [open, setOpen] = useState(false);
   const [publicUrl, setPublicUrl] = useState('')
 
@@ -24,7 +24,9 @@ function AddAudioDialog({song, dispatch, handleMenuClose }) {
     let newTitle = publicUrl.split("_").pop();
     let newAudio = {song_id : song.id, src: publicUrl, title: newTitle}
     console.log(newAudio);
-    handleMenuClose(newAudio);
+    dispatch({ type: 'SETTING_SONG', payload: song.song_id })
+    dispatch({ type: 'ADD_RECORDING', payload: newAudio})   
+    handleMenuClose();
     setOpen(false);
   };
 
@@ -53,7 +55,6 @@ function AddAudioDialog({song, dispatch, handleMenuClose }) {
           <Button onClick={handleCancel}>
             Cancel
           </Button>
-
           { publicUrl.length > 0 &&  <Button onClick={handleSave} >
             Save
           </Button>}

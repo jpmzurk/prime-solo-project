@@ -46,15 +46,14 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     })
   })
 
-router.delete('/:src', rejectUnauthenticated, (req, res) => {
-  const src = decodeURIComponent(req.params.src)
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
+  const id = req.params.id
 
-  console.log('in delete recordings src', src);
+  console.log('in delete recordings id: ',  id);
   let sqlText = `DELETE FROM recordings 
-                 WHERE src = $1
-                 RETURNING "id";`
+                 WHERE id = $1;`
 
-  pool.query(sqlText, [src])
+  pool.query(sqlText, [id])
       .then(result => {
           console.log(result);
           res.sendStatus(201);
