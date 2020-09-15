@@ -30,7 +30,9 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 //getting the selected song
 router.get('/:id', rejectUnauthenticated, (req, res) => {
-
+  if (req.params.id == 'undefined') {
+    return null
+  } else {
   console.log('in recording get by id: ', req.params.id);
   const id = req.params.id;
 
@@ -38,21 +40,21 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
                     SELECT * FROM songs
                     WHERE id = $1
                     `
-
   pool.query(queryText, [id])
-  .then (result => {
-    console.log(result.rows);
-    res.send(result.rows)
-  })
-  .catch(err =>{ 
-    console.log('Error complete select song', err);
-  })
+    .then(result => {
+      console.log(result.rows);
+      res.send(result.rows)
+    })
+    .catch(err => {
+      console.log('Error complete select song', err);
+    })
+  }
 })
 
 //Post new song from AddSong
 router.post('/', rejectUnauthenticated, (req, res) => {
-  console.log('in song post. the song and user id are',req.body, req.user.id);
- 
+  console.log('in song post. the song and user id are', req.body, req.user.id);
+
   const song = req.body;
 
   const queryText = `INSERT INTO "songs" (
@@ -73,43 +75,45 @@ router.post('/', rejectUnauthenticated, (req, res) => {
       `
 
       pool.query(recordingQueryText, [newSongId, song.src, song.title]).then(result => {
-        //Now that both are done, send b  ack success!
-            // console.log(result);
-            
-            //         const queryText = 
-            //         `
-            //         SELECT * FROM songs
-            //         WHERE id = $1
-            //         `
-            //         pool.query(queryText, [req.user.id]).then(result => {res.send(result.rows)
+        //Now that both are done, send back success!
+        console.log(result);
+        res.sendStatus(201)
 
-            //         }).catch((err) => console.log('Error completing get songs query in Post songs', err), res.sendStatus(500))
-
-      // catch for second query
-      }).catch(err => { console.log('Error completing POST song in recordings table', err), res.sendStatus(500)})
+        // catch for second query
+      }).catch(err => { console.log('Error completing POST song in recordings table', err), res.sendStatus(500) })
 
     }).catch((err) => console.log('Error completing POST songs query', err), res.sendStatus(500));
 });
 
-module.exports = router;
 
 
-router.put('/', rejectUnauthenticated, (req, res) => {
+router.put('/:id', rejectUnauthenticated, (req, res) => {
+  const id = req.params.id;
+  const songInfo = req.body
 
-  console.log('in put songs title', req.body.id);
-  let sqlText = `UPDATE songs 
-                 SET song_title = $2 
-                 WHERE id = $1;`
+  // get key : value pairs out of songInfo
+  const songValuePairs = Object.entries(songInfo);
 
-  pool.query(sqlText, [req.body.id, req.body.song_title])
-    .then(result => {
-      console.log(result);
-      res.sendStatus(201);
-    }).catch(error => {
-      console.log('error in put', error);
-      res.sendStatus(500);
-    });
+  // loop over array to get keys and values for all items in songInfo 
+  for (let [key, value] of songValuePairs){
+    console.log(`in put songs its changing: id: ${id}, key: ${key}`);
+
+    let sqlText = `UPDATE songs 
+                   SET ${key} = $2 
+                   WHERE id = $1;`
+
+    pool.query(sqlText, [id, value])
+      .then(result => {
+        console.log(result);
+        res.sendStatus(201);
+      }).catch(error => {
+        console.log('error in put', error);
+        res.sendStatus(500);
+      });
+
+    }
 });
+
 
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
   const id = req.params.id;
@@ -142,3 +146,4 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
     });
 });
 
+module.exports = router;

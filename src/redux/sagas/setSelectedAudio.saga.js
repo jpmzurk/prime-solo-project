@@ -9,7 +9,7 @@ function* setSong(action) {
             withCredentials: true,
         };
         const id = action.payload
-        console.log(id);
+        console.log('id', id);
         const response = yield axios.get(`/api/recording/${id}`, config);
         
         yield put({ type: 'SET_SELECTED_RECORDING', payload: response.data})

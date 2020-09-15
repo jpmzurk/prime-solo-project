@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const SongLyrics = ({ notes, dispatch }) => {
+const SongLyrics = ({ notes, dispatch, song }) => {
     const {textField, buttons} = useStyles();
     const [ editable, setEditable] = useState(false);
     const { handleSubmit, register } = useForm();
@@ -27,9 +27,10 @@ const SongLyrics = ({ notes, dispatch }) => {
     }
 
     const onSubmit = (data) => {
+        data = {...data, id: song.id}
         console.log('in onSubmit lyrics', data);
         setEditable(editable => !editable);
-        dispatch({ type: 'PUT_NOTES', payload: data })
+        dispatch({ type: 'EDIT_SONG', payload: data })
     }
     return (
         <>
@@ -59,6 +60,7 @@ const SongLyrics = ({ notes, dispatch }) => {
 const mapStoreToProps = (reduxState) => {
     return {
         notes: reduxState.song.notes,
+        song: reduxState.song
     };
   };
 export default connect(mapStoreToProps)(SongLyrics);

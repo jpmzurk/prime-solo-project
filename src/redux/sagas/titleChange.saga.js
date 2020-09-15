@@ -8,9 +8,12 @@ function* putTitle(action) {
             withCredentials: true,
         };
         
-        const response = yield axios.put(`/api/song/`, action.payload, config);
+        const songId = action.payload.id;
+        console.log(action.payload);
+        
+        const response = yield axios.put(`/api/song/${songId}`, action.payload, config);
         console.log(response);
-
+        yield put ({type: 'SETTING_SONG', payload: songId})
         yield put({ type: 'FETCH_SONGS'})
     } catch (error) {
         console.log('Song POST request failed', error)
@@ -18,7 +21,7 @@ function* putTitle(action) {
 }
 
 function* editTitle() {
-    yield takeLatest('EDIT_TITLE', putTitle);
+    yield takeLatest('EDIT_SONG', putTitle);
 }
 
 export default editTitle;

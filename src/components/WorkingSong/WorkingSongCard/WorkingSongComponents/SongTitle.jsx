@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const SongTitle = ({ title, dispatch }) => {
+const SongTitle = ({ title, dispatch, song }) => {
     const { textField, subheading, buttons } = useStyles();
     const [ editable, setEditable] = useState(false);
     const { handleSubmit, register } = useForm();
@@ -36,8 +36,9 @@ const SongTitle = ({ title, dispatch }) => {
     }
 
     const onSubmit = (data) => {
+        data = {...data, id: song.id}
         console.log('in onSubmit title', data);
-        dispatch({ type: 'PUT_TITLE', payload: data })
+        dispatch({ type: 'EDIT_SONG', payload: data })
         setEditable(editable => !editable);
     }
     return (
@@ -47,7 +48,7 @@ const SongTitle = ({ title, dispatch }) => {
                 <FormControl  >
                     <form onSubmit={handleSubmit(onSubmit)} autoComplete="off" >
                         <TextField 
-                            label="title" name="title" defaultValue={`${title}`} onDoubleClick={handleEditable}
+                            label="title" name="song_title" defaultValue={`${title}`} onDoubleClick={handleEditable}
                             margin="dense" inputRef={register} multiline className={textField} />
                         <div className={buttons}> 
                         <Button onClick={handleEditable}> CANCEL </Button>
@@ -75,6 +76,7 @@ const SongTitle = ({ title, dispatch }) => {
 const mapStoreToProps = (reduxState) => {
     return {
         title: reduxState.song.song_title,
+        song: reduxState.song
     };
 };
 export default connect(mapStoreToProps)(SongTitle);

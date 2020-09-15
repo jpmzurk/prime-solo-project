@@ -9,9 +9,12 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { connect } from 'react-redux';
 import MenuItem from '@material-ui/core/MenuItem';
 
-function NameChangeDialog({selectedSong, handleClose, dispatch}) {
+function NameChangeDialog({song, handleClose, dispatch}) {
+
   const [open, setOpen] = useState(false);
   const [newTitle, setNewTitle] = useState('');
+
+  // console.log(`song.id: ${song.id}, song_id: ${song.song_id}`);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -27,10 +30,11 @@ function NameChangeDialog({selectedSong, handleClose, dispatch}) {
   };
 
   const handleSave = () => {
-    let song = {id : selectedSong.song_id, song_title: newTitle}
+    console.log(song.id);
+    let newSongTitle = {id : song.id, song_title: newTitle}
     setOpen(false);
     handleClose();
-    dispatch({ type: 'EDIT_TITLE', payload: song})
+    dispatch({ type: 'EDIT_SONG', payload: newSongTitle})
   };
   const handleChange = (e) => {
     setNewTitle(e.target.value)
@@ -38,7 +42,9 @@ function NameChangeDialog({selectedSong, handleClose, dispatch}) {
 
   return (
     <div>
+
       <MenuItem onClick={handleClickOpen}> Rename Song Title </MenuItem>
+{      song &&
       <Dialog open={open} onClose={() => handleCloseDialog()} aria-labelledby="Rename song title input">
         <DialogTitle id="dialogTitle">Song Title</DialogTitle>
         <DialogContent>
@@ -51,7 +57,7 @@ function NameChangeDialog({selectedSong, handleClose, dispatch}) {
             id="songTitle"
             label="Song Title"
             type="text"
-            defaultValue={selectedSong.song_title}
+            defaultValue={song.song_title}
             fullWidth
             onChange={handleChange}
           />
@@ -64,14 +70,15 @@ function NameChangeDialog({selectedSong, handleClose, dispatch}) {
             Save
           </Button>
         </DialogActions>
-      </Dialog>
+      </Dialog>}
+
     </div>
   );
 }
 
 const mapStoreToProps = (reduxState) => {
     return {
-        selectedSong: reduxState.selectedSong,
+        song: reduxState.song,
     };
   };
 export default connect(mapStoreToProps)(NameChangeDialog);

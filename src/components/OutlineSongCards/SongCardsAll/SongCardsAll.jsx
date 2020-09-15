@@ -20,7 +20,6 @@ const UserHome = ({ dispatch, songs, history }) => {
     
     useEffect(() => {
         getSongs()
-        
     }, []);
 
     const directWorkingCard = () => {
