@@ -11,7 +11,6 @@ import { connect } from 'react-redux';
 const useStyles = makeStyles(() => ({
     card: {
         marginTop: '2em',
-        backgroundColor: "#EBEBEB",
         width: 300,
         maxHeight: 300,
         overflow: "scroll",
@@ -44,7 +43,8 @@ const SongCards = ({ song, directWorkingCard, dispatch }) => {
 
     return (
         <>
-            <Card className={classes.card} onDoubleClick={handleDoubleClick}>
+            
+           { <Card className={classes.card} onDoubleClick={handleDoubleClick} style={{background: (song.color)}}>
                 <SongOutlineMenu directWorkingCard={directWorkingCard} song={song}/>
                 <CardContent >
               
@@ -58,12 +58,17 @@ const SongCards = ({ song, directWorkingCard, dispatch }) => {
                 <AudioPlayer song={song}/>
                 <CardActions>
                 </CardActions>
-            </Card>
+            </Card>}
         </>
     );
 }
 
 
+// const mapStoreToProps = (reduxState) => {
+//     return {
+//         color: reduxState.color
+//     };
+//   };
 export default connect()(SongCards);
 
 

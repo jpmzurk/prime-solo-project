@@ -56,8 +56,6 @@ const SongLyrics = ({ lyrics, dispatch, song }) => {
     )
 }
 
-
-
 const mapStoreToProps = (reduxState) => {
     return {
         lyrics: reduxState.song.lyrics,

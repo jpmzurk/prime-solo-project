@@ -6,10 +6,10 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import DeleteAudioDialog from '../../MenuDialogComponents/DeleteAudioDialog/DeleteAudioDialog';
 import UploaderMenuDialog from '../../MenuDialogComponents/AddAudioFileDialog/AddAudioFileDialog';
-// import NameChangeDialog from '../MenuDialogComponents/NameChangeDialog/NameChangeDialog';
 
-const WorkingCardMenu = ({ directUserHome, directOriginalSong, song, dispatch }) => {
+const WorkingCardMenu = ({directUserHome, directOriginalSong, song, dispatch }) => { 
     const [anchorEl, setAnchorEl] = useState(null);
+
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -30,14 +30,15 @@ const WorkingCardMenu = ({ directUserHome, directOriginalSong, song, dispatch })
         handleClose();
         }
     }
-    const handleMenuClose = () => {
-        setAnchorEl(null);
-    };
 
     const handleTopMenuClose = () => {
         dispatch({ type: 'SETTING_SONG', payload: song.song_id });
         setAnchorEl(null)
     };
+
+    const setEditAll = () => { 
+        handleClose()
+    }
 
     return (
         <>
@@ -52,12 +53,12 @@ const WorkingCardMenu = ({ directUserHome, directOriginalSong, song, dispatch })
                     open={Boolean(anchorEl)}
                     onClose={handleClose}
                 >   
-                    <UploaderMenuDialog handleMenuClose={handleMenuClose}/>
-                    {/* <NameChangeDialog /> */}
-                    <MenuItem onClick={goBack}>Go Back To All Songs</MenuItem>
-                    <MenuItem onClick={goToOriginal}>Go to Original Idea</MenuItem>
+                    <UploaderMenuDialog handleMenuClose={handleClose}/>
+                    <DeleteAudioDialog handleTopMenuClose={handleTopMenuClose} handleClose={handleClose}/>
+                    <MenuItem onClick={setEditAll}> Edit </MenuItem>
                     <MenuItem onClick={handleClose}>Change Color</MenuItem>
-                    <DeleteAudioDialog handleTopMenuClose={handleTopMenuClose} />
+                    <MenuItem onClick={goToOriginal}>Go to Original Idea</MenuItem>
+                    <MenuItem onClick={goBack}>Go Back To All Songs</MenuItem>
                 </Menu>  
         </>
     );

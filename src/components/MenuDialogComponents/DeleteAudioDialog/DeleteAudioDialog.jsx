@@ -9,17 +9,17 @@ import { connect } from 'react-redux';
 import MenuItem from '@material-ui/core/MenuItem';
 import AudioRadioBtns from './AudioRadioBtns'
 
-function DeleteAudioDialog({song, handleTopMenuClose}) {
+function DeleteAudioDialog({song, handleTopMenuClose, handleClose}) {
   const [open, setOpen] = useState(false);
 
-  const handleClickOpen = () => {
+  const openDialog = () => {
     if (song.id === null){
       setOpen(false)
     } else
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const closeDialog = () => {
     setOpen(false);
   };
 
@@ -29,10 +29,15 @@ function DeleteAudioDialog({song, handleTopMenuClose}) {
     handleTopMenuClose()
   }
 
+  const handleCancel = () => {
+    closeDialog();
+    handleClose();
+  }
+
   return (
     <div>
-      <MenuItem onClick={handleClickOpen}> Delete An Audio File</MenuItem>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="Rename song title input">
+      <MenuItem onClick={openDialog}> Delete An Audio File</MenuItem>
+      <Dialog open={open} onClose={closeDialog} aria-labelledby="Rename song title input">
         <DialogTitle id="dialogTitle">Delete Audio File?</DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -40,7 +45,7 @@ function DeleteAudioDialog({song, handleTopMenuClose}) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <AudioRadioBtns handleDelete={handleDelete}/>
+          <AudioRadioBtns handleDelete={handleDelete} handleCancel={handleCancel}/>
         </DialogActions>
       </Dialog>
     </div>

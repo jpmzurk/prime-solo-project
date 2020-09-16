@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
-function* putTitle(action) {
+function* editSong(action) {
     try {
         const config = {
             headers: { 'Content-Type': 'application/json' },
@@ -20,8 +20,8 @@ function* putTitle(action) {
     }
 }
 
-function* editTitle() {
-    yield takeLatest('EDIT_SONG', putTitle);
+function* songEdit() {
+    yield takeLatest('EDIT_SONG', editSong);
 }
 
-export default editTitle;
+export default songEdit;

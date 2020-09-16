@@ -28,10 +28,10 @@ const SongLyrics = ({ notes, dispatch, song }) => {
 
     const onSubmit = (data) => {
         data = {...data, id: song.id}
-        console.log('in onSubmit lyrics', data);
-        setEditable(editable => !editable);
         dispatch({ type: 'EDIT_SONG', payload: data })
+        setEditable(editable => !editable);
     }
+
     return (
         <>
             {editable ?
@@ -39,17 +39,20 @@ const SongLyrics = ({ notes, dispatch, song }) => {
                     <form onSubmit={handleSubmit(onSubmit)} autoComplete="off"> 
                     <TextField label="notes" name="notes" defaultValue={`${notes}`} onDoubleClick={handleEditable}
                         inputRef={register} margin="dense" multiline className={textField} />
-                    <div className={buttons}>
-                    <Button onClick={handleEditable}> CANCEL </Button>
-                    <Button type="submit"> SAVE </Button>
-                    </div>
+                
+                      <div className={buttons}>
+                      <Button onClick={handleEditable}> CANCEL </Button>
+                     <Button type="submit"> SAVE </Button>
+                     </div>
+                    
                     </form>
                 </FormControl>
-                :
+                :   
                 <Typography variant="body2" component="h5" color="textSecondary"  onDoubleClick={handleEditable} style={{ marginLeft: '1em' }} >
-                    Notes: <br />
-                    {`${notes}`}
-                </Typography>
+                Notes: <br />
+                {`${notes}`}
+            </Typography>
+              
             }
         </>
     )
@@ -60,7 +63,7 @@ const SongLyrics = ({ notes, dispatch, song }) => {
 const mapStoreToProps = (reduxState) => {
     return {
         notes: reduxState.song.notes,
-        song: reduxState.song
+        song: reduxState.song,
     };
   };
 export default connect(mapStoreToProps)(SongLyrics);

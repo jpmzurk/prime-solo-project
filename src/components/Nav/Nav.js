@@ -17,7 +17,7 @@ import NavList from './NavMenuItems'
 import useStyles from './NavStyles'
 
 
-const NavDrawer = ({history}) => {
+const NavDrawer = () => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);

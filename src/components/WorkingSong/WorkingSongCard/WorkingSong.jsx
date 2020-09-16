@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from 'react-redux';
-import { Card, CardContent, Typography, CardActions } from '@material-ui/core';
+import { Card, CardContent, CardActions } from '@material-ui/core';
 import WorkingSongPlayer from '../WorkingSongPlayer/WorkingSongPlayer';
 import WorkingCardMenu from '../WorkingCardMenu/WorkingCardMenu';
 import SongTitle from './WorkingSongComponents/SongTitle';
@@ -37,14 +37,13 @@ const WorkingSong = ({ song, history, dispatch }) => {
         history.push('/originalsong')
     }
 
-    useEffect(() => {
-        updateStore()
-    }, [song]);
-
     const updateStore = () => {
         console.log('in update store');
         dispatch({ type: 'FETCH_RECORDINGS', payload: song.id })
     }
+    useEffect(() => {
+        updateStore()
+    });
 
     return (
         <div className={root} onDoubleClick={directUserHome}>
@@ -53,12 +52,13 @@ const WorkingSong = ({ song, history, dispatch }) => {
                     <WorkingCardMenu directUserHome={directUserHome} directOriginalSong={directOriginalSong} />
                     <CardContent>
                         <SongTitle />
-                        <SongLyrics />
+                        <SongLyrics  />
                         <SongNotes />
                     </CardContent>
                     <WorkingSongPlayer />
                     <CardActions>
                     </CardActions>
+
                 </Card>
             </div>
         </div>

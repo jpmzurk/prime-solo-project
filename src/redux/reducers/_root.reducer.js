@@ -12,7 +12,7 @@ const rootReducer = combineReducers({
   user, // will have an id and username if someone is logged in
   songs, // has all songs for of user
   recordings, // audio files that have names cleaned up by workingSongPlayer
-  song
+  song,
 });
 
 export default rootReducer;

@@ -2,11 +2,12 @@ import { all } from 'redux-saga/effects';
 import loginSaga from './login.saga';
 import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
-import postSongSaga from './postSong.saga';
-import getSongSaga from './getSongs.saga';
-import titleChange from './titleChange.saga';
-import deleteSong from './deleteSong.saga';
+import getSongs from './getSongs.saga';
+import postSong from './postSong.saga';
 import postRecording from './postRecording.saga'
+import updateSong from './updateSong';
+import updateCardColor from './updateCardColor'
+import deleteSong from './deleteSong.saga';
 import deleteAudio from './deleteAudio.saga'
 import setSelectedAudio from './setSelectedAudio.saga'
 import setSelectedSong  from './setSelectedSong.saga'
@@ -22,11 +23,12 @@ export default function* rootSaga() {
     loginSaga(), // login saga is now registered
     registrationSaga(),
     userSaga(),
-    postSongSaga(),
-    getSongSaga(),
-    titleChange(),
-    deleteSong(),
+    getSongs(),
+    postSong(),
     postRecording(),
+    updateSong(),
+    updateCardColor(),
+    deleteSong(),
     deleteAudio(),
     setSelectedAudio(),
     setSelectedSong()

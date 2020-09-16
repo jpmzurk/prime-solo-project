@@ -9,12 +9,12 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   console.log('req.user:', req.user);
 
   const queryText =
-    `SELECT song_id, song_title, date, lyrics, preview_audio, notes, org_date, org_title, org_lyrics, org_audio,
+    `SELECT song_id, song_title, date, lyrics, preview_audio, notes, org_date, org_title, org_lyrics, org_audio, color,
         ARRAY_AGG (src)
         FROM songs
         JOIN "recordings" ON "recordings".song_id = "songs".id
         WHERE user_id = $1
-        GROUP BY song_id, song_title, date, lyrics, preview_audio, notes, org_date, org_title, org_lyrics, org_audio
+        GROUP BY song_id, song_title, date, lyrics, preview_audio, notes, org_date, org_title, org_lyrics, org_audio, color
         ORDER BY song_id DESC
         `;
   pool.query(queryText, [req.user.id])
@@ -113,6 +113,28 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
 
     }
 });
+
+
+router.put('/color/:id', rejectUnauthenticated, (req, res) => {
+  const id = req.params.id;
+  const hexValue = req.body.color
+
+    console.log(`in update cardColor its changing: id: ${id}, key: ${hexValue}`);
+
+    let sqlText = `UPDATE songs 
+                   SET color = $2 
+                   WHERE id = $1;`
+
+    pool.query(sqlText, [id, hexValue])
+      .then(result => {
+        console.log(result);
+        res.sendStatus(201);
+      }).catch(error => {
+        console.log('error in put', error);
+        res.sendStatus(500);
+      }); 
+});
+
 
 
 router.delete('/:id', rejectUnauthenticated, (req, res) => {

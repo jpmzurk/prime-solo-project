@@ -14,8 +14,6 @@ function NameChangeDialog({song, handleClose, dispatch}) {
   const [open, setOpen] = useState(false);
   const [newTitle, setNewTitle] = useState('');
 
-  // console.log(`song.id: ${song.id}, song_id: ${song.song_id}`);
-
   const handleClickOpen = () => {
     setOpen(true);
   };

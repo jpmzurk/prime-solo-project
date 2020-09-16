@@ -42,16 +42,6 @@ app.use(express.static('build'));
 const PORT = process.env.PORT || 5000;
 
 
-// const awsRouter =require('./routes/aws.router')
-// const UploaderS3Router = require('react-dropzone-s3-uploader/s3router')
-
-// app.use('/s3', UploaderS3Router({
-//   bucket: 'primesonglybucket',                           // required
-//   region: 'us-east-2',                            // optional
-//   headers: {'Access-Control-Allow-Origin': '*'},  // optional
-//   ACL: `public-read`,                                 // this is the default - set to `public-read` to let anyone view uploads
-// }));
-
 /** Listen * */
 app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);

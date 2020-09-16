@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function RecordingRadios({ handleDelete, recordings, song, dispatch}) {
+function RecordingRadios({ handleDelete, handleCancel, recordings, song, dispatch}) {
   const classes = useStyles();
   const [value, setValue] = useState('');
   const [error, setError] = useState(false);
@@ -63,7 +63,7 @@ function RecordingRadios({ handleDelete, recordings, song, dispatch}) {
             }
         </RadioGroup>
         <FormHelperText>{helperText}</FormHelperText>
-        <Button className={classes.button} onClick={handleDelete} >
+        <Button className={classes.button} onClick={handleCancel} >
             Cancel
           </Button>
           <Button type="submit" className={classes.button}>

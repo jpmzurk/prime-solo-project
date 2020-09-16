@@ -14,20 +14,16 @@ const useStyles = makeStyles(() => ({
 
 const UserHome = ({ dispatch, songs, history }) => {
     const classes = useStyles();
-    const getSongs = () => {
-        dispatch({ type: 'FETCH_SONGS' })
-    }
-    
+
     useEffect(() => {
-        getSongs()
-    }, []);
+        dispatch({ type: 'FETCH_SONGS' })
+    }, [dispatch]);
 
     const directWorkingCard = () => {
         history.push('/workingsong')
         console.log('clicked to working card');
     }
     return (
-
         <div className={classes.root}>
             {songs.map((song, i) => {
             return <SongOutlineCard key={i} song={song} directWorkingCard={directWorkingCard}/>

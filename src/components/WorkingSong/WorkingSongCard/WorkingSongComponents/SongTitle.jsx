@@ -42,7 +42,6 @@ const SongTitle = ({ title, dispatch, song }) => {
         setEditable(editable => !editable);
     }
     return (
-        // < div className={root}>
         <>
             {editable ?
                 <FormControl  >
@@ -67,7 +66,7 @@ const SongTitle = ({ title, dispatch, song }) => {
                 (Working Song)
              </Typography>
         </>
-        // </div>
+   
     )
 }
 
