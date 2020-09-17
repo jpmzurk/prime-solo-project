@@ -1,55 +1,40 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux'
-import ReactS3uploader from 'react-s3-uploader'
+import ReactS3uploader from 'react-s3-uploader';
+import ProgressBar from '../MenuDialogComponents/AddAudioFileDialog/ProgressBar';
 
 
-class AudioUpload extends Component {
-    //use the ref that was created! 
-    // handleUpload = () => {
-    //   this.uploader.uploadFile();
-    // }
 
-    // state = {
-    //   completed : 0
-    // }
-    
-    // onProgress(percent){
-    //   console.log(percent);
+const AudioUpload = ({ settingPublicUrl }) => {
+  const [progress, setProgress] = useState(0);
+  const [progressTitle, setProgressTitle] = useState('')
 
-    //   // this.setState({completed: });
-    // }
-  
-    //send complete function to AddSong and di
-    onFinish = (info) => {
-      console.log(info.publicUrl)
-      this.props.uploadComplete(info.publicUrl)
-    }
+  const onFinish = (info) => {
+    settingPublicUrl(info.publicUrl)
+  }
 
-    render() {
-        return (
-          <>
-          <div>
-              <ReactS3uploader
-                // autoUpload={false}
-                // ref={uploader => { this.uploader = uploader; }}
-                signingUrl="/s3/sign"
-                signingUrlMethod="GET"
-                onDrop={this.handleDrop}
-                onProgress={this.onProgress}
-                onError={this.onError}
-                onFinish={this.onFinish}
-                // scrubFilename={(filename) => filename.replace(/[^\w\d_\-.]+/ig, '')}
-                s3path={''}
-                accept="audio/*"                
-            />
-            {/* <input type="button" value="Upload" onClick={this.handleUpload} /> */}
-            {/* <input type="file" onChange={this.uploadFile}/> */}
-             
-          </div>
-          {/* <p> {this.onProgress}</p> */}
-          </>
-        );
-      }
+  const onProgress = (percent, event) => {
+    setProgress(percent)
+    setProgressTitle(event)
+  }
+
+  const onError = (error) => {
+    alert(error)
+  }
+
+  return (
+    <div>
+      <ProgressBar progress={progress} progressTitle={progressTitle}/>
+      <ReactS3uploader
+        signingUrl="/s3/sign"
+        signingUrlMethod="GET"
+        onProgress={onProgress}
+        onError={onError}
+        onFinish={onFinish}
+        accept="audio/*"
+      />
+    </div>
+  );
 }
 
 export default connect()(AudioUpload);
