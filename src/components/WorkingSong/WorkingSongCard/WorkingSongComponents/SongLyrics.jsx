@@ -36,7 +36,7 @@ const SongLyrics = ({ lyrics, dispatch, song }) => {
                 <FormControl>
                     <form onSubmit={handleSubmit(onSubmit)} autoComplete="off"> 
                     <TextField 
-                            label="lyrics" name="lyrics" defaultValue={`${lyrics}`} 
+                            label="Lyrics" name="lyrics" defaultValue={`${lyrics}`} 
                             inputRef={register} onDoubleClick={handleEditable}
                             margin="normal" multiline className={textField} 
                     />

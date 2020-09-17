@@ -28,6 +28,7 @@ function AddAudioDialog({song, handleMenuClose, dispatch }) {
     dispatch({ type: 'ADD_RECORDING', payload: newAudio})   
     handleMenuClose();
     setOpen(false);
+    setPublicUrl('');
   };
 
   const handleCancel = () => {

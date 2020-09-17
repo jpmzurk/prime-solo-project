@@ -17,9 +17,6 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: "#EBEBEB",
         color: '#000000'
     },
-    title: {
-        alignItems: "center",
-    },
     appBarShift: {
         width: `calc(100% - ${drawerWidth}px)`,
         marginLeft: drawerWidth,

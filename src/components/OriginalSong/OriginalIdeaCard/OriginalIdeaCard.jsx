@@ -1,6 +1,5 @@
 import React from "react";
 import { makeStyles} from "@material-ui/core/styles";
-// import { useState } from 'react'
 import { connect } from 'react-redux';
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -8,7 +7,6 @@ import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
 import OriginalCardPlayer from '../OriginalSongPlayer/OriginalSongPlayer';
 import OriginalCardMenu from '../OriginalCardMenu/OriginalCardMenu'
-
 // import CardMedia from '@material-ui/core/CardMedia';
 // import AudioUpload from '../AudioUpload/AudioUpload';
 
@@ -17,17 +15,26 @@ const useStyles = makeStyles(() => ({
         marginTop: '2em',
         backgroundColor: "#EBEBEB",
         width: 500,
-        height: 500,
+        marginBottom: '7em',
     },
     root: {
         display: 'flex',
         alignContent: 'center',
         justifyContent: 'center',
+        marginTop: '3em',
     },
+    headings: {
+        display: 'flex',
+        alignContent: 'column',
+    },
+    words: {
+        alignText: 'center',
+        justifyContent: 'center',
+    }
 }));
 
-const WorkingSong = ({ song, history }) => {
-    const {card, root} = useStyles();
+const OriginalSongIdea = ({ song, history }) => {
+    const {card, root, words, headings} = useStyles();
     
     const directUserHome = () => {
         console.log('clicked to home');
@@ -40,20 +47,21 @@ const WorkingSong = ({ song, history }) => {
     }
     return (
         <div className={root} onDoubleClick={directUserHome}>
-          <Card className={card} onDoubleClick={e => e.stopPropagation()}>
+          <Card className={card} onDoubleClick={e => e.stopPropagation()} style={{backgroundColor: song.color}}>
               <OriginalCardMenu directUserHome={directUserHome} directToWorking={directToWorking}/>
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="h5" style={{ marginLeft: '25%' }}>
+                <CardContent >
+                    <Typography gutterBottom variant="h5" component="h5" className={words}>
                         {song.org_title}
                     </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p" style={{ marginLeft: '30%', marginBottom: '.75em', marginTop: '-.75em' }}>
+                    <Typography variant="body2" color="textSecondary" component="p" className={words} style={{marginBottom: '.75em', marginTop: '-.75em' }}>
                         (Original Song)
                     </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p" style={{ marginLeft: '1em' }}>
-                        {song.org_lyrics}
+                    <Typography variant="body2" color="textSecondary" component="p" style={{ alignText: 'left' }}>
+                        Lyrics: {song.org_lyrics}
                     </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p" style={{ marginLeft: '1em' }}>
-                        {song.org_notes}
+                    <br/>
+                    <Typography variant="body2" color="textSecondary" component="p" style={{ alignText: 'left' }}>
+                        Notes: {song.org_notes}
                     </Typography>
                 </CardContent>
                 <OriginalCardPlayer/>
@@ -69,4 +77,4 @@ const mapStoreToProps = (reduxState) => {
         song: reduxState.song,
     };
   };
-export default connect(mapStoreToProps)(WorkingSong);
+export default connect(mapStoreToProps)(OriginalSongIdea);

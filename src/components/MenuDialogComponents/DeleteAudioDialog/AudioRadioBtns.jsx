@@ -1,4 +1,4 @@
-import React, { useState }from 'react';
+import React, { useState, useEffect }from 'react';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Radio from '@material-ui/core/Radio';
@@ -24,6 +24,13 @@ function RecordingRadios({ handleDelete, handleCancel, recordings, song, dispatc
   const [helperText, setHelperText] = useState('');
   const [readyDelete, setReadyDelete] = useState(false);
 
+  useEffect(() => {
+    console.log('use effect ran');
+    return () => {
+      
+    };
+  }, [recordings]);
+
 
   const handleRadioChange = (event) => {
     setValue(event.target.value);
@@ -38,7 +45,7 @@ function RecordingRadios({ handleDelete, handleCancel, recordings, song, dispatc
       setHelperText('');
       setError(false);
       setReadyDelete(false);
-      console.log('song id to be deleteed and values to be got', song.id);
+      console.log('song id to be deleted and values to be got', song.id);
       dispatch({type: 'DELETE_AUDIO', payload: {id: Number(value), song_id: song.id }})
       handleDelete();
 

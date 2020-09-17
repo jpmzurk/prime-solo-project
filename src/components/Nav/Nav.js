@@ -17,8 +17,11 @@ import NavList from './NavMenuItems'
 import useStyles from './NavStyles'
 
 
+
 const NavDrawer = () => {
-  const classes = useStyles();
+  const {root, appBar, appBarShift, menuButton, contentShift, marginAutoItem,
+         hide, drawer, drawerPaper, drawerHeader, content
+  } = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
 
@@ -31,39 +34,43 @@ const NavDrawer = () => {
   };
 
   return (
-    <div className={classes.root}>
+    
+    <div className={root}>
       <CssBaseline />
       <AppBar
         position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open
+        className={clsx(appBar, {
+          [appBarShift]: open
         })}
       >
         <Toolbar style={{marginTop : '.5em'}}>
           <IconButton
+            style={{marginRight: '-1.5em'}}
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
+            className={clsx(menuButton, open && hide)}
           >
-            <MenuIcon style={{ alignItems: "left" }} />
+            <MenuIcon />
           </IconButton>
-          <Typography variant="h6" style={{ marginLeft: "40%" }}>
+          <div className={marginAutoItem}> 
+          <Typography variant="h6" >
             Songly
           </Typography>
+          </div>
         </Toolbar>
       </AppBar>
       <Drawer
-        className={classes.drawer}
+        className={drawer}
         variant="persistent"
         anchor="left"
         open={open}
         classes={{
-          paper: classes.drawerPaper
+          paper: drawerPaper
         }}
       >
-        <div className={classes.drawerHeader}>
+        <div className={drawerHeader}>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "ltr" ? (
               <ChevronLeftIcon />
@@ -77,12 +84,13 @@ const NavDrawer = () => {
         <Divider />
       </Drawer>
       <main
-        className={clsx(classes.content, {
-          [classes.contentShift]: open
+        className={clsx(content, {
+          [contentShift]: open
         })}
       >
-        <div className={classes.drawerHeader} />
+        <div className={drawerHeader} />
         </main>
+    
         </div>
         
   );

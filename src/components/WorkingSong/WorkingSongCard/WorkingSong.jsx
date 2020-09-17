@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from 'react-redux';
 import { Card, CardContent, CardActions } from '@material-ui/core';
@@ -11,21 +11,26 @@ import SongNotes from './WorkingSongComponents/SongNotes';
 const useStyles = makeStyles((theme) => ({
     card: {
         marginTop: '2em',
-        backgroundColor: "#EBEBEB",
         width: 500,
-        // height: 500,
+        marginBottom: '-1em',
     },
     root: {
         display: 'flex',
         alignContent: 'center',
         justifyContent: 'center',
         marginTop: '3em',
-        marginBottom: '6em',
+        marginBottom: '3em',
+    },
+    emptyCard: {
+        marginTop: '20em',
+        marginBottom: '35em'
     }
 }));
 
-const WorkingSong = ({ song, history, dispatch }) => {
-    const { card, root } = useStyles();
+const WorkingSong = ({ song, history, dispatch, recordings }) => {
+    const { card, root, emptyCard } = useStyles();
+    const [updated, setUpdated ] = useState(false);
+    const [oldSongId, setOldSongId ] = useState(false);
 
     const directUserHome = () => {
         console.log('clicked to home');
@@ -34,21 +39,33 @@ const WorkingSong = ({ song, history, dispatch }) => {
 
     const directOriginalSong = () => {
         console.log('clicked to home');
-        history.push('/originalsong')
+        history.push('/originalsong');
     }
 
-    const updateStore = () => {
-        console.log('in update store');
-        dispatch({ type: 'FETCH_RECORDINGS', payload: song.id })
-    }
     useEffect(() => {
-        updateStore()
-    });
+        console.log('working card ran useEffect');
+        if (song.id === oldSongId){ 
+            setUpdated(true)
+            console.log('old songId same as "new" song id, updated was false');
+        } else if ( song.id !== oldSongId){
+            setOldSongId(song.id);
+            console.log('song.id is different than oldSongId, updated was true', oldSongId);
+            setUpdated(false);
+            dispatch({ type: 'FETCH_RECORDINGS', payload: song.id })
+        }
+         return () => {
+            console.log('ran cleanup');
+            setUpdated(false)
+        };
+    }, [song.id, oldSongId, dispatch, updated, recordings]);
 
     return (
+        <>
+        {  (updated === true) ? 
+        
         <div className={root} onDoubleClick={directUserHome}>
             <div onDoubleClick={e => e.stopPropagation()}>
-                <Card className={card} >
+                <Card className={card} style={{backgroundColor: song.color}}>
                     <WorkingCardMenu directUserHome={directUserHome} directOriginalSong={directOriginalSong} />
                     <CardContent>
                         <SongTitle />
@@ -58,16 +75,22 @@ const WorkingSong = ({ song, history, dispatch }) => {
                     <WorkingSongPlayer />
                     <CardActions>
                     </CardActions>
-
                 </Card>
             </div>
-        </div>
+        </div> 
+        
+        : <div className={emptyCard} > </div>  }
+        
+        </>
     );
 }
+
+// song.id !== 1.1
 
 const mapStoreToProps = (reduxState) => {
     return {
         song: reduxState.song,
+        recordings: reduxState.recordings,
     };
 };
 export default connect(mapStoreToProps)(WorkingSong);

@@ -34,31 +34,29 @@ const useStyles = makeStyles(() => ({
 }));
 
 const SongCards = ({ song, directWorkingCard, dispatch }) => {
-    const classes = useStyles();
+    const { card, text }= useStyles();
     
     const handleDoubleClick = () => {
-        dispatch({ type: 'SETTING_SONG', payload: song.song_id })
+        dispatch({ type: 'SETTING_SONG', payload: song.song_id });
         directWorkingCard()
     }
 
     return (
         <>
-            
-           { <Card className={classes.card} onDoubleClick={handleDoubleClick} style={{background: (song.color)}}>
-                <SongOutlineMenu directWorkingCard={directWorkingCard} song={song}/>
+           <Card className={card} onDoubleClick={handleDoubleClick} style={{background: (song.color)}}>
+            <SongOutlineMenu directWorkingCard={directWorkingCard} song={song}/>
                 <CardContent >
-              
                     <Typography gutterBottom variant="h5" component="h5"  >
                         {song.song_title}
                     </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p" className={classes.text} >
+                    <Typography variant="body2" color="textSecondary" component="p" className={text} >
                         {song.lyrics}
                     </Typography>
                 </CardContent>
                 <AudioPlayer song={song}/>
                 <CardActions>
                 </CardActions>
-            </Card>}
+            </Card>
         </>
     );
 }

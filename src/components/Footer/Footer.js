@@ -1,14 +1,31 @@
 import React from 'react';
-import './Footer.css';
-
-// This is one of our simplest components
-// It doesn't have local state, so it can be a function component.
-// It doesn't dispatch any redux actions or display any part of redux state
-// or even care what the redux state is, so it doesn't need 'connect()'
-
-// &copy; John Patrick Mazurek & Prime Digital Academy
+import { makeStyles } from "@material-ui/core/styles";
+// import './Footer.css';
 
 
-const Footer = () => <footer></footer>;
+const useStyles = makeStyles((theme) => ({
+    root: {
+        display: 'flex',
+        alignContent: 'center',
+        justifyContent: 'center',
+        paddingTop: '16em',
+        paddingBottom: '13em',
+        margin: 0,
+        textAlign: 'center',
+        background: '#d5dad8',
+        marginTop: '7em',
+    }
+}));
+
+
+const Footer = () => {
+ const {root} = useStyles()
+return (
+    <div className={root}> 
+<footer> &copy; John Patrick Mazurek & Prime Digital Academy
+</footer>
+</div>)
+
+};
 
 export default Footer;

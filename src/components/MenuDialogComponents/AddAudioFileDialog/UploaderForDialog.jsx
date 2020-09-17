@@ -11,7 +11,7 @@ class UploaderForDialog extends Component {
       this.props.settingPublicUrl(info.publicUrl)
       // add confirmation popup on success!
     }
-
+    
     render() {
         return (
           <div>

@@ -29,8 +29,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div>
-          {/* <Nav /> */}
+        <div style={{backgroundColor: "#d5dad8"}}>
           <NewNav/>
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
@@ -60,8 +59,6 @@ class App extends Component {
               path="/user"
               component={UserHome}
             />
-
-
             <ProtectedRoute
               // logged in shows UserPage else shows LoginPage
               exact

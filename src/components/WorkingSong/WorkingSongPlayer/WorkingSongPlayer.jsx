@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import AudioPlayer from "react-modular-audio-player";
 import playIcon from './icons/play.png'
@@ -57,49 +57,32 @@ let rearrangedPlayer = [
     },
 ];
 
-const Player = ({ recordings }) => {
-    const [playlist, setPlaylist] = useState([
-        { src: '' , title: ''}
-    ]);
-    
-    const mounted = useRef();
+const Player = ({ recordings, audioPlayer }) => {
     useEffect(() => {
-        if (!mounted.current) {
-            // componentDidMount-ish
-            setRecordings()
-            mounted.current = true;
-        } else {
-            // do componentDidUpdate-ish
-            recordings ? setPlaylist(recordings) : setPlaylist([{ src: '',title: ''}])
-        }
-    }, [recordings]);
-  
 
-    const setRecordings = () => {
-        // dispatch({ type: 'FETCH_RECORDINGS', payload: song.id })
-        console.log('working song player remounted');
-    }
+    }, [recordings, audioPlayer]);
 
     return (
         <>
-            { recordings &&
+            { (!recordings || audioPlayer === true)
+                ? null :
                 <div >
-                <AudioPlayer
-                    audioFiles={playlist}
-                    rearrange={rearrangedPlayer}
-                    iconSize="1.5rem"
-                    playIcon={playIcon}
-                    pauseIcon={pauseIcon}
-                    rewindIcon={skipBack}
-                    forwardIcon={skipNext}
-                    volumeIcon={volume}
-                    muteIcon={mute}
-                    loopIcon={loop}
-                    fontFamily="sans-serif"
-                    fontSize="1rem"
-                    playerWidth="auto"
-                />
-                 </div>
+                    <AudioPlayer
+                        audioFiles={recordings}
+                        rearrange={rearrangedPlayer}
+                        iconSize="1.5rem"
+                        playIcon={playIcon}
+                        pauseIcon={pauseIcon}
+                        rewindIcon={skipBack}
+                        forwardIcon={skipNext}
+                        volumeIcon={volume}
+                        muteIcon={mute}
+                        loopIcon={loop}
+                        fontFamily="sans-serif"
+                        fontSize="1rem"
+                        playerWidth="auto"
+                    />
+                </div>
             }
         </>
     );
@@ -107,8 +90,8 @@ const Player = ({ recordings }) => {
 
 const mapStoreToProps = (reduxState) => {
     return {
-        song: reduxState.song,
         recordings: reduxState.recordings,
+        audioPlayer: reduxState.audioPlayer
     };
 };
 export default connect(mapStoreToProps)(Player);

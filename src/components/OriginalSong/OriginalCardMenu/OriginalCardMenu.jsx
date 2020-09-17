@@ -38,8 +38,7 @@ const OriginalCardMenu = ({ directUserHome, directToWorking }) => {
                     onClose={handleClose}
                 >
                     <UploaderMenuDialog/>
-                     <MenuItem onClick={handleClose}>Change the original Audio</MenuItem>
-                    <MenuItem onClick={handleClose}>Change Color</MenuItem>
+                    <MenuItem onClick={handleClose}>Change the original Audio</MenuItem>
                     <MenuItem onClick={goToWorking}>Go to Working Song</MenuItem>
                     <MenuItem onClick={goHome}>Go Home</MenuItem>
                 </Menu>  

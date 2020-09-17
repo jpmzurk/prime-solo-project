@@ -10,10 +10,13 @@ function* setSong(action) {
         };
         const id = action.payload
         console.log('id', id);
-        const response = yield axios.get(`/api/recording/${id}`, config);
+        if (id === 1.1){
+            return 
+        } else {
+            const response = yield axios.get(`/api/recording/${id}`, config);
         
-        yield put({ type: 'SET_SELECTED_RECORDING', payload: response.data})
-
+            yield put({ type: 'SET_SELECTED_RECORDING', payload: response.data})
+        }
     } catch (error) {
         console.log('recordings GET request failed', error)
     }

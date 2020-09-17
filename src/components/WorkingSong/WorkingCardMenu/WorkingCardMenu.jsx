@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from 'react-redux';
 import IconButton from "@material-ui/core/IconButton";
 import Menu from '@material-ui/core/Menu';
@@ -36,9 +36,17 @@ const WorkingCardMenu = ({directUserHome, directOriginalSong, song, dispatch }) 
         setAnchorEl(null)
     };
 
-    const setEditAll = () => { 
-        handleClose()
-    }
+    // const setEditAll = () => { 
+    //     handleClose()
+    // }
+
+    useEffect(() => {
+        
+        return () => {
+            console.log('cleanup and dispatch ran');
+            dispatch({type: 'START_PLAYER'})
+        };
+    }, [anchorEl, dispatch]);
 
     return (
         <>
@@ -53,12 +61,12 @@ const WorkingCardMenu = ({directUserHome, directOriginalSong, song, dispatch }) 
                     open={Boolean(anchorEl)}
                     onClose={handleClose}
                 >   
+                    <MenuItem onClick={goBack}>Go Back</MenuItem>
                     <UploaderMenuDialog handleMenuClose={handleClose}/>
                     <DeleteAudioDialog handleTopMenuClose={handleTopMenuClose} handleClose={handleClose}/>
-                    <MenuItem onClick={setEditAll}> Edit </MenuItem>
+                    {/* <MenuItem onClick={setEditAll}> Edit </MenuItem> */}
                     <MenuItem onClick={handleClose}>Change Color</MenuItem>
                     <MenuItem onClick={goToOriginal}>Go to Original Idea</MenuItem>
-                    <MenuItem onClick={goBack}>Go Back To All Songs</MenuItem>
                 </Menu>  
         </>
     );
