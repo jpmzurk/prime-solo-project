@@ -10,10 +10,13 @@ const useStyles = makeStyles(() => ({
         justifyContent: 'space-around',
         overflow: 'hidden',
     },
+    preLoad: {
+        margin: '25em'
+    }
 }));
 
 const UserHome = ({ dispatch, songs, history }) => {
-    const classes = useStyles();
+    const {root, preLoad}= useStyles();
 
     useEffect(() => {
         dispatch({ type: 'FETCH_SONGS' })
@@ -21,14 +24,16 @@ const UserHome = ({ dispatch, songs, history }) => {
 
     const directWorkingCard = () => {
         history.push('/workingsong')
-        console.log('clicked to working card');
     }
+                        //FIND A WAY TO KEEP HEADER DOWN WHILE GETTING INFO FROM SERVER
     return (
-        <div className={classes.root}>
+        <> 
+       { songs ? <div className={root}>
             {songs.map((song, i) => {
             return <SongOutlineCard key={i} song={song} directWorkingCard={directWorkingCard}/>
              })}
-        </div>
+        </div> : <div className={preLoad} ></div>  } 
+        </> 
     );
 }
 

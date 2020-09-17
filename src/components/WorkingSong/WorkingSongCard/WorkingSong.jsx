@@ -11,7 +11,7 @@ import SongNotes from './WorkingSongComponents/SongNotes';
 const useStyles = makeStyles((theme) => ({
     card: {
         marginTop: '2em',
-        width: 500,
+        width: 700,
         marginBottom: '-1em',
     },
     root: {
@@ -33,12 +33,10 @@ const WorkingSong = ({ song, history, dispatch, recordings }) => {
     const [oldSongId, setOldSongId ] = useState(false);
 
     const directUserHome = () => {
-        console.log('clicked to home');
         history.push('/user')
     }
 
     const directOriginalSong = () => {
-        console.log('clicked to home');
         history.push('/originalsong');
     }
 
@@ -85,7 +83,6 @@ const WorkingSong = ({ song, history, dispatch, recordings }) => {
     );
 }
 
-// song.id !== 1.1
 
 const mapStoreToProps = (reduxState) => {
     return {

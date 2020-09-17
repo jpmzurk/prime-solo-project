@@ -34,7 +34,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const OriginalSongIdea = ({ song, history }) => {
-    const {card, root, words, headings} = useStyles();
+    const {card, root, words} = useStyles();
     
     const directUserHome = () => {
         console.log('clicked to home');
