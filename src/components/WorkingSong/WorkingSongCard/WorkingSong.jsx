@@ -70,7 +70,7 @@ const WorkingSong = ({ song, history, dispatch, recordings }) => {
 
         <div className={root} onDoubleClick={directUserHome}>
             <div onDoubleClick={e => e.stopPropagation()}>
-                <Card style={{backgroundColor: song.color}}>
+                <Card style={{backgroundColor: song.color}} raised={true}>
                     <WorkingCardMenu directUserHome={directUserHome} directOriginalSong={directOriginalSong} />
                     <section > 
                     <CardContent className={card}>

@@ -10,30 +10,27 @@ import OriginalCardMenu from '../OriginalCardMenu/OriginalCardMenu'
 // import CardMedia from '@material-ui/core/CardMedia';
 // import AudioUpload from '../AudioUpload/AudioUpload';
 
-
-// marginTop: '2em',
-//         width: 700,
-//         marginBottom: '-1em',
 const useStyles = makeStyles(() => ({
     card: {
         marginTop: '2em',
-        backgroundColor: "#EBEBEB",
         width: 700,
         marginBottom: '4em',
+        display: 'flex',
+        alignItems: 'center',  
+        flexDirection: 'column',
     },
     root: {
         display: 'flex',
         alignContent: 'center',
         justifyContent: 'center',
-        marginTop: '3em',
+        marginTop: '5em',
     },
-    headings: {
-        display: 'flex',
-        alignContent: 'column',
-    },
+    // headings: {
+    //     display: 'flex',
+    //     alignContent: 'column',
+    // },
     words: {
-        alignText: 'center',
-        justifyContent: 'center',
+        width: '75%'
     }
 }));
 
@@ -51,20 +48,20 @@ const OriginalSongIdea = ({ song, history }) => {
     }
     return (
         <div className={root} onDoubleClick={directUserHome}>
-          <Card className={card} onDoubleClick={e => e.stopPropagation()} style={{backgroundColor: song.color}}>
+          <Card  onDoubleClick={e => e.stopPropagation()} style={{backgroundColor: song.color}} raised={true}>
               <OriginalCardMenu directUserHome={directUserHome} directToWorking={directToWorking}/>
-                <CardContent >
-                    <Typography gutterBottom variant="h5" component="h5" className={words}>
+                <CardContent className={card} >
+                    <Typography gutterBottom variant="h5" component="h5" >
                         {song.org_title}
                     </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p" className={words} style={{marginBottom: '.75em', marginTop: '-.75em' }}>
+                    <Typography variant="body2" color="textSecondary" component="p" style={{marginBottom: '.75em'}}>
                         (Original Song)
                     </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p" style={{ alignText: 'left' }}>
+                    <Typography variant="body2" color="textSecondary" component="p"  className={words}>
                         Lyrics: {song.org_lyrics}
                     </Typography>
                     <br/>
-                    <Typography variant="body2" color="textSecondary" component="p" style={{ alignText: 'left' }}>
+                    <Typography variant="body2" color="textSecondary" component="p" >
                         Notes: {song.org_notes}
                     </Typography>
                 </CardContent>

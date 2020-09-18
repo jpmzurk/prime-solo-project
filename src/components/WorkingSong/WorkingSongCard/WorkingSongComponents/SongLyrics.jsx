@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 const useStyles = makeStyles((theme) => ({
     textField: {
         margin: theme.spacing(1),
-        width: '60ch',
+        width: '64ch',
         marginBottom: '-.2em'
     },
     buttons:  {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import { Button, Typography, TextField }from '@material-ui/core';
+import { Button, Typography, TextField, Paper }from '@material-ui/core';
 
 class LoginForm extends Component {
   state = {
@@ -40,13 +40,13 @@ class LoginForm extends Component {
             {this.props.store.errors.loginMessage}
           </h3>
         )}
-        <div style={{marginTop: '1.5em'}}> 
+        <div style={{marginTop: '1em'}}> 
           {/* <Typography variant="p" gutterBottom>
             Username: */}
             <TextField
               label="Username"
               size="small"
-              variant="outlined"
+              // variant="filled"
               type="text"
               name="username"
               required
@@ -57,7 +57,7 @@ class LoginForm extends Component {
         </div>
         <div>
         <TextField
-              variant="outlined"
+              // variant="filled"
               type="password"
               name="password"
               label="Password"
@@ -70,7 +70,7 @@ class LoginForm extends Component {
      
         </div>
         <div  >
-          <Button type="submit" variant="contained" name="submit" style={{marginTop: '1em'}}>Login</Button>
+          <Button type="submit" variant="contained" name="submit" style={{marginTop: '1.5em'}}>Login</Button>
         </div>
       </form>
     );

@@ -78,7 +78,7 @@ const AddSong = ({ dispatch, history }) => {
 
     return (
         <div onDoubleClick={toUserHome}>
-            <Paper className={paper} onDoubleClick={e => e.stopPropagation()} >
+            <Paper className={paper} onDoubleClick={e => e.stopPropagation()} elevation={10}>
                 <FormControl >
                     <form className={root} onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off" >
                         <div className={cardContent}> 

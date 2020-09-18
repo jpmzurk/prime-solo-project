@@ -5,13 +5,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
-    // root: {
-    //     display: 'flex',
-    //     alignContent: 'center',
-    // },
     textField: {
         margin: theme.spacing(1),
-        width: '40ch',
+        width: '36ch',
         marginBottom: '1em',
         // marginLeft: '20%',
     },
@@ -22,7 +18,8 @@ const useStyles = makeStyles((theme) => ({
     },
     buttons:  {
         marginBottom: '2em',
-        marginTop: '-1em'
+        marginTop: '-1em',
+        marginLeft: '7.5em'
     }
 }));
 

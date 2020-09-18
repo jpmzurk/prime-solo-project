@@ -7,11 +7,11 @@ import { Button }from '@material-ui/core';
 class LoginPage extends Component {
   render() {
     return (
-      <div className='formSpacer'>
+      <div className='formSpacer' >
         <LoginForm />
 
         <center>
-          <Button 
+          <Button variant="contained"
             onClick={() => {
               this.props.history.push('/registration');
             }}

@@ -43,7 +43,7 @@ const SongCards = ({ song, directWorkingCard, dispatch }) => {
   
     return (
         <>
-           <Card className={card} onDoubleClick={handleDoubleClick} style={{background: (song.color)}}>
+           <Card className={card} onDoubleClick={handleDoubleClick} style={{background: (song.color)}} raised={true}>
             <SongOutlineMenu directWorkingCard={directWorkingCard} song={song}/>
                 <CardContent >
                     <Typography gutterBottom variant="h5" component="h5"  >
