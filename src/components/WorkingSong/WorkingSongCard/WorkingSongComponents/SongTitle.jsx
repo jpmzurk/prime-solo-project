@@ -13,16 +13,17 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(1),
         width: '40ch',
         marginBottom: '1em',
-        marginLeft: '20%',
+        // marginLeft: '20%',
     },
     subheading: {
-        marginLeft: '30%',
-        marginBottom: '.75em',
-        marginTop: '-.75em'
+        marginLeft: '.5em',
+        marginBottom: '1.5em',
+        marginTop: '-1.5em'
     },
     buttons:  {
-        marginLeft: '30%',
-        marginBottom: '1em',
+        // marginLeft: '.5em',
+        marginBottom: '2em',
+        marginTop: '-1em'
     }
 }));
 
@@ -47,11 +48,11 @@ const SongTitle = ({ title, dispatch, song }) => {
                 <FormControl  >
                     <form onSubmit={handleSubmit(onSubmit)} autoComplete="off" >
                         <TextField 
-                            label="title" name="song_title" defaultValue={`${title}`} onDoubleClick={handleEditable}
+                            label="Title" name="song_title" defaultValue={`${title}`} onDoubleClick={handleEditable}
                             margin="dense" inputRef={register} multiline className={textField} />
                         <div className={buttons}> 
                         <Button onClick={handleEditable}> CANCEL </Button>
-                        <Button type="submit"> SAVE </Button>
+                        <Button variant="filled" type="submit"> SAVE </Button>
                         </div>
                     </form>
                 </FormControl>
@@ -63,7 +64,7 @@ const SongTitle = ({ title, dispatch, song }) => {
                 </div>
             }
             <Typography variant="body2" color="textSecondary" component="p" className={subheading}>
-                (Working Song)
+                Working Song
              </Typography>
         </>
    

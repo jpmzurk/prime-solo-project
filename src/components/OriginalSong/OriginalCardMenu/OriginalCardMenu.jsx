@@ -37,7 +37,6 @@ const OriginalCardMenu = ({ directUserHome, directToWorking }) => {
                     open={Boolean(anchorEl)}
                     onClose={handleClose}
                 >
-                    <UploaderMenuDialog/>
                     <MenuItem onClick={handleClose}>Change the original Audio</MenuItem>
                     <MenuItem onClick={goToWorking}>Go to Working Song</MenuItem>
                     <MenuItem onClick={goHome}>Go Home</MenuItem>

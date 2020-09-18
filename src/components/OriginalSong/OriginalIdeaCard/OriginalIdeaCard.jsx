@@ -10,12 +10,16 @@ import OriginalCardMenu from '../OriginalCardMenu/OriginalCardMenu'
 // import CardMedia from '@material-ui/core/CardMedia';
 // import AudioUpload from '../AudioUpload/AudioUpload';
 
+
+// marginTop: '2em',
+//         width: 700,
+//         marginBottom: '-1em',
 const useStyles = makeStyles(() => ({
     card: {
         marginTop: '2em',
         backgroundColor: "#EBEBEB",
-        width: 500,
-        marginBottom: '7em',
+        width: 700,
+        marginBottom: '4em',
     },
     root: {
         display: 'flex',

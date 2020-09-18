@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: '-.2em'
     },
     buttons:  {
-        margin: '1em'
+        // margin: '1em'
     }
 }));
 
@@ -47,7 +47,7 @@ const SongLyrics = ({ lyrics, dispatch, song }) => {
                     </form>
                 </FormControl>
                 :
-                <Typography variant="body2" component="h5" color="textSecondary"  onDoubleClick={handleEditable} style={{ marginLeft: '1em' }} >
+                <Typography variant="body2" component="h5" color="textSecondary"  onDoubleClick={handleEditable} style={{ marginLeft: '.5em' }} >
                     Lyrics: <br />
                     {`${lyrics}`}
                 </Typography>

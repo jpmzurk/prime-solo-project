@@ -15,7 +15,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         JOIN "recordings" ON "recordings".song_id = "songs".id
         WHERE user_id = $1
         GROUP BY song_id, song_title, date, lyrics, preview_audio, notes, org_date, org_title, org_lyrics, org_audio, color
-        ORDER BY song_id DESC
+        ORDER BY song_id ASC
         `;
   pool.query(queryText, [req.user.id])
     .then((result) => {

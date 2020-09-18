@@ -9,10 +9,10 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(1),
         width: '40ch',
         marginBottom: '-.2em',
-        marginLeft: '30%',
+        // marginLeft: '30%',
     },
     buttons:  {
-        marginLeft: '30%',
+        // marginLeft: '30%',
         marginBottom: '1em',
     }
 }));
@@ -37,7 +37,7 @@ const SongLyrics = ({ notes, dispatch, song }) => {
             {editable ?
                 <FormControl>
                     <form onSubmit={handleSubmit(onSubmit)} autoComplete="off"> 
-                    <TextField label="notes" name="notes" defaultValue={`${notes}`} onDoubleClick={handleEditable}
+                    <TextField label="Notes" name="notes" defaultValue={`${notes}`} onDoubleClick={handleEditable}
                         inputRef={register} margin="dense" multiline className={textField} />
                 
                       <div className={buttons}>
@@ -48,7 +48,7 @@ const SongLyrics = ({ notes, dispatch, song }) => {
                     </form>
                 </FormControl>
                 :   
-                <Typography variant="body2" component="h5" color="textSecondary"  onDoubleClick={handleEditable} style={{ marginLeft: '1em' }} >
+                <Typography variant="body2" component="h5" color="textSecondary"  onDoubleClick={handleEditable} style={{ marginLeft: '.5em' }} >
                 Notes: <br />
                 {`${notes}`}
             </Typography>

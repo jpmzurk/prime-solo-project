@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import useStyles from './SearchStyles'
-import SearchBar from 'material-ui-search-bar';
+// import SearchBar from 'material-ui-search-bar';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
 const Search = ({dispatch, query}) => {
@@ -13,11 +13,9 @@ const Search = ({dispatch, query}) => {
     const handleSearch = (e) => {
        setKeyword(e.target.value)
     }
-    console.log(keyword);
     
     const handleSubmit = (e) => { 
-        e.preventDefault();
-        console.log('submit', query.value);  
+        e.preventDefault(); 
         query.value = "";
         dispatch({type: 'SET_KEYWORD', payload: keyword})
     }
@@ -41,7 +39,7 @@ const Search = ({dispatch, query}) => {
                 inputRef={el => (query = el)} 
             />
             </form>
-        
+            {query && <LinearProgress />}
         </div>
     )
 }
@@ -49,12 +47,13 @@ const Search = ({dispatch, query}) => {
 const mapStoreToProps = (reduxState) => {
     return {
         songs: reduxState.songs,
+        search: reduxState.search
     };
   };
 export default connect(mapStoreToProps)(Search);
 
 
-{/* <SearchBar 
+/* <SearchBar 
                 onChange={(value) => setKeyword(value)}
                 onRequestSearch={handleSearch}
                 placeholder="search"
@@ -62,7 +61,7 @@ export default connect(mapStoreToProps)(Search);
                 className={inputInput}
                 searchIcon={<></>}
                 // autoFocus
-            /> */}
+            /> */
 
 
 

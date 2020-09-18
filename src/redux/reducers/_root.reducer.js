@@ -4,7 +4,8 @@ import user from './user.reducer';
 import songs from './songs.reducer';
 import recordings from './selected_recordings.reducer';
 import song from './SettingSong.reducer';
-import audioPlayer from './audioPlayerUnmount'
+import audioPlayer from './audioPlayerUnmount';
+import search from './search.reducer'
 // rootReducer bundles up all of the other reducers so our project can use them.
 // its imported in index.js as rootSaga
 
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   songs, // has all songs for of user
   recordings, // audio files that have names cleaned up by workingSongPlayer
   song,
-  audioPlayer
+  audioPlayer,
+  search
 });
 
 export default rootReducer;

@@ -6,7 +6,7 @@ import LoginForm from '../LoginForm/LoginForm';
 class LoginPage extends Component {
   render() {
     return (
-      <div className={'formSpacer'}>
+      <div className='formSpacer'>
         <LoginForm />
 
         <center>
