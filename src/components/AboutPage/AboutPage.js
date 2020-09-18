@@ -6,7 +6,7 @@ import React from 'react';
 // or even care what the redux state is, so it doesn't need 'connect()'
 
 const AboutPage = () => (
-  <div className='formSpacer' >
+  <div className='formSpacer' style={{paddingBottom: '5em'}}>
   <div className="container">
     <div style={{display: 'flex', flexDirection: 'column', alignItems: "center"}}>
       <p>If you’ve ever worked on a long term project you know that its easy to lose track of small changes.  <br/>

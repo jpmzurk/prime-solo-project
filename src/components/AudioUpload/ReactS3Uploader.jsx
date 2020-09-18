@@ -24,6 +24,7 @@ const AudioUpload = ({ uploadComplete }) => {
     <div>
       <ProgressBar progress={progress} progressTitle={progressTitle}/>
       <ReactS3uploader
+        style={{marginLeft: '6em'}}
         signingUrl="/s3/sign"
         signingUrlMethod="GET"
         onProgress={onProgress}

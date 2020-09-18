@@ -77,8 +77,8 @@ const AddSong = ({ dispatch, history }) => {
     }
 
     return (
-        <>
-            <Paper className={paper} >
+        <div onDoubleClick={toUserHome}>
+            <Paper className={paper} onDoubleClick={e => e.stopPropagation()} >
                 <FormControl >
                     <form className={root} onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off" >
                         <div className={cardContent}> 
@@ -90,15 +90,15 @@ const AddSong = ({ dispatch, history }) => {
                         <ReactS3Uploader uploadComplete={uploadComplete}/>
                         <FormControl  >
                             <section>
-                            <Button variant="outlined"onClick={toUserHome}className={inputs} > CANCEL </Button>
-                            <Button variant="outlined" type="submit" className={inputs}> Save </Button>
+                            <Button variant="contained"onClick={toUserHome}className={inputs} > CANCEL </Button>
+                            <Button variant="contained" type="submit" className={inputs}> Save </Button>
                             </section>
                         </FormControl>
                         </div>
                     </form>
                 </FormControl>
             </Paper>
-        </>
+        </div>
     );
 }
 

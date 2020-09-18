@@ -3,14 +3,9 @@ import { makeStyles } from "@material-ui/core/styles";
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        // display: "flex",
-    },
-    marginAutoItem: {
-        // margin: 'auto',
+    title: {
         flex: 1,
-        marginRight: '-4em'
-        // alignItems: "center"
+        marginRight: '-6em'
     },
     appBar: {
         transition: theme.transitions.create(["margin", "width"], {

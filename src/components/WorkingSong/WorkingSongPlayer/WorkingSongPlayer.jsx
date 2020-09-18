@@ -8,56 +8,18 @@ import volume from './icons/volume-high.png'
 import mute from './icons/volume-off.png'
 import loop from './icons/all-inclusive.png'
 import skipNext from './icons/skip-next.png'
-// import More from './MoreMenu/more'
+import { makeStyles } from '@material-ui/core/styles';
+import rearrangedPlayer from './PlayerConfig'
 
-//for rearrange prop
-let rearrangedPlayer = [
-    {
-        className: "top",
-        style: { marginBottom: "0.2rem" },
-        innerComponents: [
-            {
-                type: "name",
-                style: { width: "55%", paddingLeft: '4rem' }
-            },
-        ]
-    },
-    {
-        className: "middle",
-        style: { width: '65%', marginTop: "0.8rem", paddingRight: '1em' },
-        innerComponents: [
-            {
-                type: "play",
-            },
-            {
-                type: "rewind",
-            },
-            {
-                type: "forward",
-            },
-            {
-                type: "volume",
-                style: { width: "120.5%" }
-            },
+const useStyles = makeStyles((theme) => ({
+   emptyCard: {
+        paddingBottom: '6em'
+   }
+}));
 
-        ]
-    },
-    {
-        className: "bottom",
-        style: { marginTop: "1rem", width: '75%' },
-        innerComponents: [
-            {
-                type: "seek",
-                style: { width: "300%", paddingRight: '1rem' }
-            },
-            {
-                type: "time",
-            }
-        ]
-    },
-];
 
 const Player = ({ recordings, audioPlayer }) => {
+    const { emptyCard } = useStyles()
     useEffect(() => {
 
     }, [recordings, audioPlayer]);
@@ -65,7 +27,7 @@ const Player = ({ recordings, audioPlayer }) => {
     return (
         <>
             { (!recordings || audioPlayer === true)
-                ? null :
+                ? <div className={emptyCard}> </div>:
                 <div >
                     <AudioPlayer
                         audioFiles={recordings}

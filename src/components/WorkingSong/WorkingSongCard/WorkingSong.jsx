@@ -13,27 +13,34 @@ const useStyles = makeStyles((theme) => ({
         marginTop: '2em',
         width: 700,
         marginBottom: '-1em',
+        display: 'flex',
+        alignItems: 'center',  
+        flexDirection: 'column',
     },
     root: {
         display: 'flex',
-        alignContent: 'center',
+        alignItems: 'center',  
         justifyContent: 'center',
-        marginTop: '3em',
+        marginTop: '5em',
         marginBottom: '3em',
     },
     emptyCard: {
         marginTop: '20em',
         marginBottom: '35em'
+    },
+    noCard: {
+        marginBottom: '20em'
     }
 }));
 
 const WorkingSong = ({ song, history, dispatch, recordings }) => {
-    const { card, root, emptyCard } = useStyles();
+    const { card, root, emptyCard, noCard } = useStyles();
     const [updated, setUpdated ] = useState(false);
     const [oldSongId, setOldSongId ] = useState(false);
 
     const directUserHome = () => {
-        history.push('/user')
+        history.push('/user');
+        console.log();
     }
 
     const directOriginalSong = () => {
@@ -59,17 +66,19 @@ const WorkingSong = ({ song, history, dispatch, recordings }) => {
 
     return (
         <>
-        {  (updated === true) ? 
-        
+        {  (updated === true) ?  
+
         <div className={root} onDoubleClick={directUserHome}>
             <div onDoubleClick={e => e.stopPropagation()}>
-                <Card className={card} style={{backgroundColor: song.color}}>
+                <Card style={{backgroundColor: song.color}}>
                     <WorkingCardMenu directUserHome={directUserHome} directOriginalSong={directOriginalSong} />
-                    <CardContent>
+                    <section > 
+                    <CardContent className={card}>
                         <SongTitle />
                         <SongLyrics  />
                         <SongNotes />
                     </CardContent>
+                    </section>
                     <WorkingSongPlayer />
                     <CardActions>
                     </CardActions>
@@ -78,7 +87,7 @@ const WorkingSong = ({ song, history, dispatch, recordings }) => {
         </div> 
         
         : <div className={emptyCard} > </div>  }
-        
+        {song.id === 1.1 && <div className={noCard} > </div> }
         </>
     );
 }

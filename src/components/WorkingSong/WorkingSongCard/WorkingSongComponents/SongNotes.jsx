@@ -9,16 +9,19 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(1),
         width: '40ch',
         marginBottom: '-.2em',
-        // marginLeft: '30%',
+      
     },
     buttons:  {
-        // marginLeft: '30%',
         marginBottom: '1em',
-    }
+    },
+    notesMargin: {
+        width: '75%',
+        paddingTop: '1em'
+     }
 }));
 
 const SongLyrics = ({ notes, dispatch, song }) => {
-    const {textField, buttons} = useStyles();
+    const {textField, buttons, notesMargin} = useStyles();
     const [ editable, setEditable] = useState(false);
     const { handleSubmit, register } = useForm();
 
@@ -48,7 +51,7 @@ const SongLyrics = ({ notes, dispatch, song }) => {
                     </form>
                 </FormControl>
                 :   
-                <Typography variant="body2" component="h5" color="textSecondary"  onDoubleClick={handleEditable} style={{ marginLeft: '.5em' }} >
+                <Typography variant="body2" component="h5" color="textSecondary"  onDoubleClick={handleEditable} className={notesMargin} >
                 Notes: <br />
                 {`${notes}`}
             </Typography>

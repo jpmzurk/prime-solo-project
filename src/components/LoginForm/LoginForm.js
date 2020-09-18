@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import { Button, Typography, TextField }from '@material-ui/core';
 
 class LoginForm extends Component {
   state = {
@@ -32,39 +33,44 @@ class LoginForm extends Component {
 
   render() {
     return (
-      <form className="formPanel" onSubmit={this.login}>
-        <h2>Login</h2>
+      <form className="formPanel" style={{display:'flex', alignItems: 'center',  flexDirection: 'column'}}onSubmit={this.login}>
+        <Typography variant="h5" component="h2">Login</Typography>
         {this.props.store.errors.loginMessage && (
           <h3 className="alert" role="alert">
             {this.props.store.errors.loginMessage}
           </h3>
         )}
-        <div>
-          <label htmlFor="username">
-            Username:
-            <input
+        <div style={{marginTop: '1.5em'}}> 
+          {/* <Typography variant="p" gutterBottom>
+            Username: */}
+            <TextField
+              label="Username"
+              size="small"
+              variant="outlined"
               type="text"
               name="username"
               required
               value={this.state.username}
               onChange={this.handleInputChangeFor('username')}
             />
-          </label>
+          {/* </Typography> */}
         </div>
         <div>
-          <label htmlFor="password">
-            Password:
-            <input
+        <TextField
+              variant="outlined"
               type="password"
               name="password"
+              label="Password"
+              size="small"
               required
               value={this.state.password}
               onChange={this.handleInputChangeFor('password')}
+              style={{marginTop: '1em'}}
             />
-          </label>
+     
         </div>
-        <div>
-          <input className="btn" type="submit" name="submit" value="Log In" />
+        <div  >
+          <Button type="submit" variant="contained" name="submit" style={{marginTop: '1em'}}>Login</Button>
         </div>
       </form>
     );

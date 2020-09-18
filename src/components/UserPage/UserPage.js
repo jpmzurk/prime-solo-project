@@ -8,7 +8,7 @@ class UserPage extends Component {
   render() {
     return (
       <div className="formSpacer"> 
-      <div style={{display: 'flex', flexDirection: 'column', alignItems: "center", paddingTop: '4em'}} >
+      <div style={{display: 'flex', flexDirection: 'column', alignItems: "center", paddingTop: '5em', paddingBottom: '3em'}} >
         <h1 id="welcome">Welcome, {this.props.store.user.username}!</h1>
         <p>Your ID is: {this.props.store.user.id}</p>
         <LogOutButton className="log-in" />

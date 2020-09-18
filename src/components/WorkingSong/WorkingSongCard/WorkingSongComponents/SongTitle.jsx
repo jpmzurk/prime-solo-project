@@ -5,10 +5,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-        alignContent: 'center',
-    },
+    // root: {
+    //     display: 'flex',
+    //     alignContent: 'center',
+    // },
     textField: {
         margin: theme.spacing(1),
         width: '40ch',
@@ -18,10 +18,9 @@ const useStyles = makeStyles((theme) => ({
     subheading: {
         marginLeft: '.5em',
         marginBottom: '1.5em',
-        marginTop: '-1.5em'
+        // marginTop: '-1.5em'
     },
     buttons:  {
-        // marginLeft: '.5em',
         marginBottom: '2em',
         marginTop: '-1em'
     }
@@ -58,7 +57,7 @@ const SongTitle = ({ title, dispatch, song }) => {
                 </FormControl>
                 :
                 <div onDoubleClick={handleEditable}>
-                    <Typography variant="h5" component="h5" className={textField} >
+                    <Typography variant="h5" component="h5" >
                         {`${title}`}
                     </Typography>
                 </div>

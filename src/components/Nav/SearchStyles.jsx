@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
       [theme.breakpoints.up('sm')]: {
         width: '0ch',
         '&:focus': {
-          width: '14ch',
+          width: '17ch',
           paddingRight: theme.spacing(14),
           backgroundColor: fade(theme.palette.common.white, 0.7)
         },

@@ -18,7 +18,7 @@ import useStyles from './NavStyles'
 import SearchBar from './Search'
 
 const NavDrawer = () => {
-  const {root, appBar, appBarShift, menuButton, contentShift, marginAutoItem,
+  const {appBar, appBarShift, menuButton, contentShift, title,
          hide, drawer, drawerPaper, drawerHeader, content
   } = useStyles();
   const theme = useTheme();
@@ -34,7 +34,7 @@ const NavDrawer = () => {
 
   return (
     
-    <div className={root}>
+    <div>
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -53,8 +53,8 @@ const NavDrawer = () => {
           >
             <MenuIcon />
           </IconButton>
-          <div className={marginAutoItem}> 
-          <Typography variant="h6"  align="center" >
+          <div className={title}> 
+          <Typography variant="h6" align="center" >
             Songly
           </Typography>
           </div>
