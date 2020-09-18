@@ -44,11 +44,11 @@ const WorkingSong = ({ song, history, dispatch, recordings }) => {
         console.log('working card ran useEffect');
         if (song.id === oldSongId){ 
             setUpdated(true)
-            console.log('old songId same as "new" song id, updated was false');
+          
         } else if ( song.id !== oldSongId){
             setOldSongId(song.id);
-            console.log('song.id is different than oldSongId, updated was true', oldSongId);
             setUpdated(false);
+            dispatch({type: 'STOP_SEARCHABLE'})
             dispatch({ type: 'FETCH_RECORDINGS', payload: song.id })
         }
          return () => {

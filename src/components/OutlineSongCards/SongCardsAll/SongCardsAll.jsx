@@ -22,6 +22,11 @@ const UserHome = ({ dispatch, songs, history }) => {
         dispatch({ type: 'FETCH_SONGS' })
     }, [dispatch]);
 
+    useEffect(() => {
+        dispatch({type: 'START_SEARCHABLE'})
+    }, [dispatch]);
+
+
     const directWorkingCard = () => {
         history.push('/workingsong')
     }

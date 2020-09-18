@@ -50,10 +50,10 @@ const AddSong = ({ dispatch, history }) => {
         } else {
             setErrorState(false);
             //clean up url to be title for audio player
-             let songTitle = url.split("_").pop();
-             songTitle = songTitle.split("/").pop();
-             songTitle = songTitle.split(".mp3").shift();
-            data = {...data, src: url, title: songTitle}
+            let songTitle = url.split("_").pop();
+            songTitle = songTitle.split("/").pop();
+            songTitle = songTitle.split(".mp3").shift();
+            data = {src: url, title: songTitle}
             console.log(data);
             dispatch({ type: 'POST_NEW_SONG', payload: data })
             reset();

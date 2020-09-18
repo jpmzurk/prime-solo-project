@@ -3,14 +3,12 @@ import { connect } from 'react-redux'
 import ReactS3uploader from 'react-s3-uploader';
 import ProgressBar from '../MenuDialogComponents/AddAudioFileDialog/ProgressBar';
 
-
-
-const AudioUpload = ({ settingPublicUrl }) => {
+const AudioUpload = ({ uploadComplete }) => {
   const [progress, setProgress] = useState(0);
   const [progressTitle, setProgressTitle] = useState('')
 
   const onFinish = (info) => {
-    settingPublicUrl(info.publicUrl)
+    uploadComplete(info.publicUrl)
   }
 
   const onProgress = (percent, event) => {

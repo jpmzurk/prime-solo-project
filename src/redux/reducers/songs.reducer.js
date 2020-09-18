@@ -7,6 +7,5 @@ const songs = (state = [], action) => {
     }
 }
   
-  // user will be on the redux state at:
-  // state.user
-  export default songs;
+
+export default songs;

@@ -11,7 +11,5 @@ const song_selected_recording = (state = initialState, action) => {
             return state;
     }
 }
-  
-  // user will be on the redux state at:
-  // state.user
-  export default song_selected_recording;
+
+export default song_selected_recording;

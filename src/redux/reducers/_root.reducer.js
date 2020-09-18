@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import errors from './errors.reducer';
 import user from './user.reducer';
-import songs from './song.reducer';
+import songs from './songs.reducer';
 import recordings from './selected_recordings.reducer';
 import song from './SettingSong.reducer';
 import audioPlayer from './audioPlayerUnmount'

@@ -6,8 +6,8 @@ import {
   Switch,
 } from 'react-router-dom';
 import { connect } from 'react-redux';
-import NewNav from '../Nav/Nav'
-import Footer from '../Footer/Footer';
+import Nav from '../Nav/Nav.jsx'
+import Footer from '../Footer/Footer.jsx';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
@@ -30,7 +30,7 @@ class App extends Component {
     return (
       <Router>
         <div style={{backgroundColor: "#d5dad8"}}>
-          <NewNav/>
+          <Nav/>
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />

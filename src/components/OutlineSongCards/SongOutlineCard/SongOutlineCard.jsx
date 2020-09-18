@@ -40,7 +40,7 @@ const SongCards = ({ song, directWorkingCard, dispatch }) => {
         dispatch({ type: 'SETTING_SONG', payload: song.song_id });
         directWorkingCard()
     }
-
+  
     return (
         <>
            <Card className={card} onDoubleClick={handleDoubleClick} style={{background: (song.color)}}>
