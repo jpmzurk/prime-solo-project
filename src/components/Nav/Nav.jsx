@@ -54,7 +54,7 @@ const NavDrawer = () => {
             <MenuIcon />
           </IconButton>
           <div className={marginAutoItem}> 
-          <Typography variant="h6" >
+          <Typography variant="h6"  align="center" >
             Songly
           </Typography>
           </div>

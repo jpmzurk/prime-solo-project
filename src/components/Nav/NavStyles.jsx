@@ -4,11 +4,14 @@ const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        display: "flex",
+        // display: "flex",
     },
     marginAutoItem: {
-        margin: 'auto'
-      },
+        // margin: 'auto',
+        flex: 1,
+        marginRight: '-4em'
+        // alignItems: "center"
+    },
     appBar: {
         transition: theme.transitions.create(["margin", "width"], {
             easing: theme.transitions.easing.sharp,

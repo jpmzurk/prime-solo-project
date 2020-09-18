@@ -8,7 +8,7 @@ import React from 'react';
 const AboutPage = () => (
   <div className='formSpacer' >
   <div className="container">
-    <div style={{display: 'flex', 2: 'column', alignItems: "center"}}>
+    <div style={{display: 'flex', flexDirection: 'column', alignItems: "center"}}>
       <p>If you’ve ever worked on a long term project you know that its easy to lose track of small changes.  <br/>
       If you’re a songwriter you know it is especially difficult to keep track of all the small ideas that go into <br/>
       a great song. Lyrics and the many recordings of your song will surely be in six different places and ultimately you <br/>
