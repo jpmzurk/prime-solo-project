@@ -2,14 +2,10 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import clsx from "clsx";
-import { useTheme } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
+import { useTheme, createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+import { Drawer, CssBaseline, AppBar, Toolbar,
+      Typography, Divider, IconButton
+} from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
@@ -19,7 +15,7 @@ import SearchBar from './Search'
 
 const NavDrawer = () => {
   const {appBar, appBarShift, menuButton, contentShift, title,
-         hide, drawer, drawerPaper, drawerHeader, content
+         hide, drawer, drawerPaper, drawerHeader, content, h5
   } = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
@@ -54,7 +50,7 @@ const NavDrawer = () => {
             <MenuIcon />
           </IconButton>
           <div className={title}> 
-          <Typography variant="h6" align="center" >
+          <Typography variant="h5" align="center" className={h5}>
             Songly
           </Typography>
           </div>

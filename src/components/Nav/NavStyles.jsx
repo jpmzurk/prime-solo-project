@@ -1,11 +1,16 @@
 import { makeStyles } from "@material-ui/core/styles";
-
+import 'fontsource-roboto';
+  
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
     title: {
         flex: 1,
-        marginRight: '-6em'
+        marginRight: '-6em',
+    },
+    h5: {
+        fontFamily: 'roboto',
+        fontSize: 28 
     },
     appBar: {
         transition: theme.transitions.create(["margin", "width"], {
