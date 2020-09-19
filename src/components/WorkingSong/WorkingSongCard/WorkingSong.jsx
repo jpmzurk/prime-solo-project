@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         alignItems: 'center',  
         justifyContent: 'center',
-        marginTop: '9em',
+        marginTop: '6em',
         marginBottom: '3em',
     },
     emptyCard: {

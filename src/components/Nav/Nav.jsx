@@ -15,7 +15,7 @@ import SearchBar from './Search'
 
 const NavDrawer = () => {
   const {appBar, appBarShift, menuButton, contentShift, title,
-         hide, drawer, drawerPaper, drawerHeader, content, h5
+         hide, drawer, drawerPaper, drawerHeader, content, titleTitle
   } = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
@@ -50,7 +50,7 @@ const NavDrawer = () => {
             <MenuIcon />
           </IconButton>
           <div className={title}> 
-          <Typography variant="h5" align="center" className={h5}>
+          <Typography variant="h5" align="center" className={titleTitle}>
             Songly
           </Typography>
           </div>

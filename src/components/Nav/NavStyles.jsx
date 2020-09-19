@@ -7,10 +7,11 @@ const useStyles = makeStyles((theme) => ({
     title: {
         flex: 1,
         marginRight: '-6em',
+        
     },
-    h5: {
-        fontFamily: 'roboto',
-        fontSize: 28 
+    titleTitle: {
+        fontFamily: 'Poppins, sansSerif',
+        fontSize: 28,
     },
     appBar: {
         transition: theme.transitions.create(["margin", "width"], {
@@ -47,7 +48,8 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(0, 1),
         // necessary for content to be below app bar
         ...theme.mixins.toolbar,
-        justifyContent: "flex-end"
+        justifyContent: "flex-end",
+        marginBottom: '-2em'
     },
     content: {
         flexGrow: 1,

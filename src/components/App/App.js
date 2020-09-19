@@ -22,9 +22,6 @@ import WorkingSong from '../WorkingSong/WorkingSongCard/WorkingSong';
 import OriginalSong from '../OriginalSong/OriginalIdeaCard/OriginalIdeaCard'
 
 
-
-
-
 class App extends Component {
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_USER' });
