@@ -1,47 +1,12 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import { useForm } from "react-hook-form";
 import { connect } from 'react-redux';
 import { TextField, Button, Typography } from '@material-ui/core';
 import { FormControl, FormHelperText } from '@material-ui/core';
 import { Paper } from '@material-ui/core';
-// import AudioUpload from '../AudioUpload/AudioUpload'
+import AudioUpload from '../AudioUpload/AudioUpload'
 import ReactS3Uploader from '../AudioUpload/ReactS3Uploader'
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-    },
-    inputs: {
-        margin: theme.spacing(1),
-        width: '12ch',
-        marginBottom: '1em',
-        marginTop: '1.5em',
-    },
-    paper: {
-        margin: 'auto',
-        backgroundColor: '#607d8b96',
-        paddingBottom: '16em',
-        marginTop: '4em',
-        width: 600,
-    },
-    textField: {
-        margin: theme.spacing(1),
-        width: '40ch',
-        marginBottom: '1em',
-        marginTop: '1em'
-    },
-    cardContent: {
-        display: 'flex',
-        flexDirection : 'column', 
-        alignItems: "center", 
-        marginLeft: '9em',
-        paddingTop: '3em'
-    }
-
-}));
+import useStyles from './AddSongStyles'
 
 
 const AddSong = ({ dispatch, history }) => {
@@ -60,8 +25,8 @@ const AddSong = ({ dispatch, history }) => {
             let songTitle = url.split("_").pop();
             songTitle = songTitle.split("/").pop();
             songTitle = songTitle.split(".mp3").shift();
-            data = {src: url, title: songTitle}
-            dispatch({ type: 'POST_NEW_SONG', payload: data })
+            let newSong = {...data, src: url, title: songTitle}
+            dispatch({ type: 'POST_NEW_SONG', payload: newSong })
             reset();
             setUrl('');
             history.push('/user')
@@ -87,7 +52,8 @@ const AddSong = ({ dispatch, history }) => {
                         <TextField label="Notes" name="notes" inputRef={register} multiline className={textField} />
                         <TextField label="Lyrics" name="lyrics" inputRef={register} multiline className={textField} error={errorState} />
                         <FormHelperText error={errorState} > {helperText} </FormHelperText>
-                        <ReactS3Uploader uploadComplete={uploadComplete}/>
+                        <AudioUpload uploadComplete={uploadComplete} />
+                        {/* <ReactS3Uploader uploadComplete={uploadComplete}/> */}
                         <FormControl  >
                             <section>
                             <Button variant="contained"onClick={toUserHome}className={inputs} > CANCEL </Button>

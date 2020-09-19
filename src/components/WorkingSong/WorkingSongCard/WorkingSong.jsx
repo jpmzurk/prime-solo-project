@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     card: {
         marginTop: '2em',
         width: 700,
-        marginBottom: '-1em',
+        marginBottom: '1em',
         display: 'flex',
         alignItems: 'center',  
         flexDirection: 'column',
