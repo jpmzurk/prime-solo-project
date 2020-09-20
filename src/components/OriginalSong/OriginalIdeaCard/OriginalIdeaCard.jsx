@@ -7,8 +7,6 @@ import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
 import OriginalCardPlayer from '../OriginalSongPlayer/OriginalSongPlayer';
 import OriginalCardMenu from '../OriginalCardMenu/OriginalCardMenu'
-// import CardMedia from '@material-ui/core/CardMedia';
-// import AudioUpload from '../AudioUpload/AudioUpload';
 
 const useStyles = makeStyles(() => ({
     card: {
@@ -25,10 +23,6 @@ const useStyles = makeStyles(() => ({
         justifyContent: 'center',
         marginTop: '5em',
     },
-    // headings: {
-    //     display: 'flex',
-    //     alignContent: 'column',
-    // },
     words: {
         width: '75%'
     }

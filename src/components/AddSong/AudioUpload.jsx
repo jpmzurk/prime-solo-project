@@ -1,8 +1,18 @@
 import React, { useState } from 'react';
+import { Button } from '@material-ui/core';
 import ProgressBar from '../MenuDialogComponents/AddAudioFileDialog/ProgressBar';
 import DropzoneS3Uploader from 'react-dropzone-s3-uploader'
 
-const AudioUpload = ({ uploadComplete, settingPublicUrl }) => {
+const dropStyles = {
+    height: "3em",
+    background: '#EBEBEB',
+    borderRadius: "4px",
+    boxShadow: '0 2px 3px rgb(0, 0, 0, 0.4)',
+    marginBottom: '2em',
+    marginTop: '1em'
+}
+
+const AudioUpload = ({ uploadComplete }) => {
     const [progress, setProgress] = useState(0);
     const [progressTitle, setProgressTitle] = useState('')
 
@@ -10,9 +20,7 @@ const AudioUpload = ({ uploadComplete, settingPublicUrl }) => {
         console.log(info);
         console.log('Access it on s3 at', info.publicUrl);
         uploadComplete(info.publicUrl);
-        settingPublicUrl(info.publicUrl);
     }
-
 
     const onProgress = (percent, event) => {
         setProgress(percent);
@@ -29,10 +37,18 @@ const AudioUpload = ({ uploadComplete, settingPublicUrl }) => {
 
     const s3Url = 'https://primesonglybucket.s3.amazonaws.com';
 
+    const innerElement = (
+        <div style={{paddingTop: '.25rem'}}>
+            <Button> Click or Drag Files to upload</Button>
+        </div>
+    )
+
     return (
-        <>
+        <div style={{paddingTop: '2em'}}>
             <ProgressBar progress={progress} progressTitle={progressTitle} />
             <DropzoneS3Uploader
+              
+                style={dropStyles}
                 onProgress={onProgress}
                 onFinish={handleFinishedUpload}
                 s3Url={s3Url}
@@ -40,9 +56,9 @@ const AudioUpload = ({ uploadComplete, settingPublicUrl }) => {
                 maxSize={1024 * 1024 * 11}
                 upload={uploadOptions}
                 accept="audio/*"
+                children={innerElement}
             />
-
-        </>
+        </div>
     )
 }
 

@@ -8,7 +8,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { connect } from 'react-redux';
 import MenuItem from '@material-ui/core/MenuItem';
 import Uploader from './UploaderForDialog'
-import AudioUploader from '../../AudioUpload/AudioUpload';
+// import AudioUploader from '../../AudioUpload/AudioUpload';
 
 function AddAudioDialog({song, handleMenuClose, dispatch }) {
   const [open, setOpen] = useState(false);
@@ -51,7 +51,7 @@ function AddAudioDialog({song, handleMenuClose, dispatch }) {
           <DialogContentText>
             Select a file to upload. 
           </DialogContentText>
-        <AudioUploader settingPublicUrl={settingPublicUrl}/>
+        <Uploader settingPublicUrl={settingPublicUrl}/>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCancel}>

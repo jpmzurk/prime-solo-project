@@ -11,12 +11,19 @@ const useStyles = makeStyles((theme) => ({
         width: '12ch',
         marginBottom: '1em',
         marginTop: '1.5em',
+        background: '#EBEBEB'
+    },
+    titleField: {
+        margin: theme.spacing(1),
+        width: '16em',
+        marginBottom: '1em',
+        marginTop: '1.5em',
     },
     paper: {
         margin: 'auto',
-        backgroundColor: '#607d8b96',
-        paddingBottom: '16em',
-        marginTop: '4em',
+        backgroundColor: '#14342B50',
+        paddingBottom: '6em',
+        marginTop: '1em',
         width: 600,
     },
     textField: {
@@ -31,7 +38,10 @@ const useStyles = makeStyles((theme) => ({
         alignItems: "center", 
         marginLeft: '9em',
         paddingTop: '3em'
-    }
+    },  title: {
+        fontFamily: 'Lato, sansSerif',
+        fontSize: 25,
+    },
 
 }));
 

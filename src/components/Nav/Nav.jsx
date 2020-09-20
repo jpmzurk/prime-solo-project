@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import clsx from "clsx";
-import { useTheme, createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+import { useTheme } from "@material-ui/core/styles";
 import { Drawer, CssBaseline, AppBar, Toolbar,
       Typography, Divider, IconButton
 } from "@material-ui/core";

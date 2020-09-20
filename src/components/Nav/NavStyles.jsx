@@ -6,12 +6,13 @@ const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
     title: {
         flex: 1,
-        marginRight: '-6em',
+        marginRight: '-5em',
         
     },
     titleTitle: {
-        fontFamily: 'Poppins, sansSerif',
+        fontFamily: 'Lato, sansSerif',
         fontSize: 28,
+        // fontWeight: 500,
     },
     appBar: {
         transition: theme.transitions.create(["margin", "width"], {
@@ -40,7 +41,8 @@ const useStyles = makeStyles((theme) => ({
         flexShrink: 0
     },
     drawerPaper: {
-        width: drawerWidth
+        width: drawerWidth,
+        backgroundColor: "#EBEBEB",
     },
     drawerHeader: {
         display: "flex",
@@ -49,7 +51,6 @@ const useStyles = makeStyles((theme) => ({
         // necessary for content to be below app bar
         ...theme.mixins.toolbar,
         justifyContent: "flex-end",
-        marginBottom: '-2em'
     },
     content: {
         flexGrow: 1,

@@ -33,59 +33,65 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
   if (req.params.id == 'undefined') {
     return null
   } else {
-  console.log('in recording get by id: ', req.params.id);
-  const id = req.params.id;
+    console.log('in recording get by id: ', req.params.id);
+    const id = req.params.id;
 
-  const queryText = `
+    const queryText = `
                     SELECT * FROM songs
                     WHERE id = $1
                     `
-  pool.query(queryText, [id])
-    .then(result => {
-      console.log(result.rows);
-      res.send(result.rows)
-    })
-    .catch(err => {
-      console.log('Error complete select song', err);
-    })
+    pool.query(queryText, [id])
+      .then(result => {
+        console.log(result.rows);
+        res.send(result.rows)
+      })
+      .catch(err => {
+        console.log('Error complete select song', err);
+      })
   }
 })
 
 //Post new song from AddSong
-router.post('/', rejectUnauthenticated, (req, res) => {
-  console.log('in song post. the song and user id are', req.body, req.user.id);
+router.post('/', rejectUnauthenticated, async (req, res) => {
+  const client = await pool.connect();
+  const userId = req.user.id;
+  const { song_title, notes, lyrics, src, color, title } = req.body;
+  console.log('in song post. the song and user id are', song_title, userId);
 
-  const song = req.body;
+  try {
+    await client.query('BEGIN');
+    const firstQuery = `
+                        INSERT INTO "songs" (
+                        user_id, song_title, notes, lyrics, preview_audio, org_title, org_notes, org_lyrics, org_audio, color
+                        )
+                        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+                        RETURNING "id"`;
 
-  const queryText = `INSERT INTO "songs" (
-                        user_id, song_title, notes, lyrics, preview_audio, org_title, org_notes, org_lyrics, org_audio
-                     )
-                     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
-                     RETURNING "id"`;
-  pool.query(queryText, [req.user.id, song.song_title, song.notes, song.lyrics, song.src, song.song_title, song.notes, song.lyrics, song.src])
+    const result = await client.query(firstQuery, [userId, song_title, notes, lyrics, src, song_title, notes, lyrics, src, color]);
 
-    .then(result => {
-      console.log('new song id:', result.rows[0].id);
+    const newSongId = result.rows[0].id;
+    const secondQueryText = ` 
+                            INSERT INTO "recordings" ("song_id", "src", "title")
+                            VALUES  ($1, $2, $3);
+                            `
 
-      const newSongId = result.rows[0].id
+    await client.query(secondQueryText, [newSongId, src, title]);
 
-      const recordingQueryText = ` 
-      INSERT INTO "recordings" ("song_id", "src", "title")
-      VALUES  ($1, $2, $3);
-      `
+    await client.query('COMMIT');
 
-      pool.query(recordingQueryText, [newSongId, song.src, song.title]).then(result => {
-        //Now that both are done, send back success!
-        console.log(result);
-        res.sendStatus(201)
+    res.sendStatus(201)
 
-        // catch for second query
-      }).catch(err => { console.log('Error completing POST song in recordings table', err), res.sendStatus(500) })
+  } catch (error) {
+    await client.query('ROLLBACK')
+    console.log('Error completing POST', error),
+    res.sendStatus(500)
 
-    }).catch((err) => console.log('Error completing POST songs query', err), res.sendStatus(500));
-});
+  } finally {
+    //ends pool.connect
+    client.release();
+  }
 
-
+})
 
 router.put('/:id', rejectUnauthenticated, (req, res) => {
   const id = req.params.id;
@@ -95,7 +101,7 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
   const songValuePairs = Object.entries(songInfo);
 
   // loop over array to get keys and values for all items in songInfo 
-  for (let [key, value] of songValuePairs){
+  for (let [key, value] of songValuePairs) {
     console.log(`in put songs its changing: id: ${id}, key: ${key}`);
 
     let sqlText = `UPDATE songs 
@@ -111,7 +117,7 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
         res.sendStatus(500);
       });
 
-    }
+  }
 });
 
 
@@ -119,20 +125,20 @@ router.put('/color/:id', rejectUnauthenticated, (req, res) => {
   const id = req.params.id;
   const hexValue = req.body.color
 
-    console.log(`in update cardColor its changing: id: ${id}, key: ${hexValue}`);
+  console.log(`in update cardColor its changing: id: ${id}, key: ${hexValue}`);
 
-    let sqlText = `UPDATE songs 
+  let sqlText = `UPDATE songs 
                    SET color = $2 
                    WHERE id = $1;`
 
-    pool.query(sqlText, [id, hexValue])
-      .then(result => {
-        console.log(result);
-        res.sendStatus(201);
-      }).catch(error => {
-        console.log('error in put', error);
-        res.sendStatus(500);
-      }); 
+  pool.query(sqlText, [id, hexValue])
+    .then(result => {
+      console.log(result);
+      res.sendStatus(201);
+    }).catch(error => {
+      console.log('error in put', error);
+      res.sendStatus(500);
+    });
 });
 
 
