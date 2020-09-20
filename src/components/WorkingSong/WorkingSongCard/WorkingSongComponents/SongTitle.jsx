@@ -9,22 +9,25 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(1),
         width: '36ch',
         marginBottom: '1em',
-        // marginLeft: '20%',
     },
     subheading: {
         marginLeft: '.5em',
         marginBottom: '1.5em',
-        // marginTop: '-1.5em'
+        marginTop: '.5em'
     },
     buttons:  {
         marginBottom: '2em',
         marginTop: '-1em',
         marginLeft: '7.5em'
-    }
+    },
+    titleTitle: {
+        fontFamily: 'Source Sans Pro, sansSerif',
+        fontSize: 28,
+    },
 }));
 
 const SongTitle = ({ title, dispatch, song }) => {
-    const { textField, subheading, buttons } = useStyles();
+    const { textField, subheading, buttons, titleTitle } = useStyles();
     const [ editable, setEditable] = useState(false);
     const { handleSubmit, register } = useForm();
 
@@ -54,7 +57,7 @@ const SongTitle = ({ title, dispatch, song }) => {
                 </FormControl>
                 :
                 <div onDoubleClick={handleEditable}>
-                    <Typography variant="h5" component="h5" >
+                    <Typography variant="h5" component="h5" className={titleTitle}>
                         {`${title}`}
                     </Typography>
                 </div>
@@ -66,7 +69,6 @@ const SongTitle = ({ title, dispatch, song }) => {
    
     )
 }
-
 
 
 const mapStoreToProps = (reduxState) => {

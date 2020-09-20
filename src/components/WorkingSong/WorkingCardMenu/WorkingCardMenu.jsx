@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
 import IconButton from "@material-ui/core/IconButton";
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -7,7 +8,17 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import DeleteAudioDialog from '../../MenuDialogComponents/DeleteAudioDialog/DeleteAudioDialog';
 import UploaderMenuDialog from '../../MenuDialogComponents/AddAudioFileDialog/AddAudioFileDialog';
 
+const useStyles = makeStyles((theme) => ({
+    moreIcon: {
+      '& svg': {
+        fontSize: 27
+      }
+    },
+}));
+
+  
 const WorkingCardMenu = ({directUserHome, directOriginalSong, song, dispatch }) => { 
+    const {moreIcon} = useStyles();
     const [anchorEl, setAnchorEl] = useState(null);
 
     const handleClick = (event) => {
@@ -36,10 +47,6 @@ const WorkingCardMenu = ({directUserHome, directOriginalSong, song, dispatch }) 
         setAnchorEl(null)
     };
 
-    // const setEditAll = () => { 
-    //     handleClose()
-    // }
-
     useEffect(() => {
         
         return () => {
@@ -50,8 +57,8 @@ const WorkingCardMenu = ({directUserHome, directOriginalSong, song, dispatch }) 
 
     return (
         <>
-            <IconButton aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                    <MoreVertIcon>
+            <IconButton aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} className={moreIcon}>
+                    <MoreVertIcon fontSize={'inherit'}>
                     </MoreVertIcon>
                 </IconButton>
                 <Menu

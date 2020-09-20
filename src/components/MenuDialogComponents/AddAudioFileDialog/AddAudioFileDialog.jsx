@@ -24,6 +24,7 @@ function AddAudioDialog({song, handleMenuClose, dispatch }) {
   const handleSave = () => {
     let newTitle = publicUrl.split("_").pop();
     newTitle = newTitle.split(".mp3").shift();
+    newTitle = newTitle.split(".m4a").shift();
     let newAudio = {song_id : song.id, src: publicUrl, title: newTitle}
     dispatch({ type: 'SETTING_SONG', payload: song.song_id })
     dispatch({ type: 'ADD_RECORDING', payload: newAudio})   

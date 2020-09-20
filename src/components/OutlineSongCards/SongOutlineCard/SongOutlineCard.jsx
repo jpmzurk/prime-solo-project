@@ -19,8 +19,6 @@ const useStyles = makeStyles(() => ({
     },
     text: {
         display: 'flex',
-        // flexDirection: 'column',
-        // alignItems: "center",
         width: 200,
         overflow: 'hidden',
         textOverflow: 'ellipsis',

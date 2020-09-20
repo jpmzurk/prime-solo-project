@@ -4,6 +4,9 @@ import 'fontsource-roboto';
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
+    root: {
+        marginBottom:'0em'
+    },
     title: {
         flex: 1,
         marginRight: '-5em',
@@ -11,8 +14,8 @@ const useStyles = makeStyles((theme) => ({
     },
     titleTitle: {
         fontFamily: 'Lato, sansSerif',
-        fontSize: 28,
-        // fontWeight: 500,
+        fontSize: 30,
+        marginBottom: '.25rem'
     },
     appBar: {
         transition: theme.transitions.create(["margin", "width"], {
@@ -20,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
             duration: theme.transitions.duration.leavingScreen
         }),
         backgroundColor: "#EBEBEB",
-        color: '#000000'
+        color: '#000000',
     },
     appBarShift: {
         width: `calc(100% - ${drawerWidth}px)`,

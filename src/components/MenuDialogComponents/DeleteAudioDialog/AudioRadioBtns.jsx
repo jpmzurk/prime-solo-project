@@ -1,4 +1,4 @@
-import React, { useState, useEffect }from 'react';
+import React, { useState }from 'react';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Radio from '@material-ui/core/Radio';
@@ -23,14 +23,6 @@ function RecordingRadios({ handleDelete, handleCancel, recordings, song, dispatc
   const [error, setError] = useState(false);
   const [helperText, setHelperText] = useState('');
   const [readyDelete, setReadyDelete] = useState(false);
-
-  useEffect(() => {
-    console.log('use effect ran');
-    return () => {
-      
-    };
-  }, [recordings]);
-
 
   const handleRadioChange = (event) => {
     setValue(event.target.value);
@@ -74,7 +66,7 @@ function RecordingRadios({ handleDelete, handleCancel, recordings, song, dispatc
             Cancel
           </Button>
           <Button type="submit" className={classes.button}>
-            Save
+            Delete
           </Button>
       </FormControl>
     </form>

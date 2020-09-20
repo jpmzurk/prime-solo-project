@@ -9,7 +9,7 @@ const useStyles = makeStyles(() => ({
         flexWrap: 'wrap',
         justifyContent: 'space-around',
         overflow: 'hidden',
-        paddingBottom: '2em'
+        paddingBottom: '2em',
     },
     preLoad: {
         marginTop : '40em'

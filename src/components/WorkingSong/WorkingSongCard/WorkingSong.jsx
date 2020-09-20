@@ -10,7 +10,7 @@ import SongNotes from './WorkingSongComponents/SongNotes';
 
 const useStyles = makeStyles((theme) => ({
     card: {
-        marginTop: '2em',
+        // marginTop: '2em',
         width: 700,
         marginBottom: '1em',
         display: 'flex',
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         alignItems: 'center',  
         justifyContent: 'center',
-        marginTop: '6em',
+        marginTop: '4em',
         marginBottom: '3em',
     },
     emptyCard: {

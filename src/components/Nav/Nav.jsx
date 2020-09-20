@@ -15,7 +15,7 @@ import SearchBar from './Search'
 
 const NavDrawer = () => {
   const {appBar, appBarShift, menuButton, contentShift, title,
-         hide, drawer, drawerPaper, drawerHeader, content, titleTitle
+         hide, drawer, drawerPaper, drawerHeader, content, titleTitle, root
   } = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
@@ -29,8 +29,7 @@ const NavDrawer = () => {
   };
 
   return (
-    
-    <div>
+    <div className={root}>
       <CssBaseline />
       <AppBar
         position="fixed"
