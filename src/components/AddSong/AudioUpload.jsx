@@ -38,7 +38,8 @@ const AudioUpload = ({ uploadComplete }) => {
     const s3Url = 'https://primesonglybucket.s3.amazonaws.com';
 
     const innerElement = (
-        <div style={{paddingTop: '.25rem'}}>
+        <div 
+            style={{paddingTop: '.25rem'}} >
             <Button> Click or Drag Files to upload</Button>
         </div>
     )
@@ -47,7 +48,7 @@ const AudioUpload = ({ uploadComplete }) => {
         <div style={{paddingTop: '2em'}}>
             <ProgressBar progress={progress} progressTitle={progressTitle} />
             <DropzoneS3Uploader
-              
+                passChildrenProps={false}
                 style={dropStyles}
                 onProgress={onProgress}
                 onFinish={handleFinishedUpload}

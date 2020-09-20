@@ -47,11 +47,11 @@ function AddAudioDialog({song, handleMenuClose, dispatch }) {
     <div>
       <MenuItem onClick={handleClickOpen}> Add New Audio File </MenuItem>
       <Dialog open={open} onClose={handleCancel} aria-labelledby="Rename song title input">
-        <DialogTitle id="newAudio">New Audio File</DialogTitle>
+        <DialogTitle id="newAudio">Select a file to upload </DialogTitle>
         <DialogContent>
-          <DialogContentText>
+          {/* <DialogContentText>
             Select a file to upload. 
-          </DialogContentText>
+          </DialogContentText> */}
         <Uploader settingPublicUrl={settingPublicUrl}/>
         </DialogContent>
         <DialogActions>
