@@ -7,35 +7,39 @@ import AudioPlayer from '../AudioPlayer/AudioPlayer'
 import Typography from "@material-ui/core/Typography";
 import SongOutlineMenu from '../SongOutlineMenu/SongOutlineMenu'
 import { connect } from 'react-redux';
+import { bottom } from '@material-ui/system';
 
 const useStyles = makeStyles(() => ({
     card: {
         marginTop: '2em',
-        width: 330,
-        maxHeight: 330,
-        overflow: "scroll",
+        width: 350,
+        maxHeight: 350,
+        minHeight: 270,
         marginLeft: '1.5em',
         marginRight: '1.5em',
+        flexDirection: 'column',
+        position: 'relative', 
     },
     text: {
         display: 'flex',
-        width: 275,
+        width: 295,
         overflow: 'hidden',
         textOverflow: 'ellipsis',
-        maxHeight: '5.4em',
+        maxHeight: '7.4em',
+        // overflow: "scroll",
         lineHeight: '1.8em',
         whiteSpace: 'pre-line',
-        // color: '#585F5F',
         fontSize: 14.5,
+        paddingBottom: '2em',
     },
-    media: {
-        width: 300,
-        height: 300,
-    },
+    player: {
+        position: 'absolute',
+        bottom: '0em'
+    }
 }));
 
 const SongCards = ({ song, directWorkingCard, dispatch }) => {
-    const { card, text }= useStyles();
+    const { card, text, player, cardBody }= useStyles();
     
     const handleDoubleClick = () => {
         dispatch({ type: 'SETTING_SONG', payload: song.song_id });
@@ -45,9 +49,10 @@ const SongCards = ({ song, directWorkingCard, dispatch }) => {
     return (
         <>
            <Card className={card} onDoubleClick={handleDoubleClick} style={{background: (song.color)}} raised={true}>
+               <section className={cardBody}>
             <SongOutlineMenu directWorkingCard={directWorkingCard} song={song}/>
                 <CardContent >
-                    <Typography gutterBottom variant="h5" component="h5"  >
+                    <Typography gutterBottom variant="h5" component="h5" >
                         {song.song_title}
                     </Typography>
             
@@ -56,9 +61,11 @@ const SongCards = ({ song, directWorkingCard, dispatch }) => {
                     </Typography>
                 
                 </CardContent>
+               
+                <CardActions className={player}>
                 <AudioPlayer song={song}/>
-                <CardActions>
                 </CardActions>
+                </section>
             </Card>
         </>
     );

@@ -10,7 +10,6 @@ const useStyles = makeStyles((theme) => ({
     title: {
         flex: 1,
         marginRight: '-5em',
-        
     },
     titleTitle: {
         fontFamily: 'Lato, sansSerif',

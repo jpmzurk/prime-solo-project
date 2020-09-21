@@ -12,14 +12,14 @@ import skipNext from './icons/skip-next.png'
 let rearrangedPlayer = [
     {   //only one line of audio player needed here
         className: "top",
-        style: { marginRight: "-.25rem", width: '85%' },
+        style: { display: 'flex', float: 'center', marginLeft: "2rem", marginBottom: '.75rem', width: '100%', marginTop: '-.5em' },
         innerComponents: [
             {   //accessing different built-in props of audio player
                 type: "play",
             },
             {
                 type: "seek",
-                style: { width: "300%", paddingRight: '1rem' }
+                style: { width: "500%", paddingRight: '1rem' }
             },
             {
                 type: "time",

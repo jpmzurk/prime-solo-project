@@ -32,10 +32,10 @@ const UserHome = ({ dispatch, songs, history, keyword }) => {
         history.push('/workingsong')
     }
 
-    const filteredSongs =
-        songs.filter(song => {
-            return song.song_title.toLowerCase().includes(keyword.toLowerCase())
-        })
+    // const filteredSongs =
+    //     songs.filter(song => {
+    //         return song.song_title.toLowerCase().includes(keyword.toLowerCase())
+    //     })
     
 
 

@@ -15,7 +15,7 @@ const dropStyles = {
 const AudioUpload = ({ uploadComplete }) => {
     const [progress, setProgress] = useState(0);
     const [progressTitle, setProgressTitle] = useState('')
-
+    
     const handleFinishedUpload = info => {
         console.log(info);
         console.log('Access it on s3 at', info.publicUrl);

@@ -17,9 +17,9 @@ const AddSong = ({ dispatch, history }) => {
     const [color, setColor] = useState('#14342B50')
 
     const onSubmit = (data) => {
-        if ((data.song_title === '') || (data.lyrics === '')) {
+        if ((data.song_title === '') || (url === 'no file dropped' || '')) {
             setErrorState(true);
-            setHelperText('You must enter a title and a few lyrics');
+            setHelperText('You must enter a title and upload a song');
         } else {
             setErrorState(false);
             let songTitle = url.split("_").pop();
@@ -54,10 +54,10 @@ const AddSong = ({ dispatch, history }) => {
                         <Typography variant="h4" component="h5" className={title}>Add A Song</Typography>
                         <TextField label="Title" name="song_title" inputRef={register} multiline className={titleField} error={errorState}/>
                         <TextField label="Notes" name="notes" inputRef={register} multiline className={textField} />
-                        <TextField label="Lyrics" name="lyrics" inputRef={register} multiline className={textField} error={errorState} />
+                        <TextField label="Lyrics" name="lyrics" inputRef={register} multiline className={textField} />
                         <FormHelperText error={errorState} > {helperText} </FormHelperText>
                         <AddColor colorSelected={colorSelected}/>
-                        <AudioUpload uploadComplete={uploadComplete}/>
+                        <AudioUpload uploadComplete={uploadComplete} error={errorState} />
                         <FormControl >
                             <section>
                             <Button variant="contained" onClick={toUserHome}className={inputs} > CANCEL </Button>
