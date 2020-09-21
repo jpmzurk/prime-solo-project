@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import useStyles from './SearchStyles'
-// import SearchBar from 'material-ui-search-bar';
-import LinearProgress from '@material-ui/core/LinearProgress';
+// import LinearProgress from '@material-ui/core/LinearProgress';
 
 const Search = ({dispatch, query}) => {
     const { search, searchIcon, inputRoot, inputInput} = useStyles();
@@ -15,7 +14,9 @@ const Search = ({dispatch, query}) => {
     }
     
     const handleSubmit = (e) => { 
-        e.preventDefault(); 
+        e.preventDefault();
+        console.log('submit', query.value);  
+        setKeyword(query.value);
         query.value = "";
         dispatch({type: 'SET_KEYWORD', payload: keyword})
     }
@@ -39,7 +40,7 @@ const Search = ({dispatch, query}) => {
                 inputRef={el => (query = el)} 
             />
             </form>
-            {query && <LinearProgress />}
+            {/* {query && <LinearProgress />} */}
         </div>
     )
 }

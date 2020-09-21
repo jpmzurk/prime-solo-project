@@ -15,11 +15,16 @@ const useStyles = makeStyles((theme) => ({
     },
     lyricMargin: {
        width: '75%'
+    },
+    text: {
+        fontSize: 15,
+        fontWeight: 400,
+        whiteSpace: 'pre-line'
     }
 }));
 
 const SongLyrics = ({ lyrics, dispatch, song }) => {
-    const {textField, buttons, lyricMargin} = useStyles();
+    const {textField, buttons, lyricMargin, text} = useStyles();
     const [ editable, setEditable] = useState(false);
     const { handleSubmit, register } = useForm();
 
@@ -51,11 +56,13 @@ const SongLyrics = ({ lyrics, dispatch, song }) => {
                 </FormControl>
                 :
                 <div className={lyricMargin}> 
-                <Typography variant="body2" component="h5" color="textSecondary" 
-                     onDoubleClick={handleEditable}>
+             
+                <Typography variant="body2" component="h6" paragraph={true}
+                     onDoubleClick={handleEditable} className={text}>
                     Lyrics: <br />
                     {`${lyrics}`}
                 </Typography>
+              
                 </div>
             }
         </>

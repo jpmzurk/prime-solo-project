@@ -15,8 +15,12 @@ const useStyles = makeStyles((theme) => ({
     },
     notesMargin: {
         width: '75%',
-        paddingTop: '1em'
+        paddingTop: '1em',
+        fontSize: 15,
+        fontWeight: 400,
+        whiteSpace: 'pre-line'
      }
+  
 }));
 
 const SongLyrics = ({ notes, dispatch, song }) => {
@@ -50,7 +54,7 @@ const SongLyrics = ({ notes, dispatch, song }) => {
                     </form>
                 </FormControl>
                 :   
-                <Typography variant="body2" component="h5" color="textSecondary"  onDoubleClick={handleEditable} className={notesMargin} >
+                <Typography variant="body2" component="h5"  onDoubleClick={handleEditable} className={notesMargin} >
                 Notes: <br />
                 {`${notes}`}
             </Typography>
