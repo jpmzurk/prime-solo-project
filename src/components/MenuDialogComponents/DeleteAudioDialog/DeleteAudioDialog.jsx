@@ -25,7 +25,6 @@ function DeleteAudioDialog({song, handleTopMenuClose, handleClose, dispatch}) {
   };
 
   const handleDelete = () => {
-    console.log('song delete successfully clicked');
     setOpen(false);
     handleTopMenuClose()
     dispatch({type: 'START_PLAYER'})

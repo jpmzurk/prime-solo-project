@@ -28,7 +28,6 @@ function NameChangeDialog({song, handleClose, dispatch}) {
   };
 
   const handleSave = () => {
-    console.log(song.id);
     let newSongTitle = {id : song.id, song_title: newTitle}
     setOpen(false);
     handleClose();

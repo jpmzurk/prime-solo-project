@@ -8,10 +8,9 @@ function* songDelete(action) {
             withCredentials: true,
         };
         
-        const response = yield axios.delete(`/api/song/${action.payload}`, config);
-        console.log(response);
-    
+        yield axios.delete(`/api/song/${action.payload}`, config);
         yield put({ type: 'FETCH_SONGS'})
+        
     } catch (error) {
         console.log('Song DELETE request failed', error)
     }

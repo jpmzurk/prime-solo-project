@@ -15,7 +15,6 @@ const Search = ({dispatch, query}) => {
     
     const handleSubmit = (e) => { 
         e.preventDefault();
-        console.log('submit', query.value);  
         setKeyword(query.value);
         query.value = "";
         dispatch({type: 'SET_KEYWORD', payload: keyword})

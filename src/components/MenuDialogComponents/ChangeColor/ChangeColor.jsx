@@ -14,14 +14,11 @@ function ChangeColorDialog({ song, handleClose, dispatch }) {
   const [backgroundColor, setBackgroundColor] = useState('#969696');
 
   const colorChange = (color) => {
-        console.log(color.rgb);
-        console.log(color.rgb.a);
       if (color.rgb.a === 1) {
           setBackgroundColor(color.hex)
       } else 
       {let alpha = (color.rgb.a).toFixed(2)
       alpha = alpha.split(".").pop()
-      console.log(alpha);
       setBackgroundColor(color.hex + (Number(alpha) + 20))}
   }
 

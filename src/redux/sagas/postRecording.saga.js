@@ -8,8 +8,7 @@ function* postRecording(action) {
             withCredentials: true,
         };
 
-        const response = yield axios.post('/api/recording', action.payload, config);
-        console.log(response);
+        yield axios.post('/api/recording', action.payload, config);
         yield put({ type: 'FETCH_RECORDINGS', payload: action.payload.song_id})
 
     } catch (error) {

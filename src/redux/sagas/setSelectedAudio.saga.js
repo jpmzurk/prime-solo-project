@@ -9,7 +9,6 @@ function* setSong(action) {
             withCredentials: true,
         };
         const id = action.payload
-        console.log('id', id);
         if (id === 1.1){
             return 
         } else {

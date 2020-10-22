@@ -7,7 +7,6 @@ import AudioPlayer from '../AudioPlayer/AudioPlayer'
 import Typography from "@material-ui/core/Typography";
 import SongOutlineMenu from '../SongOutlineMenu/SongOutlineMenu'
 import { connect } from 'react-redux';
-import { bottom } from '@material-ui/system';
 
 const useStyles = makeStyles(() => ({
     card: {
@@ -26,7 +25,6 @@ const useStyles = makeStyles(() => ({
         overflow: 'hidden',
         textOverflow: 'ellipsis',
         maxHeight: '7.4em',
-        // overflow: "scroll",
         lineHeight: '1.8em',
         whiteSpace: 'pre-line',
         fontSize: 14.5,
@@ -72,11 +70,6 @@ const SongCards = ({ song, directWorkingCard, dispatch }) => {
 }
 
 
-// const mapStoreToProps = (reduxState) => {
-//     return {
-//         color: reduxState.color
-//     };
-//   };
 export default connect()(SongCards);
 
 

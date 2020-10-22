@@ -48,9 +48,6 @@ function AddAudioDialog({song, handleMenuClose, dispatch }) {
       <Dialog open={open} onClose={handleCancel} aria-labelledby="Rename song title input">
         <DialogTitle id="newAudio">Select a file to upload </DialogTitle>
         <DialogContent>
-          {/* <DialogContentText>
-            Select a file to upload. 
-          </DialogContentText> */}
         <Uploader settingPublicUrl={settingPublicUrl}/>
         </DialogContent>
         <DialogActions>

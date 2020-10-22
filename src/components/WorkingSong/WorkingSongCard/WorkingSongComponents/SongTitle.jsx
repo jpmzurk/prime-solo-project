@@ -37,7 +37,6 @@ const SongTitle = ({ title, dispatch, song }) => {
 
     const onSubmit = (data) => {
         data = {...data, id: song.id}
-        console.log('in onSubmit title', data);
         dispatch({ type: 'EDIT_SONG', payload: data })
         setEditable(editable => !editable);
     }

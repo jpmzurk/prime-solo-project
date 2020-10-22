@@ -4,8 +4,6 @@ const router = express.Router();
 const {rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 router.get('/:id', rejectUnauthenticated, (req, res) => {
-
-  console.log('in recording get by id: ', req.params.id);
   const id = req.params.id;
 
   const queryText = `
@@ -24,9 +22,8 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 })
 
 
-router.post('/', rejectUnauthenticated, (req, res) => {
 
-  console.log(req.body)
+router.post('/', rejectUnauthenticated, (req, res) => {
   const recording = req.body;
 
   const queryText = `INSERT INTO "recordings" (
@@ -49,7 +46,6 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
   const id = req.params.id
 
-  console.log('in delete recordings id: ',  id);
   let sqlText = `DELETE FROM recordings 
                  WHERE id = $1;`
 

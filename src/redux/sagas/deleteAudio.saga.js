@@ -8,13 +8,10 @@ function* audioDelete(action) {
             withCredentials: true,
         };
         let id = (action.payload.id);
-        console.log('in audio Delete payload: ', id );
-        console.log(action.payload.id);
+ 
+        yield axios.delete(`/api/recording/${id}`, config);
+        yield put({ type: 'FETCH_RECORDINGS', payload: action.payload.song_id});
         
-        const response = yield axios.delete(`/api/recording/${id}`, config);
-        console.log(response);
-        
-        yield put({ type: 'FETCH_RECORDINGS', payload: action.payload.song_id})
     } catch (error) {
         console.log('Song DELETE request failed', error)
     }

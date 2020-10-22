@@ -37,7 +37,6 @@ function RecordingRadios({ handleDelete, handleCancel, recordings, song, dispatc
       setHelperText('');
       setError(false);
       setReadyDelete(false);
-      console.log('song id to be deleted and values to be got', song.id);
       dispatch({type: 'DELETE_AUDIO', payload: {id: Number(value), song_id: song.id }})
       handleDelete();
 

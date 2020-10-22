@@ -8,9 +8,9 @@ function* postSong(action) {
             withCredentials: true,
         };
 
-        const response = yield axios.post('/api/song', action.payload, config);
-        console.log(response);
-        yield put({ type: 'FETCH_SONGS' })
+        yield axios.post('/api/song', action.payload, config);
+        yield put({ type: 'FETCH_SONGS' });
+        
     } catch (error) {
         console.log('Song POST request failed', error)
     }

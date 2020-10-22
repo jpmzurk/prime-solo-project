@@ -10,7 +10,6 @@ import SongNotes from './WorkingSongComponents/SongNotes';
 
 const useStyles = makeStyles((theme) => ({
     card: {
-        // marginTop: '2em',
         width: 700,
         marginBottom: '1em',
         display: 'flex',
@@ -21,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         alignItems: 'center',  
         justifyContent: 'center',
+        flexDirection: 'column',
         marginTop: '4em',
         marginBottom: '3em',
     },
@@ -40,7 +40,6 @@ const WorkingSong = ({ song, history, dispatch, recordings }) => {
 
     const directUserHome = () => {
         history.push('/user');
-        console.log();
     }
 
     const directOriginalSong = () => {
@@ -48,7 +47,6 @@ const WorkingSong = ({ song, history, dispatch, recordings }) => {
     }
 
     useEffect(() => {
-        console.log('working card ran useEffect');
         if (song.id === oldSongId){ 
             setUpdated(true)
           
@@ -59,7 +57,6 @@ const WorkingSong = ({ song, history, dispatch, recordings }) => {
             dispatch({ type: 'FETCH_RECORDINGS', payload: song.id })
         }
          return () => {
-            console.log('ran cleanup');
             setUpdated(false)
         };
     }, [song.id, oldSongId, dispatch, updated, recordings]);

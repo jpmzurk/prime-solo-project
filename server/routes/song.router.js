@@ -6,8 +6,6 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 //get songs from SongCardsAll
 router.get('/', rejectUnauthenticated, (req, res) => {
 
-  console.log('req.user:', req.user);
-
   const queryText =
     `SELECT song_id, song_title, date, lyrics, preview_audio, notes, org_date, org_title, org_lyrics, org_audio, color,
         ARRAY_AGG (src)
@@ -33,7 +31,6 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
   if (req.params.id == 'undefined') {
     return null
   } else {
-    console.log('in recording get by id: ', req.params.id);
     const id = req.params.id;
 
     const queryText = `
@@ -56,7 +53,6 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
   const client = await pool.connect();
   const userId = req.user.id;
   const { song_title, notes, lyrics, src, color, title } = req.body;
-  console.log('in song post. the song and user id are', song_title, userId);
 
   try {
     await client.query('BEGIN');
@@ -102,8 +98,6 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
 
   // loop over array to get keys and values for all items in songInfo 
   for (let [key, value] of songValuePairs) {
-    console.log(`in put songs its changing: id: ${id}, key: ${key}`);
-
     let sqlText = `UPDATE songs 
                    SET ${key} = $2 
                    WHERE id = $1;`

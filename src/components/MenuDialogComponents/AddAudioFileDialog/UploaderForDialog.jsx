@@ -9,9 +9,7 @@ const dropStyles = {
     width:'20em',
     border: '1px',
     borderStyle: 'dashed',
-    borderRadius: "4px",
-    // marginBottom: '2em',
-    // marginTop: '1em'
+    borderRadius: "4px"
 }
 
 const zoneStyles = {
@@ -24,8 +22,6 @@ const DialogUploader = ({ settingPublicUrl }) => {
   const [progressTitle, setProgressTitle] = useState('')
 
   const handleFinishedUpload = info => {
-      console.log(info);
-      console.log('Access it on s3 at', info.publicUrl);
       settingPublicUrl(info.publicUrl);
   }
 

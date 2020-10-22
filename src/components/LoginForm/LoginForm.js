@@ -1,80 +1,88 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import { Button, Typography, TextField }from '@material-ui/core';
+import { Button, Typography, TextField, Card, makeStyles } from '@material-ui/core';
+import { useForm } from "react-hook-form";
 
-class LoginForm extends Component {
-  state = {
-    username: '',
-    password: '',
-  };
+const useStyles = makeStyles((theme) => ({
+  card: {
+    width: '30em',
+    minHeight: '15em',
+    margin: '1em',
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column',
+    background: '#EBEBEB'
+  },
+  root: {
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column'
+  },
+  title: {
+    margin: '1em 0 0 0'
+  },
+  button: {
+    margin: '1.5em'
+  }
+}));
 
-  login = (event) => {
-    event.preventDefault();
 
-    if (this.state.username && this.state.password) {
-      this.props.dispatch({
-        type: 'LOGIN',
-        payload: {
-          username: this.state.username,
-          password: this.state.password,
+const LoginForm = ({dispatch, store}) => {
+  const { card, root, title, button } = useStyles();
+  const { handleSubmit, reset, register } = useForm();
+  const [errorState, setErrorState] = useState(false);
+
+  const onSubmit = (data) => {
+    if (data.username && data.password) {
+     dispatch({ type: 'LOGIN', payload: {
+          username: data.username,
+          password: data.password,
         },
       });
+      reset()
     } else {
-      this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
+      setErrorState(true);
+      dispatch({ type: 'LOGIN_INPUT_ERROR' });
+      reset()
     }
-  }; // end login
+  }; // end login  
 
-  handleInputChangeFor = (propertyName) => (event) => {
-    this.setState({
-      [propertyName]: event.target.value,
-    });
-  };
-
-  render() {
     return (
-      <form className="formPanel" style={{display:'flex', alignItems: 'center',  flexDirection: 'column'}}onSubmit={this.login}>
-        <Typography variant="h5" component="h2">Login</Typography>
-        {this.props.store.errors.loginMessage && (
-          <h3 className="alert" role="alert">
-            {this.props.store.errors.loginMessage}
-          </h3>
-        )}
-        <div style={{marginTop: '1em'}}> 
-          {/* <Typography variant="p" gutterBottom>
-            Username: */}
-            <TextField
-              label="Username"
-              size="small"
-              // variant="filled"
-              type="text"
-              name="username"
-              required
-              value={this.state.username}
-              onChange={this.handleInputChangeFor('username')}
-            />
-          {/* </Typography> */}
-        </div>
-        <div>
-        <TextField
-              // variant="filled"
-              type="password"
-              name="password"
-              label="Password"
-              size="small"
-              required
-              value={this.state.password}
-              onChange={this.handleInputChangeFor('password')}
-              style={{marginTop: '1em'}}
-            />
-     
-        </div>
-        <div  >
-          <Button type="submit" variant="contained" name="submit" style={{marginTop: '1.5em'}}>Login</Button>
-        </div>
+      <form className={root} onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off" >
+        <Card className={card}>
+          <Typography variant="h5" component="h2" className={title}>Login</Typography>
+          {store.errors.loginMessage && (
+            <h3 className="alert" role="alert">
+              {store.errors.loginMessage}
+            </h3>
+          )}
+          <TextField
+            inputRef={register}
+            label="Username"
+            size="small"
+            variant="outlined"
+            type="text"
+            name="username"
+            required
+            className={title}
+            error={errorState}
+          />
+          <TextField
+            inputRef={register}
+            variant="outlined"
+            type="password"
+            name="password"
+            label="Password"
+            size="small"
+            required
+            className={title}
+            error={errorState}
+          />
+          <Button type="submit" variant="contained" name="submit" className={button} >Login</Button>
+        </Card>
       </form>
-    );
-  }
+    );  
 }
 
 export default connect(mapStoreToProps)(LoginForm);

@@ -4,16 +4,15 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import LoginForm from '../LoginForm/LoginForm';
 import { Button }from '@material-ui/core';
 
-class LoginPage extends Component {
-  render() {
+const LoginPage = ({history}) => {
+ 
     return (
       <div className='formSpacer' >
         <LoginForm />
-
         <center>
           <Button variant="contained"
             onClick={() => {
-              this.props.history.push('/registration');
+              history.push('/registration');
             }}
           >
             Register
@@ -21,7 +20,7 @@ class LoginPage extends Component {
         </center>
       </div>
     );
-  }
+  
 }
 
 export default connect(mapStoreToProps)(LoginPage);
