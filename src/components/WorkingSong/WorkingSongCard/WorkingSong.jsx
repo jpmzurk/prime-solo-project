@@ -13,12 +13,12 @@ const useStyles = makeStyles((theme) => ({
         width: 700,
         marginBottom: '1em',
         display: 'flex',
-        alignItems: 'center',  
+        alignItems: 'center',
         flexDirection: 'column',
     },
     root: {
         display: 'flex',
-        alignItems: 'center',  
+        alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'column',
         marginTop: '4em',
@@ -35,8 +35,8 @@ const useStyles = makeStyles((theme) => ({
 
 const WorkingSong = ({ song, history, dispatch, recordings }) => {
     const { card, root, emptyCard, noCard } = useStyles();
-    const [updated, setUpdated ] = useState(false);
-    const [oldSongId, setOldSongId ] = useState(false);
+    const [updated, setUpdated] = useState(false);
+    const [oldSongId, setOldSongId] = useState(false);
 
     const directUserHome = () => {
         history.push('/user');
@@ -47,44 +47,44 @@ const WorkingSong = ({ song, history, dispatch, recordings }) => {
     }
 
     useEffect(() => {
-        if (song.id === oldSongId){ 
+        if (song.id === oldSongId) {
             setUpdated(true)
-          
-        } else if ( song.id !== oldSongId){
+
+        } else if (song.id !== oldSongId) {
             setOldSongId(song.id);
             setUpdated(false);
-            dispatch({type: 'STOP_SEARCHABLE'})
+            dispatch({ type: 'STOP_SEARCHABLE' })
             dispatch({ type: 'FETCH_RECORDINGS', payload: song.id })
         }
-         return () => {
+        return () => {
             setUpdated(false)
         };
     }, [song.id, oldSongId, dispatch, updated, recordings]);
 
     return (
         <>
-        {  (updated === true) ?  
+            {  (updated === true) ?
 
-        <div className={root} onDoubleClick={directUserHome}>
-            <div onDoubleClick={e => e.stopPropagation()}>
-                <Card style={{backgroundColor: song.color}} raised={true}>
-                    <WorkingCardMenu directUserHome={directUserHome} directOriginalSong={directOriginalSong} />
-                    <section > 
-                    <CardContent className={card}>
-                        <SongTitle />
-                        <SongLyrics  />
-                        <SongNotes />
-                    </CardContent>
-                    </section>
-                    <WorkingSongPlayer />
-                    <CardActions>
-                    </CardActions>
-                </Card>
-            </div>
-        </div> 
-        
-        : <div className={emptyCard} > </div>  }
-        {song.id === 1.1 && <div className={noCard} > </div> }
+                <div className={root} onDoubleClick={directUserHome}>
+                    <div onDoubleClick={e => e.stopPropagation()}>
+                        <Card style={{ backgroundColor: song.color }} raised={true}>
+                            <WorkingCardMenu directUserHome={directUserHome} directOriginalSong={directOriginalSong} />
+                            <section >
+                                <CardContent className={card}>
+                                    <SongTitle />
+                                    <SongLyrics />
+                                    <SongNotes />
+                                </CardContent>
+                            </section>
+                            <WorkingSongPlayer />
+                            <CardActions>
+                            </CardActions>
+                        </Card>
+                    </div>
+                </div>
+
+                : <div className={emptyCard} > </div>}
+            {song.id === 1.1 && <div className={noCard} > </div>}
         </>
     );
 }

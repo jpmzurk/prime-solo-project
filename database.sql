@@ -1,3 +1,4 @@
+CREATE DATABASE "songly"
 
 CREATE TABLE "user" (
     "id" SERIAL PRIMARY KEY,

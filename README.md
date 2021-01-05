@@ -1,13 +1,22 @@
-# Prime Project
+# Solo Project Name 
 
-This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
+"Songly"
 
-We **STRONGLY** recommend following these instructions carefully. It's a lot, and will take some time to set up, but your life will be much easier this way in the long run.
+## Description
 
-## Use the Template for This Repository (Don't Clone) 
+Duration: Two week sprint.
 
-- Don't Fork or Clone. Instead, click the `Use this Template` button, and make a copy to your personal account.
+This application helps working artists keep track of the circuitous path of the works they create.  More specifically, it helps songwriters organize and track their works-in-progress.  The user's home page centralizes songs entered by the user in bulletin board fashion, where each song acts as a sticky note or card.  Double clicking on the song card allows the user to edit the lyrics, notes or upload/delete audio recordings.  This simple organization and workflow allows the user to quickly make any updates to their songs.   With lyrics and audio recordings centralized in one location with this application, users will better keep track of work, see more progress and complete more songs.
 
+## Screenshots
+
+![Home Screen](public/images/HomeScreen.png)
+![Card Color Picker](public/images/ColorPicker.png)
+![Add a Song](public/images/AddSong.png)
+![Working Song Card](public/images/WorkingSong.png)
+![Working Song Menu](public/images/WorkingSongMenu.png)
+![Upload a Song](public/images/UploadSong.png)
+![Delete a Song](public/images/DeleteSong.png)
 
 ## Prerequisites
 
@@ -17,105 +26,38 @@ Before you get started, make sure you have the following software installed on y
 - [PostrgeSQL](https://www.postgresql.org/)
 - [Nodemon](https://nodemon.io/)
 
-## Create database and table
+## Setup Instructions
 
-Create a new database called `prime_app` and create a `user` table:
+1. Run the statements in database.sql file. 
+2. Open up your editor of choice and run an `npm install`
+3. Create a `.env` file at the root of the project and contact the author at: jpmzurk@gmail.com for environment variables or create your own AWS account and bucket and alter the server.js file accordingly. 
+4. Run `npm run server` in your terminal
+5. Run `npm run client` in your terminal
+6. Navigate to `localhost:3000`
 
-```SQL
-CREATE TABLE "user" (
-    "id" SERIAL PRIMARY KEY,
-    "username" VARCHAR (80) UNIQUE NOT NULL,
-    "password" VARCHAR (1000) NOT NULL
-);
-```
+## How to Use Songly
 
-If you would like to name your database something else, you will need to change `prime_app` to the name of your new database name in `server/modules/pool.js`
+The features of Songly are meant to be intuitive.  The main navigation tools are the drawer menu in the upper left hand corner and card pop-up menus.  I used icons that modern users would hopefully recognize.  Too add a song, navigate to upper left drawer and select "Add a Song".  From here the user can enter recognizable song items like: title, lyrics, notes and audio recording.  The user also has the ability to pick the card color by clicking on the color picker in the "Pick A Color".  Saving or Canceling returns the user to the home screen.  Double clicking on any existing card takes the user to the "Working Song Card".  Here the user can edit the title, lyrics or notes by double clicking and then clicking "Save".  To add or delete a file the user may click the vertical more icon in the upper left corner. From here the user may delete a song by selecting "Delete Audio File" and use the radio buttons to delete one song at a time.  Similarly, The user may add one song at a time by selecting "Add New Audio File" and using the Drag and Drop tool (or click on it) to upload a song.  Lastly, a foundational piece of an artist's work is built into the app--a way to remind the user of where the idea originated.  The user may select "Go to Original Idea" and listen to their original audio recording and view their original lyrics.  This feature allows the artist to use the original idea as a source of inspiration if they find themselves stuck at some point in the songwriting process. 
 
-## Development Setup Instructions
+## Features Yet To Be Integrated
 
-- Run `npm install`
-- Create a `.env` file at the root of the project and paste this line into the file:
-  ```
-  SERVER_SESSION_SECRET=superDuperSecret
-  ```
-  While you're in your new `.env` file, take the time to replace `superDuperSecret` with some long random string like `25POUbVtx6RKVNWszd9ERB9Bb6` to keep your application secure. Here's a site that can help you: [https://passwordsgenerator.net/](https://passwordsgenerator.net/). If you don't do this step, create a secret with less than eight characters, or leave it as `superDuperSecret`, you will get a warning.
-- Start postgres if not running already by using `brew services start postgresql`
-- Run `npm run server`
-- Run `npm run client`
-- Navigate to `localhost:3000`
+This web-specific project will eventually include to the ability to record and edit new audio files with system specified devices.   These are some but not all features for next release:
 
-## Debugging
+Ability to place cards in any order.
+Ability to place cards anywhere in the browser.
+Ability to group songs by album, styles or influences. 
 
-To debug, you will need to run the client-side separately from the server. Start the client by running the command `npm run client`. Start the debugging server by selecting the Debug button.
+This project will inevitably evolve into a react-native iOS project with the ability to record and edit new audio recordings directly. 
 
-![VSCode Toolbar](documentation/images/vscode-toolbar.png)
+## Built With
 
-Then make sure `Launch Program` is selected from the dropdown, then click the green play arrow.
+Javascript, React, Node.js, Express.js, AWS S3, PostgreSQL, Material-UI, HTML5, CSS, Passport, Redux, Redux-Sagas, Axios, React-Color, React-Dropzone-S3-Uploader, React-Hook-Form, React-Modular-Audio-Player.
 
-![VSCode Debug Bar](documentation/images/vscode-debug-bar.png)
+## Acknowledgements
 
-## Testing Routes with Postman
+- I would like to thank [Prime Digital Academy](https://github.com/PrimeAcademy) for the opportunity to put my skills into action with a real world project. 
+- A special thanks to my instructors, Dane Smith and Kris Szafranksi, for providing the tools and knowledge to build this application.
 
-To use Postman with this repo, you will need to set up requests in Postman to register a user and login a user at a minimum.
+## Support:
 
-Keep in mind that once you using the login route, Postman will manage your session cookie for you just like a browser, ensuring it is sent with each subsequent request. If you delete the `localhost` cookie in Postman, it will effectively log you out.
-
-1. Start the server - `npm run server`
-2. [Import the sample routes JSON file](./PostmanPrimeSoloRoutes.json) by clicking `Import` in Postman. Select the file.
-3. Click `Collections` and `Send` the following three calls in order:
-   1. `POST /api/user/register` registers a new user, see body to change username/password
-   2. `POST /api/user/login` will login a user, see body to change username/password
-   3. `GET /api/user` will get user information, by default it's not very much
-
-After running the login route above, you can try any other route you've created that requires a logged in user!
-
-## Production Build
-
-Before pushing to Heroku, run `npm run build` in terminal. This will create a build folder that contains the code Heroku will be pointed at. You can test this build by typing `npm start`. Keep in mind that `npm start` will let you preview the production build but will **not** auto update.
-
-- Start postgres if not running already by using `brew services start postgresql`
-- Run `npm start`
-- Navigate to `localhost:5000`
-
-## Lay of the Land
-
-There are a few videos linked below that show a walkthrough the client and sever setup to help acclimatize to the boilerplate. Please take some time to watch the videos in order to get a better understanding of what the boilerplate is like.
-
-- [Initial Set](https://vimeo.com/453297271)
-- [Server Walkthrough](https://vimeo.com/453297212)
-- [Client Walkthrough](https://vimeo.com/453297124)
-
-Directory Structure:
-
-- `src/` contains the React application
-- `public/` contains static assets for the client-side
-- `build/` after you build the project, contains the transpiled code from `src/` and `public/` that will be viewed on the production site
-- `server/` contains the Express App
-
-This code is also heavily commented. We recommend reading through the comments, getting a lay of the land, and becoming comfortable with how the code works before you start making too many changes. If you're wondering where to start, consider reading through component file comments in the following order:
-
-- src/components
-  - App/App
-  - Footer/Footer
-  - Nav/Nav
-  - AboutPage/AboutPage
-  - InfoPage/InfoPage
-  - UserPage/UserPage
-  - LoginPage/LoginPage
-  - RegisterPage/RegisterPage
-  - LogOutButton/LogOutButton
-  - ProtectedRoute/ProtectedRoute
-
-## Deployment
-
-1. Create a new Heroku project
-1. Link the Heroku project to the project GitHub Repo
-1. Create an Heroku Postgres database
-1. Connect to the Heroku Postgres database from Postico
-1. Create the necessary tables
-1. Add an environment variable for `SERVER_SESSION_SECRET` with a nice random string for security
-1. In the deploy section, select manual deploy
-
-## Update Documentation
-
-Customize this ReadMe and the code comments in this project to read less like a starter repo and more like a project. Here is an example: https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
+If you have suggestions or issues, please contact me at jpmzurk@gmail.com

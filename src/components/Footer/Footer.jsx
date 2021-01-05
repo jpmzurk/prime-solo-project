@@ -1,7 +1,5 @@
 import React from 'react';
 import { makeStyles } from "@material-ui/core/styles";
-// import './Footer.css';
-
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -17,14 +15,13 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-
 const Footer = () => {
- const {root} = useStyles()
-return (
-    <div className={root}> 
-<footer> &copy; John Patrick Mazurek & Prime Digital Academy
-</footer>
-</div>)
+    const { root } = useStyles()
+    return (
+        <div className={root}>
+            <footer> &copy; John Patrick Mazurek
+            </footer>
+        </div>)
 
 };
 
