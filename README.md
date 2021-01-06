@@ -16,6 +16,7 @@ This application helps working artists keep track of the circuitous path of the 
 ![Working Song Card](public/images/WorkingSong.png)
 ![Working Song Menu](public/images/WorkingSongMenu.png)
 ![Upload a Song](public/images/UploadSong.png)
+![Uploading Progress](public/images/UploadingProgress.png)
 ![Delete a Song](public/images/DeleteSong.png)
 
 ## Prerequisites
