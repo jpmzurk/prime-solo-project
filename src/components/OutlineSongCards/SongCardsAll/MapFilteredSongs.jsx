@@ -3,23 +3,18 @@ import SongOutlineCard from '../SongOutlineCard/SongOutlineCard';
 
 const MapFilteredSongs = ({ allSongs, query, directWorkingCard }) => {
     
-    const titleFilter = song => {
-        return song.song_title.toLowerCase().includes(query.toLowerCase())
+    const titleAndLyricFilter = song => {
+        return (song.song_title.toLowerCase().includes(query.toLowerCase()) || song.lyrics.toLowerCase().includes(query.toLowerCase()))
     }
 
-    const lyricFilter = song => {
-        return song.lyrics.toLowerCase().includes(query.toLowerCase())
-    }
-
-    const songs = (song, i ) => {
-        return <SongOutlineCard key={i} song={song} directWorkingCard={directWorkingCard} />
+    const songs = (song) => {
+        return <SongOutlineCard song={song} directWorkingCard={directWorkingCard} />
     }
 
     return (
         <>
             {
-                (allSongs.filter(titleFilter) && allSongs.filter(lyricFilter))
-                    .map(songs)
+                allSongs.filter(titleAndLyricFilter).map(songs)
             }
         </>
     );

@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'center',
         background: '#d5dad8',
         marginTop: '7em',
+        minHeight: 'fit-content'
     }
 }));
 

@@ -22,6 +22,7 @@ import WorkingSong from '../WorkingSong/WorkingSongCard/WorkingSong';
 import OriginalSong from '../OriginalSong/OriginalIdeaCard/OriginalIdeaCard'
 
 
+
 class App extends Component {
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_USER' });
@@ -30,7 +31,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div style={{backgroundColor: "#d5dad8"}}>
+        <div className="mainBackground">
           <Nav/>
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
@@ -121,7 +122,7 @@ class App extends Component {
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
-          <Footer />
+          <Footer/>
         </div>
       </Router>
     );
