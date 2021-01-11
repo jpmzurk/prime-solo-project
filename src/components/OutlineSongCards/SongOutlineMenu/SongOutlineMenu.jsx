@@ -43,7 +43,7 @@ const OutlineCardMenu = ({ directWorkingCard, song, dispatch}) => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
             >
-                <MenuItem onClick={handleCardSelect}>Open Card</MenuItem>
+                <MenuItem onClick={handleCardSelect}>Open Song</MenuItem>
                 <NameChangeDialog handleClose={handleClose}/>
                 <ChangeColorDialog handleClose={handleClose}/>
                 <DeleteCardDialog handleMenuClose={handleMenuClose}/>

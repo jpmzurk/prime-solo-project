@@ -11,7 +11,7 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import NavList from './NavMenuItems'
 import useStyles from './NavStyles'
-import SearchBar from './Search'
+// import SearchBar from './Search'
 
 const NavDrawer = () => {
   const {appBar, appBarShift, menuButton, contentShift, title,
@@ -53,7 +53,6 @@ const NavDrawer = () => {
             Songly
           </Typography>
           </div>
-          <SearchBar/>
         </Toolbar>
       </AppBar>
       <Drawer

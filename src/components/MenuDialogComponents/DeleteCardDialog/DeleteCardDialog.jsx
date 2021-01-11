@@ -33,7 +33,7 @@ function DeleteCardDialog({ song , handleMenuClose, dispatch }) {
 
   return (
     <div>
-      <MenuItem onClick={handleClickOpen}> Delete Card </MenuItem>
+      <MenuItem onClick={handleClickOpen}> Delete Song </MenuItem>
       <Dialog open={open} onClose={handleClose} aria-labelledby="Rename song title input">
         <DialogTitle id="dialogTitle">Delete This Card?</DialogTitle>
         <DialogContent>

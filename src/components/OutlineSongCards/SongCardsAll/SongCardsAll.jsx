@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from 'react-redux';
 import SongOutlineCard from '../SongOutlineCard/SongOutlineCard'
+import SearchBar from '../Search/Search'
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -13,18 +14,20 @@ const useStyles = makeStyles(() => ({
     },
     preLoad: {
         marginTop: '40em'
+    },
+    search: {
+        display: 'relative',
+        top: '0%',
+        right: '0%'
     }
 }));
 
-const UserHome = ({ dispatch, songs, history, keyword }) => {
-    const { root, preLoad } = useStyles();
+const UserHome = ({ dispatch, allSongs, history }) => {
+    const { root, preLoad, search } = useStyles();
+    const [query, setQuery] = useState();
 
     useEffect(() => {
         dispatch({ type: 'FETCH_SONGS' })
-    }, [dispatch]);
-
-    useEffect(() => {
-        dispatch({ type: 'START_SEARCHABLE' })
     }, [dispatch]);
 
 
@@ -32,34 +35,38 @@ const UserHome = ({ dispatch, songs, history, keyword }) => {
         history.push('/workingsong')
     }
 
-    // const filteredSongs =
-    //     songs.filter(song => {
-    //         return song.song_title.toLowerCase().includes(keyword.toLowerCase())
-    //     })
-    
-
-
     return (
-        <div>
-            { 
-                <>
-                    { songs.length > 1 ?
-                        <div className={root}>
-                            {songs.map((song, i) => {
-                                return <SongOutlineCard key={i} song={song} directWorkingCard={directWorkingCard} />
-                            })}
-                        </div> : <div className={preLoad} ></div>}
-                </>
-            }
+        <div >
+            <SearchBar className={search} setQuery={setQuery} />
+            <div className={root}>
+                {query ?
 
+                    (allSongs.filter(song => {
+                        return song.song_title.toLowerCase().includes(query.toLowerCase())
+                    })).map((song, i) => {
+                        return <SongOutlineCard key={i} song={song} directWorkingCard={directWorkingCard} />
+                    })
+                    :
+                    <>
+                        {allSongs.length > 1 ?
+                            <>
+                                {allSongs.map((song, i) => {
+                                    return <SongOutlineCard key={i} song={song} directWorkingCard={directWorkingCard} />
+                                })}
+                            </>
+                            :
+                            <div className={preLoad} ></div>}
+                    </>
+
+                }
+            </div>
         </div>
     );
 }
 
 const mapStoreToProps = (reduxState) => {
     return {
-        songs: reduxState.songs,
-        keyword: reduxState.search.keyword
+        allSongs: reduxState.songs,
     };
 };
 export default connect(mapStoreToProps)(UserHome);

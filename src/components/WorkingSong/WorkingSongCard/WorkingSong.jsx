@@ -39,6 +39,7 @@ const WorkingSong = ({ song, history, dispatch, recordings }) => {
     const [oldSongId, setOldSongId] = useState(false);
 
     const directUserHome = () => {
+        dispatch({type: 'CLEAR_SELECTED_SONG'})
         history.push('/user');
     }
 
@@ -62,9 +63,9 @@ const WorkingSong = ({ song, history, dispatch, recordings }) => {
     }, [song.id, oldSongId, dispatch, updated, recordings]);
 
     return (
-        <>
-            {  (updated === true) ?
+        <>  
 
+            {  (updated) ?
                 <div className={root} onDoubleClick={directUserHome}>
                     <div onDoubleClick={e => e.stopPropagation()}>
                         <Card style={{ backgroundColor: song.color }} raised={true}>

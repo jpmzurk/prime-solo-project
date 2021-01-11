@@ -5,7 +5,7 @@ const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        marginBottom:'0em'
+        marginBottom:'0em',
     },
     title: {
         flex: 1,
@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
             duration: theme.transitions.duration.leavingScreen
         }),
         backgroundColor: "#EBEBEB",
+        zIndex: 1,
         color: '#000000',
     },
     appBarShift: {
