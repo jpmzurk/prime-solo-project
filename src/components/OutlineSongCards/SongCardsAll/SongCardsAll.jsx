@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from 'react-redux';
-import SongOutlineCard from '../SongOutlineCard/SongOutlineCard'
-import SearchBar from '../Search/Search'
+import SearchBar from '../Search/Search';
+import MapAllSongCards from './MapSongCards';
+import MapFilteredSongs from './MapFilteredSongs';
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -12,9 +13,6 @@ const useStyles = makeStyles(() => ({
         overflow: 'hidden',
         paddingBottom: '2em',
     },
-    preLoad: {
-        marginTop: '40em'
-    },
     search: {
         display: 'relative',
         top: '0%',
@@ -23,7 +21,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const UserHome = ({ dispatch, allSongs, history }) => {
-    const { root, preLoad, search } = useStyles();
+    const { root, search } = useStyles();
     const [query, setQuery] = useState();
 
     useEffect(() => {
@@ -33,31 +31,18 @@ const UserHome = ({ dispatch, allSongs, history }) => {
 
     const directWorkingCard = () => {
         history.push('/workingsong')
-    }
+    }   
+    
 
     return (
         <div >
             <SearchBar className={search} setQuery={setQuery} />
-            <div className={root}>
+            <div className={root}>  
+            
                 {query ?
-
-                    (allSongs.filter(song => {
-                        return song.song_title.toLowerCase().includes(query.toLowerCase())
-                    })).map((song, i) => {
-                        return <SongOutlineCard key={i} song={song} directWorkingCard={directWorkingCard} />
-                    })
+                    <MapFilteredSongs allSongs={allSongs} directWorkingCard={directWorkingCard} query={query}/>
                     :
-                    <>
-                        {allSongs.length > 1 ?
-                            <>
-                                {allSongs.map((song, i) => {
-                                    return <SongOutlineCard key={i} song={song} directWorkingCard={directWorkingCard} />
-                                })}
-                            </>
-                            :
-                            <div className={preLoad} ></div>}
-                    </>
-
+                    <MapAllSongCards allSongs={allSongs} directWorkingCard={directWorkingCard} />
                 }
             </div>
         </div>

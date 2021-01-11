@@ -7,5 +7,4 @@ const songs = (state = [], action) => {
     }
 }
 
-
 export default songs;

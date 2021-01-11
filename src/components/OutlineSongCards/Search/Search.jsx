@@ -7,21 +7,10 @@ import useStyles from './SearchStyles'
 
 const Search = ({dispatch, setQuery}) => {
     const { search, searchIcon, inputRoot, inputInput, positionRight} = useStyles();
-    // const [query, setQuery] = useState();
 
     const handleSearch = (e) => {
         setQuery(e.target.value)
-    //    setKeyword(e.target.value)
-    // dispatch({type: 'FILTER_SONGS', payload: e.target.value})
-
     }
-    
-    
-    // const handleSubmit = (e) => { 
-    //     e.preventDefault();
-    //     setKeyword(query.value);
-    //     query.value = "";
-    // }
     
     return (
         <div className={search}>
@@ -41,10 +30,8 @@ const Search = ({dispatch, setQuery}) => {
                 onChange={handleSearch}
                 id="query"
                 inputComponent="input"
-                // inputRef={el => (query = el)} 
             />
             </div>
-            {/* {query && <LinearProgress />} */}
         </div>
     )
 }
