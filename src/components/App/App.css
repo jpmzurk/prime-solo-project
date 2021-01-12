@@ -29,7 +29,7 @@ Button
 
 .mainBackground {
   background: #d5dad8;
-  min-height: 100em;
+  min-height: 100%;
   margin-bottom: 5em;
 }
 

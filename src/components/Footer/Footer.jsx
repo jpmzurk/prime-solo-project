@@ -4,15 +4,10 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
-        alignContent: 'center',
         justifyContent: 'center',
-        paddingTop: '16em',
-        paddingBottom: '13em',
-        margin: 0,
+        padding: '2em 0',
         textAlign: 'center',
-        background: '#d5dad8',
-        marginTop: '7em',
-        minHeight: 'fit-content'
+        zIndex: 0
     }
 }));
 

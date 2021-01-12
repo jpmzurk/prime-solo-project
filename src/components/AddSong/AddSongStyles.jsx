@@ -20,10 +20,9 @@ const useStyles = makeStyles((theme) => ({
         marginTop: '1.5em',
     },
     paper: {
-        margin: 'auto',
+        margin: '4em auto',
         backgroundColor: '#14342B50',
         paddingBottom: '6em',
-        marginTop: '1em',
         width: 600,
     },
     textField: {
@@ -38,10 +37,15 @@ const useStyles = makeStyles((theme) => ({
         alignItems: "center", 
         marginLeft: '9em',
         paddingTop: '3em'
-    },  title: {
+    },  
+    title: {
         fontFamily: 'Lato, sansSerif',
         fontSize: 25,
     },
+    wrapper: {
+        display: 'flex',
+        
+    }
 
 }));
 

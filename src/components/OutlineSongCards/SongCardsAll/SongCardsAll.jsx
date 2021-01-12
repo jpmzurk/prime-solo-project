@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from 'react-redux';
 import SearchBar from '../Search/Search';
-import MapAllSongCards from './MapSongCards';
+import MapAllSongCards from './MapAllSongCards';
 import MapFilteredSongs from './MapFilteredSongs';
 
 const useStyles = makeStyles(() => ({
@@ -11,7 +11,10 @@ const useStyles = makeStyles(() => ({
         flexWrap: 'wrap',
         justifyContent: 'space-around',
         overflow: 'hidden',
-        paddingBottom: '2em',
+        // height: '100%',
+        // marginBottom: '4em',
+        padding: '2em',
+        paddingBottom: '7em'
     },
     search: {
         display: 'relative',
@@ -38,7 +41,6 @@ const UserHome = ({ dispatch, allSongs, history }) => {
         <div >
             <SearchBar className={search} setQuery={setQuery} />
             <div className={root}>  
-            
                 {query ?
                     <MapFilteredSongs allSongs={allSongs} directWorkingCard={directWorkingCard} query={query}/>
                     :

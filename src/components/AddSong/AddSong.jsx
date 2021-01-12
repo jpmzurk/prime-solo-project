@@ -9,7 +9,7 @@ import useStyles from './AddSongStyles'
 import AddColor from './AddColor'
 
 const AddSong = ({ dispatch, history }) => {
-    const { root, inputs, paper, textField, cardContent, title, titleField } = useStyles();
+    const { root, inputs, paper, textField, cardContent, title, titleField, wrapper } = useStyles();
     const { handleSubmit, reset, register } = useForm();
     const [helperText, setHelperText] = useState('');
     const [errorState, setErrorState] = useState(false);
