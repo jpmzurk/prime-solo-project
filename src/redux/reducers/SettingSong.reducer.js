@@ -13,7 +13,9 @@ const initialSongState = {
     src: '',
     title: 'nada',
     color: '#607d8b96',
-}
+    position_x: 0,
+    position_y: 0,
+ }
 
 
 

@@ -54,7 +54,6 @@ const WorkingSong = ({ song, history, dispatch, recordings }) => {
         } else if (song.id !== oldSongId) {
             setOldSongId(song.id);
             setUpdated(false);
-            dispatch({ type: 'STOP_SEARCHABLE' })
             dispatch({ type: 'FETCH_RECORDINGS', payload: song.id })
         }
         return () => {

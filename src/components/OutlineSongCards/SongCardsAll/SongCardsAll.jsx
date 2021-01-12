@@ -11,8 +11,6 @@ const useStyles = makeStyles(() => ({
         flexWrap: 'wrap',
         justifyContent: 'space-around',
         overflow: 'hidden',
-        // height: '100%',
-        // marginBottom: '4em',
         padding: '2em',
         paddingBottom: '7em'
     },
@@ -23,7 +21,7 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-const UserHome = ({ dispatch, allSongs, history }) => {
+const UserHome = ({ dispatch, songs, history }) => {
     const { root, search } = useStyles();
     const [query, setQuery] = useState();
 
@@ -42,9 +40,9 @@ const UserHome = ({ dispatch, allSongs, history }) => {
             <SearchBar className={search} setQuery={setQuery} />
             <div className={root}>  
                 {query ?
-                    <MapFilteredSongs allSongs={allSongs} directWorkingCard={directWorkingCard} query={query}/>
+                    <MapFilteredSongs songs={songs} directWorkingCard={directWorkingCard} query={query}/>
                     :
-                    <MapAllSongCards allSongs={allSongs} directWorkingCard={directWorkingCard} />
+                    <MapAllSongCards songs={songs} directWorkingCard={directWorkingCard} />
                 }
             </div>
         </div>
@@ -53,7 +51,7 @@ const UserHome = ({ dispatch, allSongs, history }) => {
 
 const mapStoreToProps = (reduxState) => {
     return {
-        allSongs: reduxState.songs,
+        songs: reduxState.songs,
     };
 };
 export default connect(mapStoreToProps)(UserHome);

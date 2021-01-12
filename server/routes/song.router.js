@@ -7,12 +7,12 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 router.get('/', rejectUnauthenticated, (req, res) => {
 
   const queryText =
-    `SELECT song_id, song_title, date, lyrics, preview_audio, notes, org_date, org_title, org_lyrics, org_audio, color,
+    `SELECT song_id, song_title, date, lyrics, preview_audio, notes, org_date, org_title, org_lyrics, org_audio, color, position_x, position_y,
         ARRAY_AGG (src)
         FROM songs
         JOIN "recordings" ON "recordings".song_id = "songs".id
         WHERE user_id = $1
-        GROUP BY song_id, song_title, date, lyrics, preview_audio, notes, org_date, org_title, org_lyrics, org_audio, color
+        GROUP BY song_id, song_title, date, lyrics, preview_audio, notes, org_date, org_title, org_lyrics, org_audio, color, position_x, position_y
         ORDER BY song_id ASC
         `;
   pool.query(queryText, [req.user.id])
@@ -167,5 +167,31 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
       res.sendStatus(500);
     });
 });
+
+
+router.put('/coordinates/:id', rejectUnauthenticated, (req, res) => {
+  const id = req.params.id;
+  const xValue = req.body.x
+  const yValue = req.body.y
+
+  console.log(`in update coordinates, changing: id: ${id} values: ${xValue}, ${yValue}`);
+
+  let sqlText = `         UPDATE songs 
+                   SET position_x = $2,
+                       position_y = $3
+                        WHERE id = $1;`
+
+  pool.query(sqlText, [id, xValue, yValue])
+    .then(result => {
+      console.log(result);
+      res.sendStatus(201);
+    }).catch(error => {
+      console.log('error in put', error);
+      res.sendStatus(500);
+    });
+});
+
+
+
 
 module.exports = router;

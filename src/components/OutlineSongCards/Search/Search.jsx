@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import useStyles from './SearchStyles'
-// import LinearProgress from '@material-ui/core/LinearProgress';
 
 const Search = ({dispatch, setQuery}) => {
     const { search, searchIcon, inputRoot, inputInput, positionRight} = useStyles();
@@ -15,7 +14,7 @@ const Search = ({dispatch, setQuery}) => {
     return (
         <div className={search}>
            
-            <div className={searchIcon, positionRight}>
+            <div className={positionRight}>
                 <SearchIcon />
             </div>
 
@@ -43,18 +42,5 @@ const mapStoreToProps = (reduxState) => {
     };
   };
 export default connect(mapStoreToProps)(Search);
-
-
-/* <SearchBar 
-                onChange={(value) => setKeyword(value)}
-                onRequestSearch={handleSearch}
-                placeholder="search"
-                inputProps={{ 'aria-label': 'search' }}
-                className={inputInput}
-                searchIcon={<></>}
-                // autoFocus
-            /> */
-
-
 
 

@@ -2,7 +2,7 @@ import React from 'react';
 import SongOutlineCard from '../SongOutlineCard/SongOutlineCard';
 
 
-const MapFilteredSongs = ({ allSongs, query, directWorkingCard }) => {
+const MapFilteredSongs = ({ songs, query, directWorkingCard }) => {
 
     const titleAndLyricFilter = song => {
         return (song.song_title.toLowerCase().includes(query.toLowerCase()) || song.lyrics.toLowerCase().includes(query.toLowerCase()))
@@ -11,7 +11,7 @@ const MapFilteredSongs = ({ allSongs, query, directWorkingCard }) => {
     return (
         <>
             {
-                allSongs.filter(titleAndLyricFilter).map(song => {
+                songs.filter(titleAndLyricFilter).map(song => {
                     return <SongOutlineCard song={song} directWorkingCard={directWorkingCard} />
                 })
             }

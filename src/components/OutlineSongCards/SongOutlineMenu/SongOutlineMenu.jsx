@@ -4,14 +4,16 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { connect } from 'react-redux';
-import NameChangeDialog from '../../MenuDialogComponents/NameChangeDialog/NameChangeDialog'
-import DeleteCardDialog from '../../MenuDialogComponents/DeleteCardDialog/DeleteCardDialog'
-import ChangeColorDialog from '../../MenuDialogComponents/ChangeColor/ChangeColor'
+import NameChangeDialog from '../../MenuDialogComponents/NameChangeDialog/NameChangeDialog';
+import DeleteCardDialog from '../../MenuDialogComponents/DeleteCardDialog/DeleteCardDialog';
+import ChangeColorDialog from '../../MenuDialogComponents/ChangeColor/ChangeColor';
+import ResetCoordinates from '../../MenuDialogComponents/ResetCoordinates/ResetCoordinates';
 
-const OutlineCardMenu = ({ directWorkingCard, song, dispatch}) => {
+const OutlineCardMenu = ({ directWorkingCard, song, dispatch, resetPosition}) => {
     const [anchorEl, setAnchorEl] = useState(null);
 
     const handleMenuClick = (event) => {
+        console.log(event.target.value);
         setAnchorEl(event.currentTarget);
         dispatch({ type: 'SETTING_SONG', payload: song.song_id })
         dispatch({ type: 'FETCH_RECORDINGS', payload: song.song_id })
@@ -46,6 +48,7 @@ const OutlineCardMenu = ({ directWorkingCard, song, dispatch}) => {
                 <MenuItem onClick={handleCardSelect}>Open Song</MenuItem>
                 <NameChangeDialog handleClose={handleClose}/>
                 <ChangeColorDialog handleClose={handleClose}/>
+                <ResetCoordinates handleClose={handleClose} resetPosition={resetPosition}/>
                 <DeleteCardDialog handleMenuClose={handleMenuClose}/>
             </Menu>
         </>
@@ -53,9 +56,4 @@ const OutlineCardMenu = ({ directWorkingCard, song, dispatch}) => {
 }
 
 
-// const mapStoreToProps = (reduxState) => {
-//     return {
-//         song: reduxState.song,
-//     };
-// };
 export default connect()(OutlineCardMenu);

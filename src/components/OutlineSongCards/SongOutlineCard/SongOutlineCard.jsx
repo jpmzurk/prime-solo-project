@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -14,7 +14,6 @@ const useStyles = makeStyles(() => ({
         marginTop: '2em',
         marginLeft: '1.5em',
         marginRight: '1.5em',
-        // paddingBottom: '2em',
         width: 350,
         maxHeight: 350,
         minHeight: 270,
@@ -39,54 +38,74 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-const SongCards = ({ song, directWorkingCard, dispatch }) => {
+const SongCards = ({ song, directWorkingCard, dispatch, updatedSong }) => {
     const { card, text, player, cardBody } = useStyles();
-    const [position, setPosition] = useState({ x: 0, y: 0 });
+    const [reset, setReset] = useState(null);
+
+    useEffect(() => {
+        if (reset) {
+            setReset(null)
+            // dispatch({ type: 'SETTING_SONG', payload: song.id }
+            // )
+        }
+    }, [updatedSong])
+
 
     const handleDoubleClick = () => {
         dispatch({ type: 'SETTING_SONG', payload: song.song_id });
         directWorkingCard()
     }
 
-    const trackPosition = (data) => {
-        setPosition({ x: data.x, y: data.y });
-    };
+    const updatePosition = (data) => {
+        song.id = song.song_id
+        song.x = data.lastX
+        song.y = data.lastY
 
-    console.log(song.id, position);
+        dispatch({ type: 'UPDATE_XY', payload: song });
+    }
+
+    const resetPosition = () => {
+        console.log('in resetPosition');
+        setReset(true)
+    }
 
     return (
-        <Draggable onDrag={(e, data) => trackPosition(data)} bounds="parent" >
-                <Card className={card} onDoubleClick={handleDoubleClick} style={{ background: (song.color) }} raised={true}>
-                    <section className={cardBody}>
-                        <SongOutlineMenu directWorkingCard={directWorkingCard} song={song} />
-                        <CardContent >
-                            <Typography gutterBottom variant="h5" component="h5" >
-                                {song.song_title}
-                            </Typography>
-                            {/* <Typography>
-                            {position}
-                        </Typography>   */}
-                            <Typography variant="body2" color="textSecondary" component="p" className={text} >
-                                {song.lyrics}
-                            </Typography>
+        <>
+            { song &&
+                <Draggable
+                    bounds="parent"
+                    defaultPosition={{ x: song.position_x, y: song.position_y }}
+                    position={ reset && { x: updatedSong.position_x, y: updatedSong.position_y }}
+                    onStop={(e, data) => updatePosition(data)}
+                >
+                    <Card className={card} onDoubleClick={handleDoubleClick} style={{ background: (song.color) }} raised={true}>
+                        <section className={cardBody}>
+                            <SongOutlineMenu directWorkingCard={directWorkingCard} song={song} resetPosition={resetPosition} />
+                            <CardContent >
+                                <Typography gutterBottom variant="h5" component="h5" >
+                                    {song.song_title}
+                                </Typography>
+                                <Typography variant="body2" color="textSecondary" component="p" className={text} >
+                                    {song.lyrics}
+                                </Typography>
 
-                        </CardContent>
+                            </CardContent>
 
-                        <CardActions className={player}>
-                            <AudioPlayer song={song} />
-                        </CardActions>
-                    </section>
-                </Card>
-    
-        </Draggable>
+                            <CardActions className={player}>
+                                <AudioPlayer song={song} />
+                            </CardActions>
+                        </section>
+                    </Card>
+
+                </Draggable>}
+        </>
     );
 }
 
 
-export default connect()(SongCards);
-
-
-
-
-
-
+const mapStoreToProps = (reduxState) => {
+    return {
+        updatedSong: reduxState.song,
+    };
+};
+export default connect(mapStoreToProps)(SongCards);

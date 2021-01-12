@@ -1,14 +1,14 @@
 import React from 'react';
 import SongOutlineCard from '../SongOutlineCard/SongOutlineCard'
+import { connect } from 'react-redux';
 
-
-const MapSongCards = ({ allSongs, directWorkingCard }) => {
+const MapSongCards = ({ songs, directWorkingCard }) => {
 
     return (
         <>
-            {allSongs.length > 1 &&
+            {songs.length > 0 &&
                 <>
-                    {allSongs.map((song, i) => {
+                    {songs.map((song, i) => {
                         return <SongOutlineCard key={i} song={song} directWorkingCard={directWorkingCard} />
                     })}
                 </>
@@ -19,4 +19,9 @@ const MapSongCards = ({ allSongs, directWorkingCard }) => {
     )
 }
 
-export default MapSongCards;
+const mapStoreToProps = (reduxState) => {
+    return {
+        updatedSong: reduxState.song,
+    };
+};
+export default connect(mapStoreToProps)(MapSongCards);
