@@ -9,7 +9,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { connect } from 'react-redux';
 import MenuItem from '@material-ui/core/MenuItem';
 
-function NameChangeDialog({song, handleClose, dispatch}) {
+function NameChangeDialog({ song, handleClose, dispatch }) {
 
   const [open, setOpen] = useState(false);
   const [newTitle, setNewTitle] = useState('');
@@ -28,10 +28,10 @@ function NameChangeDialog({song, handleClose, dispatch}) {
   };
 
   const handleSave = () => {
-    let newSongTitle = {id : song.id, song_title: newTitle}
+    let newSongTitle = { id: song.id, song_title: newTitle }
     setOpen(false);
     handleClose();
-    dispatch({ type: 'EDIT_SONG', payload: newSongTitle})
+    dispatch({ type: 'EDIT_SONG', payload: newSongTitle })
   };
   const handleChange = (e) => {
     setNewTitle(e.target.value)
@@ -41,41 +41,41 @@ function NameChangeDialog({song, handleClose, dispatch}) {
     <div>
 
       <MenuItem onClick={handleClickOpen}> Rename Song Title </MenuItem>
-{      song &&
-      <Dialog open={open} onClose={() => handleCloseDialog()} aria-labelledby="Rename song title input">
-        <DialogTitle id="dialogTitle">Song Title</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Write your new song title and click save when finish.
+      { song &&
+        <Dialog open={open} onClose={() => handleCloseDialog()} aria-labelledby="Rename song title input">
+          <DialogTitle id="dialogTitle">Song Title</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Write your new song title and click save when finish.
           </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="songTitle"
-            label="Song Title"
-            type="text"
-            defaultValue={song.song_title}
-            fullWidth
-            onChange={handleChange}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => handleCancel()}>
-            Cancel
+            <TextField
+              autoFocus
+              margin="dense"
+              id="songTitle"
+              label="Song Title"
+              type="text"
+              defaultValue={song.song_title}
+              fullWidth
+              onChange={handleChange}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => handleCancel()}>
+              Cancel
           </Button>
-          <Button onClick={() => handleSave()}>
-            Save
+            <Button onClick={() => handleSave()}>
+              Save
           </Button>
-        </DialogActions>
-      </Dialog>}
+          </DialogActions>
+        </Dialog>}
 
     </div>
   );
 }
 
 const mapStoreToProps = (reduxState) => {
-    return {
-        song: reduxState.song,
-    };
+  return {
+    song: reduxState.song,
   };
+};
 export default connect(mapStoreToProps)(NameChangeDialog);

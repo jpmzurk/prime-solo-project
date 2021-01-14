@@ -5,7 +5,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import useStyles from './SearchStyles'
 
 const Search = ({dispatch, setQuery}) => {
-    const { search, searchIcon, inputRoot, inputInput, positionRight} = useStyles();
+    const { search, inputRoot, inputInput, positionRight} = useStyles();
 
     const handleSearch = (e) => {
         setQuery(e.target.value)

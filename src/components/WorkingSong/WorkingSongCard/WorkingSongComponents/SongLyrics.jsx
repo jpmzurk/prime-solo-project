@@ -10,11 +10,11 @@ const useStyles = makeStyles((theme) => ({
         width: '64ch',
         marginBottom: '-.2em'
     },
-    buttons:  {
+    buttons: {
         // margin: '1em'
     },
     lyricMargin: {
-       width: '75%'
+        width: '75%'
     },
     text: {
         fontSize: 15,
@@ -24,8 +24,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SongLyrics = ({ lyrics, dispatch, song }) => {
-    const {textField, buttons, lyricMargin, text} = useStyles();
-    const [ editable, setEditable] = useState(false);
+    const { textField, buttons, lyricMargin, text } = useStyles();
+    const [editable, setEditable] = useState(false);
     const { handleSubmit, register } = useForm();
 
     const handleEditable = () => {
@@ -33,7 +33,7 @@ const SongLyrics = ({ lyrics, dispatch, song }) => {
     }
 
     const onSubmit = (data) => {
-        data = {...data, id: song.id}
+        data = { ...data, id: song.id }
         setEditable(editable => !editable);
         dispatch({ type: 'EDIT_SONG', payload: data })
     }
@@ -41,27 +41,27 @@ const SongLyrics = ({ lyrics, dispatch, song }) => {
         <>
             {editable ?
                 <FormControl>
-                    <form onSubmit={handleSubmit(onSubmit)} autoComplete="off"> 
-                    <TextField 
-                            label="Lyrics" name="lyrics" defaultValue={`${lyrics}`} 
+                    <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
+                        <TextField
+                            label="Lyrics" name="lyrics" defaultValue={`${lyrics}`}
                             inputRef={register} onDoubleClick={handleEditable}
-                            margin="normal" multiline className={textField} 
-                    />
-                    <div className={buttons}>
-                    <Button onClick={handleEditable}> CANCEL </Button>
-                    <Button type="submit"> SAVE </Button>
-                    </div>
+                            margin="normal" multiline className={textField}
+                        />
+                        <div className={buttons}>
+                            <Button onClick={handleEditable}> CANCEL </Button>
+                            <Button type="submit"> SAVE </Button>
+                        </div>
                     </form>
                 </FormControl>
                 :
-                <div className={lyricMargin}> 
-             
-                <Typography variant="body2" component="h6" paragraph={true}
-                     onDoubleClick={handleEditable} className={text}>
-                    Lyrics: <br />
-                    {`${lyrics}`}
-                </Typography>
-              
+                <div className={lyricMargin}>
+
+                    <Typography variant="body2" component="h6" paragraph={true}
+                        onDoubleClick={handleEditable} className={text}>
+                        Lyrics: <br />
+                        {`${lyrics}`}
+                    </Typography>
+
                 </div>
             }
         </>
@@ -73,5 +73,5 @@ const mapStoreToProps = (reduxState) => {
         lyrics: reduxState.song.lyrics,
         song: reduxState.song
     };
-  };
+};
 export default connect(mapStoreToProps)(SongLyrics);

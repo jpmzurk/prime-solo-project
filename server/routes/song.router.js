@@ -179,7 +179,7 @@ router.put('/coordinates/:id', rejectUnauthenticated, (req, res) => {
   let sqlText = `         UPDATE songs 
                    SET position_x = $2,
                        position_y = $3
-                        WHERE id = $1;`
+                         WHERE id = $1;`
 
   pool.query(sqlText, [id, xValue, yValue])
     .then(result => {
@@ -191,7 +191,28 @@ router.put('/coordinates/:id', rejectUnauthenticated, (req, res) => {
     });
 });
 
+router.put('/reset/:id', rejectUnauthenticated, (req, res) => {
+  const id = req.user.id;
+  const xValue = 0;
+  const yValue = 0;
 
+  console.log(`in reset all coordinates, id`);
+
+  let sqlText = 
+                `         UPDATE songs 
+                   SET position_x = $2,
+                       position_y = $3
+                    WHERE user_id = $1;`
+
+  pool.query(sqlText, [id, xValue, yValue])
+    .then(result => {
+      console.log(result);
+      res.sendStatus(201);
+    }).catch(error => {
+      console.log('error in put', error);
+      res.sendStatus(500);
+    });
+});
 
 
 module.exports = router;

@@ -42,10 +42,10 @@ function DeleteCardDialog({ song , handleMenuClose, dispatch }) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCancel}>
-            No
+          <Button onClick={handleCancel} variant="outlined">
+            Cancel
           </Button>
-          <Button onClick={handleDelete}>
+          <Button onClick={handleDelete} variant="outlined">
             Yes
           </Button>
         </DialogActions>

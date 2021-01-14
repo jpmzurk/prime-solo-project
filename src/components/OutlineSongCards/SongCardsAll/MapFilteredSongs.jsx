@@ -1,5 +1,6 @@
 import React from 'react';
 import SongOutlineCard from '../SongOutlineCard/SongOutlineCard';
+import { connect } from 'react-redux';
 
 
 const MapFilteredSongs = ({ songs, query, directWorkingCard }) => {
@@ -19,4 +20,9 @@ const MapFilteredSongs = ({ songs, query, directWorkingCard }) => {
     );
 }
 
-export default MapFilteredSongs;
+const mapStoreToProps = (reduxState) => {
+    return {
+        songs: reduxState.songs,
+    };
+};
+export default connect(mapStoreToProps)(MapFilteredSongs);

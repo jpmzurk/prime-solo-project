@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -36,19 +36,25 @@ const useStyles = makeStyles(() => ({
         position: 'absolute',
         bottom: '0em'
     },
+    title: {
+        fontFamily: 'Lato, sansSerif',
+    }
 }));
 
-const SongCards = ({ song, directWorkingCard, dispatch, updatedSong }) => {
-    const { card, text, player, cardBody } = useStyles();
+const SongCards = ({ song, directWorkingCard, dispatch, updatedSong, resetCoordinates }) => {
+    const { card, text, player, title } = useStyles();
     const [reset, setReset] = useState(null);
+
 
     useEffect(() => {
         if (reset) {
             setReset(null)
-            // dispatch({ type: 'SETTING_SONG', payload: song.id }
-            // )
         }
-    }, [updatedSong])
+        if (resetCoordinates) {
+            setReset(null)
+            dispatch({ type: 'RESET_FALSE' })
+        }
+    }, [updatedSong, resetCoordinates])
 
 
     const handleDoubleClick = () => {
@@ -71,18 +77,21 @@ const SongCards = ({ song, directWorkingCard, dispatch, updatedSong }) => {
 
     return (
         <>
-            { song &&
+            { song && 
                 <Draggable
                     bounds="parent"
                     defaultPosition={{ x: song.position_x, y: song.position_y }}
-                    position={ reset && { x: updatedSong.position_x, y: updatedSong.position_y }}
+                    position={(reset || resetCoordinates) && { x: updatedSong.position_x, y: updatedSong.position_y }}
                     onStop={(e, data) => updatePosition(data)}
+                    
                 >
-                    <Card className={card} onDoubleClick={handleDoubleClick} style={{ background: (song.color) }} raised={true}>
-                        <section className={cardBody}>
+                    <div style={{transform: `translate(0px, 0px)`}}> 
+                    <Card className={card} 
+                            onDoubleClick={handleDoubleClick} style={{ background: (song.color) }} raised={true}>
+                        <section >
                             <SongOutlineMenu directWorkingCard={directWorkingCard} song={song} resetPosition={resetPosition} />
                             <CardContent >
-                                <Typography gutterBottom variant="h5" component="h5" >
+                                <Typography gutterBottom variant="h5" component="h5" className={title}>
                                     {song.song_title}
                                 </Typography>
                                 <Typography variant="body2" color="textSecondary" component="p" className={text} >
@@ -96,8 +105,10 @@ const SongCards = ({ song, directWorkingCard, dispatch, updatedSong }) => {
                             </CardActions>
                         </section>
                     </Card>
-
+                    </div>
                 </Draggable>}
+
+
         </>
     );
 }
@@ -106,6 +117,8 @@ const SongCards = ({ song, directWorkingCard, dispatch, updatedSong }) => {
 const mapStoreToProps = (reduxState) => {
     return {
         updatedSong: reduxState.song,
+        resetCoordinates: reduxState.resetCoordinates,
+
     };
 };
 export default connect(mapStoreToProps)(SongCards);

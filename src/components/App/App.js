@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import Nav from '../Nav/Nav.jsx'
 import Footer from '../Footer/Footer.jsx';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import AboutPage from '../AboutPage/AboutPage';
+import AboutPage from '../AboutPage/AboutPage.jsx'
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';

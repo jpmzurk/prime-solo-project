@@ -8,6 +8,7 @@ import NameChangeDialog from '../../MenuDialogComponents/NameChangeDialog/NameCh
 import DeleteCardDialog from '../../MenuDialogComponents/DeleteCardDialog/DeleteCardDialog';
 import ChangeColorDialog from '../../MenuDialogComponents/ChangeColor/ChangeColor';
 import ResetCoordinates from '../../MenuDialogComponents/ResetCoordinates/ResetCoordinates';
+import ResetAllCoordintates from '../../MenuDialogComponents/ResetCoordinates/ResetAllPositions';
 
 const OutlineCardMenu = ({ directWorkingCard, song, dispatch, resetPosition}) => {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -49,6 +50,7 @@ const OutlineCardMenu = ({ directWorkingCard, song, dispatch, resetPosition}) =>
                 <NameChangeDialog handleClose={handleClose}/>
                 <ChangeColorDialog handleClose={handleClose}/>
                 <ResetCoordinates handleClose={handleClose} resetPosition={resetPosition}/>
+                <ResetAllCoordintates handleClose={handleClose} resetPosition={resetPosition}/> 
                 <DeleteCardDialog handleMenuClose={handleMenuClose}/>
             </Menu>
         </>

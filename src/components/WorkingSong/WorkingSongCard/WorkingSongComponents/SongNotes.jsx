@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
         width: '64ch',
         marginBottom: '-.2em',
     },
-    buttons:  {
+    buttons: {
         marginBottom: '1em',
     },
     notesMargin: {
@@ -19,13 +19,13 @@ const useStyles = makeStyles((theme) => ({
         fontSize: 15,
         fontWeight: 400,
         whiteSpace: 'pre-line'
-     }
-  
+    }
+
 }));
 
 const SongLyrics = ({ notes, dispatch, song }) => {
-    const {textField, buttons, notesMargin} = useStyles();
-    const [ editable, setEditable] = useState(false);
+    const { textField, buttons, notesMargin } = useStyles();
+    const [editable, setEditable] = useState(false);
     const { handleSubmit, register } = useForm();
 
     const handleEditable = () => {
@@ -33,7 +33,7 @@ const SongLyrics = ({ notes, dispatch, song }) => {
     }
 
     const onSubmit = (data) => {
-        data = {...data, id: song.id}
+        data = { ...data, id: song.id }
         dispatch({ type: 'EDIT_SONG', payload: data })
         setEditable(editable => !editable);
     }
@@ -42,23 +42,23 @@ const SongLyrics = ({ notes, dispatch, song }) => {
         <>
             {editable ?
                 <FormControl>
-                    <form onSubmit={handleSubmit(onSubmit)} autoComplete="off"> 
-                    <TextField label="Notes" name="notes" defaultValue={`${notes}`} onDoubleClick={handleEditable}
-                        inputRef={register} margin="dense" multiline className={textField} />
-                
-                      <div className={buttons}>
-                      <Button onClick={handleEditable}> CANCEL </Button>
-                     <Button type="submit"> SAVE </Button>
-                     </div>
-                    
+                    <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
+                        <TextField label="Notes" name="notes" defaultValue={`${notes}`} onDoubleClick={handleEditable}
+                            inputRef={register} margin="dense" multiline className={textField} />
+
+                        <div className={buttons}>
+                            <Button onClick={handleEditable}> CANCEL </Button>
+                            <Button type="submit"> SAVE </Button>
+                        </div>
+
                     </form>
                 </FormControl>
-                :   
-                <Typography variant="body2" component="h5"  onDoubleClick={handleEditable} className={notesMargin} >
-                Notes: <br />
-                {`${notes}`}
-            </Typography>
-              
+                :
+                <Typography variant="body2" component="h5" onDoubleClick={handleEditable} className={notesMargin} >
+                    Notes: <br />
+                    {`${notes}`}
+                </Typography>
+
             }
         </>
     )
@@ -71,5 +71,5 @@ const mapStoreToProps = (reduxState) => {
         notes: reduxState.song.notes,
         song: reduxState.song,
     };
-  };
+};
 export default connect(mapStoreToProps)(SongLyrics);

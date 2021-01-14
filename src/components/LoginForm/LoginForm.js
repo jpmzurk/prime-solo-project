@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     flexDirection: "column",
-    background: "#ff8966",
+    background: "#14342B50",
   },
   root: {
     display: "flex",
@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     margin: "1em 0 0 0",
+    fontFamily: 'Lato, sansSerif',
   },
   button: {
     margin: "1.5em",

@@ -8,9 +8,18 @@ import CloseIcon from '@material-ui/icons/Close';
 import InfoIcon from '@material-ui/icons/Info';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-// import SearchIcon from '@material-ui/icons/Search';
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles (() => ({
+   text: {
+    fontFamily: 'Lato, sansSerif',
+    fontSize: '16px'
+   }
+}))
 
 const NavItems = ({ store, dispatch, handleDrawerClose }) => {
+
+  const { text } = useStyles();
 
   let loginLinkData = {
     path: '/login',
@@ -26,6 +35,7 @@ const NavItems = ({ store, dispatch, handleDrawerClose }) => {
     handleDrawerClose();
     dispatch({ type: 'LOGOUT' })
   }
+
 
   const persistentNav = [
     {
@@ -49,40 +59,41 @@ const NavItems = ({ store, dispatch, handleDrawerClose }) => {
       text: "User Info",
       icon: <AccountCircleIcon />,
       path: '/userInfo'
-    }
+    },
   ];
 
   return (
-    <>
+    <div  className={text}>
       <List>
         {persistentNav.map(({ text, icon, path }) => (
           <ListItem key={text} component={Link} to={path} onClick={handleDrawerClose}>
             <ListItemIcon>
               {icon}
             </ListItemIcon>
-            <ListItemText primary={text} />
+            <ListItemText disableTypography primary={text} className={text}/>
           </ListItem>
         ))}
         {store.user.id && (
           <>
             {userNavItems.map(({ text, icon, path }) => (
-              <ListItem key={text} component={Link} to={path} onClick={handleDrawerClose}>
+              <ListItem key={text} disableTypography component={Link} to={path} onClick={handleDrawerClose} >
                 <ListItemIcon>
                   {icon}
                 </ListItemIcon>
-                <ListItemText primary={text} />
+                <ListItemText disableTypography primary={text} className={text}/>
               </ListItem>
             ))}
+             
             <ListItem component={Link} to={'/'} onClick={logOut}>
               <ListItemIcon>
                 <CloseIcon />
               </ListItemIcon>
-              <ListItemText primary={'Logout'} />
+              <ListItemText disableTypography primary={'Logout'} className={text}/>
             </ListItem>
           </>
         )}
       </List>
-    </>
+    </div>
   );
 }
 

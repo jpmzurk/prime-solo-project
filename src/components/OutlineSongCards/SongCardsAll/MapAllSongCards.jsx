@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import SongOutlineCard from '../SongOutlineCard/SongOutlineCard'
 import { connect } from 'react-redux';
 
-const MapSongCards = ({ songs, directWorkingCard }) => {
+const MapSongCards = ({ songs, directWorkingCard, resetCoordinates}) => {
 
     return (
         <>
@@ -21,7 +21,8 @@ const MapSongCards = ({ songs, directWorkingCard }) => {
 
 const mapStoreToProps = (reduxState) => {
     return {
-        updatedSong: reduxState.song,
+        songs: reduxState.songs,
+        resetCoordinates: reduxState.resetCoordinates,
     };
 };
 export default connect(mapStoreToProps)(MapSongCards);

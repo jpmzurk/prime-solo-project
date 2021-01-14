@@ -12,6 +12,7 @@ import deleteAudio from './deleteAudio.saga';
 import setSelectedAudio from './setSelectedAudio.saga';
 import setSelectedSong  from './setSelectedSong.saga';
 import updateCoordinates from './updateCoordinates.saga';
+import resetAllCoordinates from './resetAllCoordinates.saga'
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
 // This is imported in index.js as rootSaga
@@ -34,7 +35,7 @@ export default function* rootSaga() {
     setSelectedAudio(),
     setSelectedSong(),
     updateCoordinates(),
-  
+    resetAllCoordinates(),
 
   ]);
 }

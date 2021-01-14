@@ -21,13 +21,13 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-const UserHome = ({ dispatch, songs, history }) => {
+const UserHome = ({ dispatch, songs, history, resetCoordinates }) => {
     const { root, search } = useStyles();
     const [query, setQuery] = useState();
 
     useEffect(() => {
         dispatch({ type: 'FETCH_SONGS' })
-    }, [dispatch]);
+    }, [dispatch, resetCoordinates]);
 
 
     const directWorkingCard = () => {
@@ -40,9 +40,9 @@ const UserHome = ({ dispatch, songs, history }) => {
             <SearchBar className={search} setQuery={setQuery} />
             <div className={root}>  
                 {query ?
-                    <MapFilteredSongs songs={songs} directWorkingCard={directWorkingCard} query={query}/>
+                    <MapFilteredSongs directWorkingCard={directWorkingCard} query={query}/>
                     :
-                    <MapAllSongCards songs={songs} directWorkingCard={directWorkingCard} />
+                    <MapAllSongCards  directWorkingCard={directWorkingCard} />
                 }
             </div>
         </div>
@@ -52,6 +52,8 @@ const UserHome = ({ dispatch, songs, history }) => {
 const mapStoreToProps = (reduxState) => {
     return {
         songs: reduxState.songs,
+        resetCoordinates: reduxState.resetCoordinates,
+
     };
 };
 export default connect(mapStoreToProps)(UserHome);
