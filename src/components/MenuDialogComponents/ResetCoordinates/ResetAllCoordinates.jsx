@@ -9,7 +9,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-const ResetAllPositions = ({ song, dispatch, handleClose, resetPosition }) => {
+const ResetAllPositions = ({ dispatch, handleClose, resetPosition, song }) => {
     const [open, setOpen] = useState(false);
 
     const handleClickOpen = () => {
@@ -22,10 +22,16 @@ const ResetAllPositions = ({ song, dispatch, handleClose, resetPosition }) => {
 
     const resetAllPositions = async () => {
         setOpen(false);
+        song.x = 0;
+        song.y = 0;
+        await dispatch({ type: 'UPDATE_XY', payload: song });
+
+        resetPosition();
         handleClose();
+
         await dispatch({ type: 'RESET_ALL_XY' });
         await dispatch({ type: 'RESET_TRUE' });
-        resetPosition()
+
     }
 
     const handleCancel = () => {
@@ -64,7 +70,8 @@ const ResetAllPositions = ({ song, dispatch, handleClose, resetPosition }) => {
 
 const mapStoreToProps = (reduxState) => {
     return {
-        user: reduxState.user,
+        song: reduxState.song,
+        songs: reduxState.songs
     };
 };
 export default connect(mapStoreToProps)(ResetAllPositions);

@@ -41,7 +41,7 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-const SongCards = ({ song, directWorkingCard, dispatch, updatedSong, resetCoordinates }) => {
+const SongCards = ({ song, directWorkingCard, dispatch, updatedSong, resetCoordinates, songs }) => {
     const { card, text, player, title } = useStyles();
     const [reset, setReset] = useState(null);
 
@@ -54,7 +54,7 @@ const SongCards = ({ song, directWorkingCard, dispatch, updatedSong, resetCoordi
             setReset(null)
             dispatch({ type: 'RESET_FALSE' })
         }
-    }, [updatedSong, resetCoordinates])
+    }, [updatedSong, songs])
 
 
     const handleDoubleClick = () => {
@@ -118,7 +118,7 @@ const mapStoreToProps = (reduxState) => {
     return {
         updatedSong: reduxState.song,
         resetCoordinates: reduxState.resetCoordinates,
-
+        songs: reduxState.songs
     };
 };
 export default connect(mapStoreToProps)(SongCards);

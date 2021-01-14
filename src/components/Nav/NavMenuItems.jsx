@@ -13,7 +13,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles (() => ({
    text: {
     fontFamily: 'Lato, sansSerif',
-    fontSize: '16px'
+    fontSize: '18px'
    }
 }))
 
